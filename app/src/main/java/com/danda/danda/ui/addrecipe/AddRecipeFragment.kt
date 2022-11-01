@@ -1,4 +1,4 @@
-package com.danda.danda.ui.notifications
+package com.danda.danda.ui.addrecipe
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.danda.danda.databinding.FragmentNotificationsBinding
+import com.danda.danda.databinding.FragmentAddRecipeBinding
 
-class NotificationsFragment : Fragment() {
+class AddRecipeFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentAddRecipeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,14 +19,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val addRecipeViewModel =
+            ViewModelProvider(this).get(AddRecipeViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textDashboard
+        addRecipeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

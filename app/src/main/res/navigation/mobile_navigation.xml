@@ -15,16 +15,16 @@
         />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.danda.danda.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard"
+        android:id="@+id/navigation_add_recipe"
+        android:name="com.danda.danda.ui.addrecipe.AddRecipeFragment"
+        android:label="@string/title_add_recipe"
+        tools:layout="@layout/fragment_add_recipe"
         />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.danda.danda.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications"
+        android:id="@+id/navigation_profile"
+        android:name="com.danda.danda.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile"
         />
 </navigation>
