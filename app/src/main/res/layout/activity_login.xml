@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout1"
+            android:id="@+id/textInputLayoutEmailLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -48,12 +48,12 @@
             android:layout_marginTop="15dp"
             android:text="Password"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout1"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailLogin"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailLogin"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailLogin" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
+            android:id="@+id/textInputLayoutPasswordLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -79,8 +79,8 @@
             app:layout_constraintEnd_toStartOf="@+id/or"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutPasswordLogin"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordLogin" />
 
         <TextView
             android:id="@+id/or"
@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Atau"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_margin="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_login"
             app:layout_constraintEnd_toStartOf="@+id/btn_register_here"
@@ -99,7 +100,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Register"
-            app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordLogin"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/or"
             app:layout_constraintTop_toTopOf="@+id/btn_login" />

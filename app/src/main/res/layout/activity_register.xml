@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,4 +7,170 @@
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_name_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Nama"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutNameRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Masukan Nama"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name_register"
+            app:layout_constraintStart_toStartOf="@+id/tv_name_register"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_register">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/tv_username_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Username"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutNameRegister"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutNameRegister"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNameRegister" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutUsernameRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Masukan Username"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="@+id/tv_username_register"
+            app:layout_constraintStart_toStartOf="@+id/tv_username_register"
+            app:layout_constraintTop_toBottomOf="@+id/tv_username_register" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_username_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/tv_email_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Email"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutUsernameRegister"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutUsernameRegister"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUsernameRegister" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmailRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Masukan Email"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="@+id/tv_email_register"
+            app:layout_constraintStart_toStartOf="@+id/tv_email_register"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email_register" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_email_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/tv_password_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Password"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailRegister"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailRegister"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailRegister" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPasswordRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Masukan Password"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="@+id/tv_password_register"
+            app:layout_constraintStart_toStartOf="@+id/tv_password_register"
+            app:layout_constraintTop_toBottomOf="@+id/tv_password_register" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/tv_ulangi_password_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Ulangi Password"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordRegister"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutPasswordRegister"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordRegister" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutUlangiPasswordRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Ulangi Password"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="@+id/tv_ulangi_password_register"
+            app:layout_constraintStart_toStartOf="@+id/tv_ulangi_password_register"
+            app:layout_constraintTop_toBottomOf="@+id/tv_ulangi_password_register" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_ulangi_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Daftar"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutUlangiPasswordRegister"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutUlangiPasswordRegister"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUlangiPasswordRegister" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
