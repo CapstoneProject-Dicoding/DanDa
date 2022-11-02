@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1095846942779",
+    "project_id": "dandarecipe",
+    "storage_bucket": "dandarecipe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095846942779:android:d11c16ad8c3e0def3a241e",
+        "android_client_info": {
+          "package_name": "com.danda.danda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095846942779-2j351nnl3fkq2pt57lrkghmopotieph8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.danda.danda",
+            "certificate_hash": "27ecb4654a6f09e902d2f62cea0b8464d6b1e324"
+          }
+        },
+        {
+          "client_id": "1095846942779-02kfigig8m9es8464vu22ufnlbch3bdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD05zQGp2ciDYbVrtSR_IelVzohAhkhhjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095846942779-02kfigig8m9es8464vu22ufnlbch3bdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.danda.danda.databinding.FragmentAddRecipeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddRecipeFragment : Fragment() {
 
     private var _binding: FragmentAddRecipeBinding? = null
