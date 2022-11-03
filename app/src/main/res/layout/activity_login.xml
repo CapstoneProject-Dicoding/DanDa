@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/brownCream"
     tools:context=".ui.login.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +38,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_email_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/greyEditText"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +68,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/greyEditText"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,6 +79,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Login"
+            android:textColor="@color/white"
+            android:background="@color/darkBlue"
             app:layout_constraintEnd_toStartOf="@+id/or"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -100,6 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Register"
+            android:background="@color/greyEditText"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordLogin"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/or"

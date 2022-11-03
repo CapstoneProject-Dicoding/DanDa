@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brownCream"
+    tools:context=".ui.detailrecipe.DetailRecipeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/foodImage"
+            style="@style/CircleImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.075"
+            tools:ignore="ImageContrastCheck"
+            tools:src="@drawable/ic_food"/>
+
+        <TextView
+            android:id="@+id/nameRecipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/foodImage"
+            app:layout_constraintStart_toStartOf="@+id/foodImage"
+            app:layout_constraintTop_toBottomOf="@+id/foodImage"
+            tools:text="Nama Resep" />
+
+        <TextView
+            android:id="@+id/bahanTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/bahan"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameRecipe"
+            app:layout_constraintVertical_bias="0.031" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutBahan"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/brown"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/bahanTv"
+            app:layout_constraintTop_toBottomOf="@+id/bahanTv">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_bahan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences|textAutoCorrect"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/alatTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/tool"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutBahan"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBahan" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAlat"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/brown"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/alatTv"
+            app:layout_constraintTop_toBottomOf="@+id/alatTv">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_alat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences|textAutoCorrect"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/caraMasakTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/HowTo"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutAlat"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutAlat" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCaraMasak"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/brown"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/caraMasakTv"
+            app:layout_constraintTop_toBottomOf="@+id/caraMasakTv">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_caraMasak"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences|textAutoCorrect"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/commentTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/Comment"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutCaraMasak"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCaraMasak" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardComment"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="10dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            android:backgroundTint="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/commentTv">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:listitem="@layout/list_comment" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutComment"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            app:boxBackgroundColor="@color/brown"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardComment">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/input_comment"
+                android:textColorHint="@color/black"
+                android:textSize="13sp"
+                android:inputType="textCapSentences|textAutoCorrect"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submitButton"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/darkBlue"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutComment"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutComment" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
