@@ -17,6 +17,14 @@
         <entry key="..\:/Users/greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/list_comment.xml" value="0.264" />
         <entry key="..\:/Users/greed/AndroidStudioProjects/DanDa/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.1895" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.12952898550724637" />
+        <entry key="app/src/main/res/layout/activity_resep_masakanku.xml" value="0.12952898550724637" />
+        <entry key="app/src/main/res/layout/fragment_add_recipe.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_resep_masakanku.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/list_comment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/resep_masakanku.xml" value="0.2" />
       </map>
     </option>
   </component>

@@ -17,6 +17,9 @@
         android:theme="@style/Theme.DanDaRecipeApp"
         tools:targetApi="31">
         <activity
+            android:name=".ResepMasakankuActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.change.EmailAndPasswordActivity"
             android:exported="false" />
         <activity
