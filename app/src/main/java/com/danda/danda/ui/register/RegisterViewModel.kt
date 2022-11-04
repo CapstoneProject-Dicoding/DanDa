@@ -12,14 +12,15 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val userRepository: UserRepository): ViewModel() {
 
-    private val _addUser = MutableLiveData<Result<String>>()
-    val addUser: LiveData<Result<String>>
-            get() = _addUser
+    private val _registerUser = MutableLiveData<Result<String>>()
+    val registerUser: LiveData<Result<String>>
+            get() = _registerUser
 
-    fun addUser(user: User){
-        _addUser.value = Result.Loading
-        userRepository.addUser(user) {
-            _addUser.value = it
+    fun registerUser(user: User) {
+        _registerUser.value = Result.Loading
+        userRepository.registerUser(user) {
+            _registerUser.value = it
         }
     }
+
 }

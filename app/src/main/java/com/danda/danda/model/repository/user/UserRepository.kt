@@ -5,5 +5,6 @@ import com.danda.danda.util.Result
 
 interface UserRepository {
 
-    fun addUser(user: User, result: (Result<String>) -> Unit)
+    fun registerUser(user: User, result: (Result<String>) -> Unit)
+    fun loginUser(email: String, password: String, result: (Result<String>) -> Unit)
 }
