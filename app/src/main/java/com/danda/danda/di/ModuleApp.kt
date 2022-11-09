@@ -2,7 +2,7 @@ package com.danda.danda.di
 
 import com.danda.danda.model.repository.user.UserRepository
 import com.danda.danda.model.repository.user.UserRepositoryImp
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,15 +15,21 @@ object ModuleApp {
 
     @Provides
     @Singleton
-    fun provideFirebase(): FirebaseFirestore {
-        return FirebaseFirestore.getInstance()
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
     }
 
     @Provides
     @Singleton
-    fun provideNoteRepository(
-        database: FirebaseFirestore
+    fun provideRepository(
+        auth: FirebaseAuth
     ): UserRepository {
-        return UserRepositoryImp(database)
+        return UserRepositoryImp(auth)
     }
+
+//    @Provides
+//    @Singleton
+//    fun provideRepository(auth: FirebaseAuth) : RegisterRepository {
+//        return RegisterRepository(auth)
+//    }
 }

@@ -1,83 +1,102 @@
 package com.danda.danda.ui.register
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Toast
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import com.danda.danda.R
 import com.danda.danda.databinding.ActivityRegisterBinding
-import com.danda.danda.model.dataclass.User
+import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.util.Result
+import com.danda.danda.util.showLoading
+import com.danda.danda.util.showToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private val registerViewModel by viewModels<RegisterViewModel>()
-    private var objUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
+
+        goToLogin()
 
         binding.btnRegister.setOnClickListener {
             registerUser()
+            closedKeyboard()
         }
 
     }
 
     private fun registerUser() {
-        val nama = binding.etNameRegister.text.toString()
-        val username = binding.etUsernameRegister.text.toString()
+        val email = binding.etEmailRegister.text.toString()
         val password = binding.etPasswordRegister.text.toString()
         val ulangiPassword = binding.etUlangiPasswordRegister.text.toString()
-        val email = binding.etEmailRegister.text.toString()
 
-        // SUDAH BISA REGISTER, TINGGAL NAMBAHIN LOGIKA JIKA EDIT TEXT, IMPROVE LAGI
-        // JIKA TEXT KURANG 6 KARAKTER
-
-        if (Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-            nama.isNotEmpty() &&
-            username.isNotEmpty() &&
-            password.isNotEmpty() &&
-            ulangiPassword.isNotEmpty() &&
-            ulangiPassword == password
-        ) {
-            if (ulangiPassword != password) Toast.makeText(this, "Ulangi Password dan Password harus sama", Toast.LENGTH_SHORT).show()
-            else {
-                registerViewModel.registerUser(
-                    User(
-                        id = objUser?.id ?: "",
-                        nama,
-                        username,
-                        password,
-                        email
-                    )
-                )
-
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.isNotEmpty()) {
+            if (ulangiPassword == password) {
                 registerViewModel.registerUser.observe(this) { status ->
                     when (status) {
                         is Result.Loading -> {
-                            // loading
+                            showLoading(true, binding.progressBarRegister)
                         }
                         is Result.Failure -> {
-                            Toast.makeText(this, status.error, Toast.LENGTH_SHORT).show()
+                            showLoading(false, binding.progressBarRegister)
+                            showToast(status.error.toString())
                         }
                         is Result.Success -> {
-                            Toast.makeText(this, status.data, Toast.LENGTH_SHORT).show()
+                            showLoading(false, binding.progressBarRegister)
+                            showToast("Created User")
+                            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
+                            startActivity(Intent(this, LoginActivity::class.java))
+                            finish()
                         }
                     }
                 }
+                registerViewModel.registerUser(email, password)
+            } else if (password.length <= 6) {
+                showToast("Password harus 6 karakter")
+            } else {
+                showToast("Ulangi password dan password harus sama")
             }
-
         } else {
-            if (username.isEmpty()) Toast.makeText(this, "username harus di isi", Toast.LENGTH_SHORT).show()
-            else if (email.isEmpty()) Toast.makeText(this, "Email harus di isi", Toast.LENGTH_SHORT).show()
-            else if (password.isEmpty()) Toast.makeText(this, "Password harus di isi", Toast.LENGTH_SHORT).show()
-            else if (ulangiPassword.isEmpty()) Toast.makeText(this, "Ulangi Password harus di isi", Toast.LENGTH_SHORT).show()
-            else Toast.makeText(this, "Email harus valid", Toast.LENGTH_SHORT).show()
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                showToast("Format email harus valid")
+            } else if (password.isEmpty()) {
+                showToast("Password tidak boleh kosong")
+            }
         }
     }
 
+    private fun closedKeyboard() {
+        val view: View? = currentFocus
+        val inputMethodManager: InputMethodManager
+        when {
+            view != null -> {
+                inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
+    }
+
+    private fun goToLogin() = binding.loginHere.setOnClickListener {
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
+    }
 }

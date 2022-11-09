@@ -1,121 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@color/brownCream"-->
-<!--    tools:context=".ui.login.LoginActivity">-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="10dp">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_email_login"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:text="Email"-->
-<!--            android:textSize="18sp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/textInputLayoutEmailLogin"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:hint="Masukan Email"-->
-<!--            app:endIconMode="clear_text"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/tv_email_login"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/tv_email_login"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tv_email_login">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/et_email_login"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/greyEditText"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_password_login"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:text="Password"-->
-<!--            android:textSize="18sp"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailLogin"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailLogin"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailLogin" />-->
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/textInputLayoutPasswordLogin"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:hint="Masukan Password"-->
-<!--            app:endIconMode="password_toggle"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/tv_password_login"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/tv_password_login"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tv_password_login">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/et_password_login"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/greyEditText"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/btn_login"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:text="Login"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:background="@color/darkBlue"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/or"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintHorizontal_chainStyle="spread"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/textInputLayoutPasswordLogin"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordLogin" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/or"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Atau"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:layout_margin="20dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/btn_login"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/btn_register_here"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/btn_login"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/btn_login" />-->
-
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/btn_register_here"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Register"-->
-<!--            android:background="@color/greyEditText"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordLogin"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/or"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/btn_login" />-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--</ScrollView>-->
-
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -125,175 +8,175 @@
     tools:context=".ui.login.LoginActivity">
 
     <androidx.core.widget.NestedScrollView
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/icon_danda_app"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_food"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/app_name" />
+            <ImageView
+                android:id="@+id/icon_danda_app"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_food"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/app_name" />
 
-        <TextView
-            android:id="@+id/tv_danda_app"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:gravity="center_horizontal"
-            android:text="DanDa"
-            android:textColor="#FF4500"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon_danda_app" />
-
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:gravity="center_horizontal"
-            android:text="Login"
-            android:textColor="#FF4500"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="210dp"
-            android:layout_height="550dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/login_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_danda_app" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:elevation="5dp"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_danda_app"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center_horizontal"
+                android:text="DanDa"
+                android:textColor="#FF4500"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/icon_danda_app" />
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center_horizontal"
+                android:text="Login"
+                android:textColor="#FF4500"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="210dp"
+                android:layout_height="400dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_danda_app" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_background"
+                    android:padding="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutEmailLogin"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:hint="Masukan Email"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="#FF4500"
+                        tools:ignore="MissingConstraints">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_email_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutPasswordLogin"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:hint="Masukan Password"
+                        app:endIconMode="password_toggle"
+                        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailLogin"
+                        app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailLogin"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailLogin"
+                        app:startIconTint="#FF4500">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/progress_bar_login"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:visibility="gone"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/file_loading"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_button"
+                android:text="Login"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                app:layout_constraintStart_toStartOf="@+id/cardView2"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register_here"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/custom_background"
-                android:padding="10dp">
+                android:padding="15dp"
+                android:text="Daftar disini"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_login"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayoutEmailLogin"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:hint="Masukan Email"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:startIconTint="#FF4500"
-                    tools:ignore="MissingConstraints">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_email_login"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayoutPasswordLogin"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:hint="Masukan Password"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailLogin"
-                    app:startIconTint="#FF4500"
-                    app:endIconMode="password_toggle">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_password_login"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-<!--                <com.airbnb.lottie.LottieAnimationView-->
-<!--                    android:id="@+id/progress_bar_login"-->
-<!--                    android:layout_width="150dp"-->
-<!--                    android:layout_height="150dp"-->
-<!--                    android:visibility="gone"-->
-<!--                    app:lottie_autoPlay="true"-->
-<!--                    app:lottie_loop="true"-->
-<!--                    app:lottie_rawRes="@raw/file_loading"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_login"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/custom_button"
-            android:text="Login"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/cardView2"
-            app:layout_constraintStart_toStartOf="@+id/cardView2"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/register_here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_background"
-            android:padding="15dp"
-            android:text="Daftar disini"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_login"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
