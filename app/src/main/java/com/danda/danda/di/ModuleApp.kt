@@ -1,8 +1,11 @@
 package com.danda.danda.di
 
+import com.danda.danda.model.repository.banner.BannerRepository
+import com.danda.danda.model.repository.banner.BannerRepositoryImp
 import com.danda.danda.model.repository.user.UserRepository
 import com.danda.danda.model.repository.user.UserRepositoryImp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,11 +24,18 @@ object ModuleApp {
 
     @Provides
     @Singleton
-    fun provideRepositoryUser(
-        auth: FirebaseAuth
-    ): UserRepository {
-        return UserRepositoryImp(auth)
+    fun provideDatabaseFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
+
+    @Provides
+    @Singleton
+    fun provideRepositoryUser(auth: FirebaseAuth): UserRepository = UserRepositoryImp(auth)
+
+    @Provides
+    @Singleton
+    fun provideRepositoryBanner(databaseFirestore: FirebaseFirestore): BannerRepository =
+        BannerRepositoryImp(databaseFirestore)
 
 //    @Provides
 //    @Singleton

@@ -3,8 +3,9 @@ package com.danda.danda.model.repository.user
 import com.danda.danda.util.Result
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class UserRepositoryImp(private var auth: FirebaseAuth): UserRepository {
+class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): UserRepository {
     override suspend fun registerUser(email: String, password: String, result: (Result<String>) -> Unit) {
         auth = FirebaseAuth.getInstance()
         try {
