@@ -9,6 +9,9 @@ class UserRepositoryImp(private var auth: FirebaseAuth): UserRepository {
         auth = FirebaseAuth.getInstance()
         try {
             val dataRegister = auth.createUserWithEmailAndPassword(email, password).await()
+            result.invoke(
+                Result.Success(dataRegister.toString())
+            )
             Result.Success(dataRegister)
         } catch (e: Exception) {
             result.invoke(
@@ -21,6 +24,9 @@ class UserRepositoryImp(private var auth: FirebaseAuth): UserRepository {
         auth = FirebaseAuth.getInstance()
         try {
             val dataLogin = auth.signInWithEmailAndPassword(email, password).await()
+            result.invoke(
+                Result.Success(dataLogin.toString())
+            )
             Result.Success(dataLogin)
         } catch (e: Exception) {
             result.invoke(

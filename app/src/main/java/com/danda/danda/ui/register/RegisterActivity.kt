@@ -14,9 +14,6 @@ import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.util.Result
 import com.danda.danda.util.showLoading
 import com.danda.danda.util.showToast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,40 +27,43 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        checkStatus()
+        registerUser()
         goToLogin()
-
-        binding.btnRegister.setOnClickListener {
-            registerUser()
-            closedKeyboard()
-        }
 
     }
 
-    private fun registerUser() {
+    private fun registerUser() = binding.btnRegister.setOnClickListener {
+        checkUser()
+        closedKeyboard()
+    }
+
+    private fun checkStatus() = registerViewModel.registerUser.observe(this) { status ->
+        when (status) {
+            is Result.Success -> {
+                showLoading(false, binding.progressBarRegister)
+                showToast("Created User")
+                startActivity(Intent(this, LoginActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
+                finish()
+            }
+            is Result.Loading -> {
+                showLoading(true, binding.progressBarRegister)
+            }
+            is Result.Failure -> {
+                showLoading(false, binding.progressBarRegister)
+                showToast(status.error.toString())
+            }
+        }
+    }
+
+    private fun checkUser() {
         val email = binding.etEmailRegister.text.toString()
         val password = binding.etPasswordRegister.text.toString()
         val ulangiPassword = binding.etUlangiPasswordRegister.text.toString()
 
         if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.isNotEmpty()) {
             if (ulangiPassword == password) {
-                registerViewModel.registerUser.observe(this) { status ->
-                    when (status) {
-                        is Result.Loading -> {
-                            showLoading(true, binding.progressBarRegister)
-                        }
-                        is Result.Failure -> {
-                            showLoading(false, binding.progressBarRegister)
-                            showToast(status.error.toString())
-                        }
-                        is Result.Success -> {
-                            showLoading(false, binding.progressBarRegister)
-                            showToast("Created User")
-                            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
-                            startActivity(Intent(this, LoginActivity::class.java))
-                            finish()
-                        }
-                    }
-                }
                 registerViewModel.registerUser(email, password)
             } else if (password.length <= 6) {
                 showToast("Password harus 6 karakter")
@@ -91,8 +91,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun goToLogin() = binding.loginHere.setOnClickListener {
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
         startActivity(Intent(this, LoginActivity::class.java))
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
     }
 
     override fun onBackPressed() {

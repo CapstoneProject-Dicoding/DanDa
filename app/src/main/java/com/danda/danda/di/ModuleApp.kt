@@ -21,7 +21,7 @@ object ModuleApp {
 
     @Provides
     @Singleton
-    fun provideRepository(
+    fun provideRepositoryUser(
         auth: FirebaseAuth
     ): UserRepository {
         return UserRepositoryImp(auth)

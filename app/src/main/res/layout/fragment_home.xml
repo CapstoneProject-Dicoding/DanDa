@@ -1,11 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint_home"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
+
+<!--    <imageslide-->
+<!--        android:id="@+id/imageSlider"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="300dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:sliderAnimationDuration="600"-->
+<!--        app:sliderAutoCycleDirection="back_and_forth"-->
+<!--        app:sliderAutoCycleEnabled="true"-->
+<!--        app:sliderIndicatorAnimationDuration="600"-->
+<!--        app:sliderIndicatorGravity="center_horizontal|bottom"-->
+<!--        app:sliderIndicatorMargin="15dp"-->
+<!--        app:sliderIndicatorOrientation="horizontal"-->
+<!--        app:sliderIndicatorPadding="3dp"-->
+<!--        app:sliderIndicatorRadius="2dp"-->
+<!--        app:sliderIndicatorSelectedColor="#5A5A5A"-->
+<!--        app:sliderIndicatorUnselectedColor="#FFF"-->
+<!--        app:sliderScrollTimeInSec="1"-->
+<!--        app:sliderStartAutoCycle="true"-->
+<!--        tools:ignore="MissingClass" />-->
+
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/image_slider_home"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        app:iss_auto_cycle="true"
+        app:iss_period="2000"
+        app:iss_delay="1000"
+        android:background="@color/teal_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_search"
+        android:layout_margin="20dp"
+        app:iconifiedByDefault="false"
+        app:queryHint="Cari resep masakan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+<!--    <FrameLayout-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/text_home"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:cardCornerRadius="20dp">-->
+
+<!--            <androidx.appcompat.widget.SearchView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:iconifiedByDefault="false"-->
+<!--                app:queryHint="Cari resep masakan"-->
+<!--                android:background="@color/white">-->
+
+<!--            </androidx.appcompat.widget.SearchView>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--    </FrameLayout>-->
 
     <TextView
         android:id="@+id/text_home"
