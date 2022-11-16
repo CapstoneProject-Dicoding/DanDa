@@ -18,7 +18,6 @@ class AddRecipeFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
     private var _binding: FragmentAddRecipeBinding? = null
     private val binding get() = _binding!!
-    private var success: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
