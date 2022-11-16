@@ -1,114 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.addrecipe.AddRecipeFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="138dp"
-        android:layout_height="138dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_food"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_nama_resep"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Nama Resep"
-        android:layout_margin="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <ImageView
+            android:id="@+id/photoFood"
+            android:layout_width="138dp"
+            android:layout_height="138dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_photo_food"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_nama_resep"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_nama_resep"
-        app:layout_constraintStart_toStartOf="@+id/tv_nama_resep"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nama_resep" />
+        <TextView
+            android:id="@+id/tv_namaResep"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Nama Resep"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoFood" />
 
-    <TextView
-        android:id="@+id/tv_bahan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Bahan: "
-        app:layout_constraintEnd_toEndOf="@+id/et_nama_resep"
-        app:layout_constraintStart_toStartOf="@+id/et_nama_resep"
-        app:layout_constraintTop_toBottomOf="@+id/et_nama_resep" />
+        <EditText
+            android:id="@+id/et_namaResep"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="name"
+            android:inputType="textCapSentences"
+            android:labelFor="@id/et_namaResep"
+            app:layout_constraintEnd_toEndOf="@+id/tv_namaResep"
+            app:layout_constraintStart_toStartOf="@+id/tv_namaResep"
+            app:layout_constraintTop_toBottomOf="@+id/tv_namaResep" />
 
-    <EditText
-        android:id="@+id/et_bahan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_bahan"
-        app:layout_constraintStart_toStartOf="@+id/tv_bahan"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bahan" />
+        <TextView
+            android:id="@+id/tv_bahan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Bahan: "
+            app:layout_constraintEnd_toEndOf="@+id/et_namaResep"
+            app:layout_constraintStart_toStartOf="@+id/et_namaResep"
+            app:layout_constraintTop_toBottomOf="@+id/et_namaResep" />
 
-    <TextView
-        android:id="@+id/tv_alat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Alat: "
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/et_bahan"
-        app:layout_constraintStart_toStartOf="@+id/et_bahan"
-        app:layout_constraintTop_toBottomOf="@+id/et_bahan" />
+        <EditText
+            android:id="@+id/et_bahan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="name"
+            android:inputType="textCapSentences"
+            app:layout_constraintEnd_toEndOf="@+id/tv_bahan"
+            app:layout_constraintStart_toStartOf="@+id/tv_bahan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_bahan" />
 
-    <EditText
-        android:id="@+id/et_alat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_alat"
-        app:layout_constraintStart_toStartOf="@+id/tv_alat"
-        app:layout_constraintTop_toBottomOf="@+id/tv_alat" />
+        <TextView
+            android:id="@+id/tv_alat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Alat: "
+            app:layout_constraintEnd_toEndOf="@+id/et_bahan"
+            app:layout_constraintStart_toStartOf="@+id/et_bahan"
+            app:layout_constraintTop_toBottomOf="@+id/et_bahan" />
 
-    <TextView
-        android:id="@+id/tv_tatacara"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Tata cara masak: "
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/et_alat"
-        app:layout_constraintStart_toStartOf="@+id/et_alat"
-        app:layout_constraintTop_toBottomOf="@+id/et_alat" />
+        <EditText
+            android:id="@+id/et_alat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="name"
+            android:inputType="textCapSentences"
+            app:layout_constraintEnd_toEndOf="@+id/tv_alat"
+            app:layout_constraintStart_toStartOf="@+id/tv_alat"
+            app:layout_constraintTop_toBottomOf="@+id/tv_alat" />
 
-    <EditText
-        android:id="@+id/et_tatacara"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_tatacara"
-        app:layout_constraintStart_toStartOf="@+id/tv_tatacara"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tatacara" />
+        <TextView
+            android:id="@+id/tv_tataCara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Tata cara masak: "
+            app:layout_constraintEnd_toEndOf="@+id/et_alat"
+            app:layout_constraintStart_toStartOf="@+id/et_alat"
+            app:layout_constraintTop_toBottomOf="@+id/et_alat" />
 
-    <Button
-        android:id="@+id/btn_tambahkan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tambahkan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/et_tatacara"
-        app:layout_constraintStart_toStartOf="@+id/et_tatacara"
-        app:layout_constraintTop_toBottomOf="@+id/et_tatacara" />
+        <EditText
+            android:id="@+id/et_tataCara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="name"
+            android:inputType="textCapSentences"
+            app:layout_constraintEnd_toEndOf="@+id/tv_tataCara"
+            app:layout_constraintStart_toStartOf="@+id/tv_tataCara"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tataCara" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_add_recipe"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        <Button
+            android:id="@+id/btn_tambahkan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tambahkan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/et_tataCara"
+            app:layout_constraintStart_toStartOf="@+id/et_tataCara"
+            app:layout_constraintTop_toBottomOf="@+id/et_tataCara" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
