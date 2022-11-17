@@ -51,16 +51,16 @@ class AddRecipeFragment : Fragment() {
 
         when {
             nameRecipe.isEmpty() -> {
-                binding.etNamaResep.error = "Masukkan nama resep"
+                binding.etNamaResep.error = "Harap masukkan nama resep terlebih dahulu"
             }
             ingredients.isEmpty() -> {
-                binding.etBahan.error = "Masukkan bahan"
+                binding.etBahan.error = "Harap masukkan bahan terlebih dahulu"
             }
             tools.isEmpty() -> {
-                binding.etAlat.error = "Masukkan Alat Masak"
+                binding.etAlat.error = "Harap masukkan alat masak terlebih dahulu"
             }
             howToCook.isEmpty() -> {
-                binding.etTataCara.error = "Masukkan Tata Cara Masak"
+                binding.etTataCara.error = "Harap masukkan tata cara masak terlebih dahulu"
             }
             else -> {
                 addRecipeViewModel.saveRecipeFireStore(nameRecipe, ingredients, tools, howToCook)
