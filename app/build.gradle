@@ -68,8 +68,10 @@ dependencies {
     // firebase
     implementation platform('com.google.firebase:firebase-bom:31.0.2')
     implementation 'com.google.firebase:firebase-firestore:21.4.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0' // fireStorage
 
     // dagger hilt
     implementation "com.google.dagger:hilt-android:2.44"
@@ -90,7 +92,8 @@ dependencies {
     // lottie
     implementation 'com.airbnb.android:lottie:4.2.0'
 
-
+    // data store
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 
 }
 
