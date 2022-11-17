@@ -48,33 +48,41 @@ class AddRecipeFragment : Fragment() {
         val tools = binding.etAlat.text.toString()
         val howToCook = binding.etTataCara.text.toString()
 
-//        when {
-//            nameRecipe.isEmpty() -> { binding.etNamaResep.error = "Masukkan nama resep" }
-//            ingredients.isEmpty() -> { binding.etBahan.error = "Masukkan bahan" }
-//            tools.isEmpty() -> { binding.etAlat.error = "Masukkan Alat Masak" }
-//            howToCook.isEmpty() -> { binding.etTataCara.error = "Masukkan Tata Cara Masak"}
-//        }
+        when {
+            nameRecipe.isEmpty() -> {
+                binding.etNamaResep.error = "Masukkan nama resep"
+            }
+            ingredients.isEmpty() -> {
+                binding.etBahan.error = "Masukkan bahan"
+            }
+            tools.isEmpty() -> {
+                binding.etAlat.error = "Masukkan Alat Masak"
+            }
+            howToCook.isEmpty() -> {
+                binding.etTataCara.error = "Masukkan Tata Cara Masak"
+            }
+            else -> {
+                addRecipeViewModel.saveRecipeFireStore(nameRecipe, ingredients, tools, howToCook)
 
-        addRecipeViewModel.saveRecipeFireStore(nameRecipe, ingredients, tools, howToCook)
+                addRecipeViewModel.addSuccess.observe(viewLifecycleOwner) {
+                    it.getContentIfNotHandled()?.let {
+                        addSuccess()
+                    }
+                }
 
-        addRecipeViewModel.addSuccess.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let {
-                addSuccess()
+                addRecipeViewModel.isLoading.observe(viewLifecycleOwner) {
+                    it.getContentIfNotHandled()?.let { state ->
+                        showLoading(state)
+                    }
+                }
+
+                addRecipeViewModel.isFailed.observe(viewLifecycleOwner) {
+                    it.getContentIfNotHandled()?.let {
+                        isFailed()
+                    }
+                }
             }
         }
-
-        addRecipeViewModel.isLoading.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { state ->
-                showLoading(state)
-            }
-        }
-
-        addRecipeViewModel.isFailed.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let {
-                isFailed()
-            }
-        }
-
 //        binding.photoFood.setOnClickListener { openCamera() }
     }
 
