@@ -106,43 +106,14 @@ class AddRecipeFragment : Fragment() {
                     }
                 }
 
-                uploadImage()
+                uploadImage(nameRecipe)
             }
         }
     }
 
-    // HELP BANG
-    // ini gw bingung camera yg di fragment, kalo yg di dicoding kan buat activity tuh
-    // jadinya beda, kalo tau tambahin yak -(revansyah)
-
-//    private fun openCamera() {
-//        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        intent.resolveActivity()
-//
-//        createCustomTempFile().also {
-//
-//        }
-//    }
-//
-//    private val launcherIntentCamera = registerForActivityResult(
-//        ActivityResultContracts.StartActivityForResult()
-//    ) {
-//        if (it.resultCode == RESULT_OK) {
-//            val imageBitmap = it.data?.extras?.get("data") as Bitmap
-//            binding.photoFood.setImageBitmap(imageBitmap)
-//        }
-//    }
-
-
-    // untuk mengambil image dari gallery atau camera bisa pake cara yg di bawah
-    // silahkan dicoba untuk upload nya
-
-
-    private fun uploadImage() {
-        val nameRecipe = binding.etNamaResep.text.toString()
-
+    private fun uploadImage(fileName: String) {
         val storage = FirebaseStorage.getInstance()
-            .getReference("images/$nameRecipe")
+            .getReference("images/$fileName")
 
         storage.putFile(getFile!!.toUri())
             .addOnCanceledListener {
@@ -153,7 +124,6 @@ class AddRecipeFragment : Fragment() {
                 Toast.makeText(requireContext(), "gagal", Toast.LENGTH_SHORT).show()
             }
     }
-
 
     private fun takeAPicture() = binding.photoFood.setOnClickListener {
         when {
