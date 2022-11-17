@@ -36,6 +36,7 @@ class AddRecipeFragment : Fragment() {
         setupViewModel()
 
         binding.btnTambahkan.setOnClickListener { addRecipe() }
+//        binding.photoFood.setOnClickListener { openCamera() }
     }
 
     private fun setupViewModel() {
@@ -83,7 +84,6 @@ class AddRecipeFragment : Fragment() {
                 }
             }
         }
-//        binding.photoFood.setOnClickListener { openCamera() }
     }
 
 
