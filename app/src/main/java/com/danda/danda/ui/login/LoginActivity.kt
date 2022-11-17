@@ -8,6 +8,7 @@ import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityLoginBinding
 import com.danda.danda.ui.home.HomeFragment
@@ -68,11 +69,9 @@ class LoginActivity : AppCompatActivity() {
             }
             is Result.Success -> {
                 showLoading(false, binding.progressBarLogin)
-                showToast("Success")
-                val mFragmentManager = supportFragmentManager
-                val mFragmentTransaction = mFragmentManager.beginTransaction()
-                val mFragment = HomeFragment()
-                mFragmentTransaction.add(R.id.nav_host_fragment_activity_main, mFragment).commit()
+                showToast("Login Success")
+                startActivity(Intent(this, MainActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
                 finish()
             }
         }
@@ -111,5 +110,10 @@ class LoginActivity : AppCompatActivity() {
     private fun goToRegister() = binding.registerHere.setOnClickListener {
         startActivity(Intent(this, RegisterActivity::class.java))
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
     }
 }

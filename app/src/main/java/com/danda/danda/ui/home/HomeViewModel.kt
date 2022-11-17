@@ -14,15 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val bannerRepository: BannerRepository) : ViewModel() {
-
-//    private val _text = MutableLiveData<String>().apply {
-//        value = "This is home Fragment"
-//    }
-//    val text: LiveData<String> = _text
-
-
-    private val _banner = MutableLiveData<Result<List<ImageSlider>>>()
-    val banner: LiveData<Result<List<ImageSlider>>>
+    private val _banner = MutableLiveData<Result<List<String>>>()
+    val banner: LiveData<Result<List<String>>>
         get() = _banner
 
     fun getBanner() {

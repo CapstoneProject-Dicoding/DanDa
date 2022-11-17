@@ -18,6 +18,9 @@
         android:theme="@style/Theme.DanDaRecipeApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.editprofile.EditProfileActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ui.resepmasakanku.ResepMasakankuActivity"
             android:exported="false" />
         <activity

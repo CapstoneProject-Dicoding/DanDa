@@ -1,5 +1,6 @@
 package com.danda.danda.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.danda.danda.databinding.FragmentProfileBinding
+import com.danda.danda.ui.editprofile.EditProfileActivity
+import com.danda.danda.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +35,14 @@ class ProfileFragment : Fragment() {
 //            textView.text = it
 //        }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.loginLogoutTv.setOnClickListener {
+            startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+        }
     }
 
     override fun onDestroyView() {
