@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.danda.danda.helper.Event
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class AddRecipeViewModel : ViewModel() {
 
     private val _addSuccess = MutableLiveData<Event<Boolean>>()

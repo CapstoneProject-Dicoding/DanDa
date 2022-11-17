@@ -68,6 +68,7 @@ class AddRecipeFragment : Fragment() {
                 showLoading(state)
             }
         }
+        
         addRecipeViewModel.isFailed.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let {
                 isFailed()
