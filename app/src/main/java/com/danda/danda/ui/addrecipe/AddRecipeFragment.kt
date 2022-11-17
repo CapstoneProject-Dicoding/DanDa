@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +29,7 @@ import com.danda.danda.databinding.FragmentAddRecipeBinding
 import com.danda.danda.util.createCustomTempFile
 import com.danda.danda.util.uriToFile
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -103,6 +105,8 @@ class AddRecipeFragment : Fragment() {
                         isFailed()
                     }
                 }
+
+                uploadImage()
             }
         }
     }
@@ -132,6 +136,24 @@ class AddRecipeFragment : Fragment() {
 
     // untuk mengambil image dari gallery atau camera bisa pake cara yg di bawah
     // silahkan dicoba untuk upload nya
+
+
+    private fun uploadImage() {
+        val nameRecipe = binding.etNamaResep.text.toString()
+
+        val storage = FirebaseStorage.getInstance()
+            .getReference("images/$nameRecipe")
+
+        storage.putFile(getFile!!.toUri())
+            .addOnCanceledListener {
+                binding.photoFood.setImageURI(null)
+                Toast.makeText(requireContext(), "berhasil", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "gagal", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 
     private fun takeAPicture() = binding.photoFood.setOnClickListener {
         when {
