@@ -22,7 +22,7 @@
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_resep_masakanku.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_add_recipe.xml" value="0.17083333333333334" />
-        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_profile.xml" value="0.20364583333333333" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/item_resep_masakanku.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/list_comment.xml" value="0.20416666666666666" />
@@ -35,5 +35,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
   </component>
 </project>

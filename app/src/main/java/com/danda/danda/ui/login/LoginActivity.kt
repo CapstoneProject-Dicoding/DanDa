@@ -35,23 +35,6 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-//    private fun logoutUser() {
-//        loginViewModel.logoutUser.observe(this) { status ->
-//            when (status) {
-//                is Result.Loading -> {
-//                    // loading
-//                }
-//                is Result.Failure -> {
-//                    showToast(status.error.toString())
-//                }
-//                is Result.Success -> {
-//                    showToast("Success")
-//                }
-//            }
-//        }
-//        loginViewModel.logout()
-//    }
-
     private fun loginUser() = binding.btnLogin.setOnClickListener {
         checkUser()
         closedKeyboard()

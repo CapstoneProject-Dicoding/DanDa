@@ -2,6 +2,8 @@ package com.danda.danda.di
 
 import com.danda.danda.model.repository.banner.BannerRepository
 import com.danda.danda.model.repository.banner.BannerRepositoryImp
+import com.danda.danda.model.repository.home.HomeRepository
+import com.danda.danda.model.repository.home.HomeRepositoryImp
 import com.danda.danda.model.repository.user.UserRepository
 import com.danda.danda.model.repository.user.UserRepositoryImp
 import com.google.firebase.auth.FirebaseAuth
@@ -37,9 +39,8 @@ object ModuleApp {
     fun provideRepositoryBanner(databaseFirestore: FirebaseFirestore): BannerRepository =
         BannerRepositoryImp(databaseFirestore)
 
-//    @Provides
-//    @Singleton
-//    fun provideRepository(auth: FirebaseAuth) : RegisterRepository {
-//        return RegisterRepository(auth)
-//    }
+    @Provides
+    @Singleton
+    fun provideRepositoryHome(databaseFirestore: FirebaseFirestore): HomeRepository =
+        HomeRepositoryImp(databaseFirestore)
 }

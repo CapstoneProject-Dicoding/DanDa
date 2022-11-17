@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityResepMasakankuBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class ResepMasakankuActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ class ResepMasakankuActivity : AppCompatActivity() {
 
     }
 
-    private fun initializeFireStore() {
-        db = Firebase.firestore
-    }
+//    private fun initializeFireStore() {
+//        db = Firebase.firestore
+//    }
 }

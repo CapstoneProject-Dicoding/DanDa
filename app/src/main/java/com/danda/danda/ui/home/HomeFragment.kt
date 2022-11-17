@@ -35,16 +35,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val auth = FirebaseAuth.getInstance()
-        val user = auth.currentUser
-        if (user != null) {
-            binding.textHome.text = "welcome ${user.displayName}"
-//            auth.signOut()
-            binding.imageTest.setImageURI(user.photoUrl)
-
-        } else {
-            binding.textHome.text = "Anda belum login"
-        }
+//        val auth = FirebaseAuth.getInstance()
+//        val user = auth.currentUser
+//        if (user != null) {
+//            binding.textHome.text = "welcome ${user.displayName}"
+////            auth.signOut()
+//            binding.imageTest.setImageURI(user.photoUrl)
+//
+//        } else {
+//            binding.textHome.text = "Anda belum login"
+//        }
 
 
         getBanner()
