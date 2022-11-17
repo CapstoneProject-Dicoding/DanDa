@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.danda.danda.databinding.FragmentAddRecipeBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddRecipeFragment : Fragment() {
 
     private lateinit var addRecipeViewModel: AddRecipeViewModel
-    private lateinit var db: FirebaseFirestore
     private var _binding: FragmentAddRecipeBinding? = null
     private val binding get() = _binding!!
 
@@ -26,30 +27,19 @@ class AddRecipeFragment : Fragment() {
     ): View {
         _binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
 
-//        val textView: TextView = binding.textDashboard
-//        addRecipeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initializeFirebase()
         setupViewModel()
 
         binding.btnTambahkan.setOnClickListener { addRecipe() }
-
     }
 
     private fun setupViewModel() {
         addRecipeViewModel = ViewModelProvider(this)[AddRecipeViewModel::class.java]
-    }
-
-    private fun initializeFirebase() {
-        db = FirebaseFirestore.getInstance()
     }
 
     private fun addRecipe() {
@@ -65,40 +55,28 @@ class AddRecipeFragment : Fragment() {
 //            howToCook.isEmpty() -> { binding.etTataCara.error = "Masukkan Tata Cara Masak"}
 //        }
 
-        saveRecipeFireStore(nameRecipe, ingredients, tools, howToCook)
+        addRecipeViewModel.saveRecipeFireStore(nameRecipe, ingredients, tools, howToCook)
+
+        addRecipeViewModel.addSuccess.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let {
+                addSuccess()
+            }
+        }
+
+        addRecipeViewModel.isLoading.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { state ->
+                showLoading(state)
+            }
+        }
+        addRecipeViewModel.isFailed.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let {
+                isFailed()
+            }
+        }
 
 //        binding.photoFood.setOnClickListener { openCamera() }
     }
 
-    private fun saveRecipeFireStore(
-        nameRecipe: String,
-        ingredients: String,
-        tools: String,
-        howToCook: String
-    ) {
-        val recipe: MutableMap<String, Any> = HashMap()
-        recipe["nameRecipe"] = nameRecipe
-        recipe["ingredients"] = ingredients
-        recipe["tools"] = tools
-        recipe["howToCook"] = howToCook
-
-        db.collection("recipe")
-            .add(recipe)
-            .addOnSuccessListener {
-                Toast.makeText(
-                    context,
-                    "Recipe Added Successfully",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    context,
-                    "Recipe Failed To Add",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-    }
 
     // HELP BANG
     // ini gw bingung camera yg di fragment, kalo yg di dicoding kan buat activity tuh
@@ -129,6 +107,28 @@ class AddRecipeFragment : Fragment() {
             } else {
                 progressBar.visibility = View.INVISIBLE
             }
+        }
+    }
+
+    private fun addSuccess() {
+        AlertDialog.Builder(requireContext()).apply {
+            setCancelable(false)
+            setTitle("Success")
+            setMessage("Recipe Added Successfully")
+            setPositiveButton("OK") { _, _ ->  }
+            create()
+            show()
+        }
+    }
+
+    private fun isFailed() {
+        AlertDialog.Builder(requireContext()).apply {
+            setCancelable(false)
+            setTitle("Failed")
+            setMessage("Recipe Failed To Add")
+            setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            create()
+            show()
         }
     }
 

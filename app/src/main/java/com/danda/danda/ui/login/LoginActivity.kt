@@ -32,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
         loginUser()
         goToRegister()
 
-
     }
 
 //    private fun logoutUser() {
