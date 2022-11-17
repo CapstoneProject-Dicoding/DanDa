@@ -86,7 +86,6 @@ class AddRecipeFragment : Fragment() {
         }
     }
 
-
     // HELP BANG
     // ini gw bingung camera yg di fragment, kalo yg di dicoding kan buat activity tuh
     // jadinya beda, kalo tau tambahin yak -(revansyah)
