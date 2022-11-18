@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.danda.danda.databinding.ActivityResepMasakankuBinding
 import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.ui.resepmasakanku.adapter.ResepMasakankuAdapter
+import com.danda.danda.util.showToast
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -70,7 +71,8 @@ class ResepMasakankuActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ResepMasakankuActivity, error.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@ResepMasakankuActivity, error.toString(), Toast.LENGTH_SHORT).show()
+                showToast(error.toString())
             }
         })
     }
