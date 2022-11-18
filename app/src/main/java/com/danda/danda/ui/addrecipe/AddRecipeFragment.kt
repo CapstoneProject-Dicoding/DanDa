@@ -151,12 +151,12 @@ class AddRecipeFragment : Fragment() {
             .setMessage("Ambil gambar dengan")
 
             .setPositiveButton("CAMERA"){ dialogInterface: DialogInterface, _: Int ->
-                startTakePhoto()
+                openCamera()
                 dialogInterface.dismiss()
             }
 
             .setNegativeButton("GALLERY"){ dialogInterface: DialogInterface, _: Int ->
-                startGallery()
+                openGallery()
                 dialogInterface.dismiss()
             }
             .show()
@@ -169,7 +169,7 @@ class AddRecipeFragment : Fragment() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun startTakePhoto() {
+    private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.resolveActivity(requireContext().packageManager)
 
@@ -185,7 +185,7 @@ class AddRecipeFragment : Fragment() {
         }
     }
 
-    private fun startGallery() {
+    private fun openGallery() {
         val intent = Intent()
         intent.action = Intent.ACTION_GET_CONTENT
         intent.type = "image/*"
@@ -222,31 +222,6 @@ class AddRecipeFragment : Fragment() {
             }
         }
     }
-
-
-
-
-//    private fun addSuccess() {
-//        AlertDialog.Builder(requireContext()).apply {
-//            setCancelable(false)
-//            setTitle("Success")
-//            setMessage("Recipe Added Successfully")
-//            setPositiveButton("OK") { _, _ ->  }
-//            create()
-//            show()
-//        }
-//    }
-//
-//    private fun isFailed() {
-//        AlertDialog.Builder(requireContext()).apply {
-//            setCancelable(false)
-//            setTitle("Failed")
-//            setMessage("Recipe Failed To Add")
-//            setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-//            create()
-//            show()
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

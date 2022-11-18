@@ -20,7 +20,7 @@
         android:paddingEnd="12dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView"
+            android:id="@+id/photoUser"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="8dp"
@@ -40,9 +40,9 @@
             android:layout_marginStart="20dp"
             android:background="@color/darkBlue"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-            app:layout_constraintStart_toEndOf="@+id/circleImageView"
-            app:layout_constraintTop_toTopOf="@+id/circleImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/photoUser"
+            app:layout_constraintStart_toEndOf="@+id/photoUser"
+            app:layout_constraintTop_toTopOf="@+id/photoUser"
             app:layout_constraintVertical_bias="0.156"
             tools:text="username" />
 

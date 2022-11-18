@@ -1,8 +1,6 @@
 package com.danda.danda.model.repository.addrecipe
 
 import android.net.Uri
-import android.widget.Toast
-import androidx.core.net.toUri
 import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.util.FireStoreTables
 import com.danda.danda.util.Result
@@ -28,8 +26,8 @@ class AddRecipeRepositoryImp @Inject constructor(private val databaseFirebase: F
             }
     }
 
-    override suspend fun addImageRecipe(name: String, file: Uri, result: (Result<String>) -> Unit) {
-        databaseStorage.getReference("images/$name")
+    override suspend fun addImageRecipe(nameRecipe: String, file: Uri, result: (Result<String>) -> Unit) {
+        databaseStorage.getReference("images/$nameRecipe")
             .putFile(file)
             .addOnCanceledListener {
                 result.invoke(

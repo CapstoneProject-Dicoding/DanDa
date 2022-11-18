@@ -33,16 +33,12 @@ class AddRecipeViewModel @Inject constructor(private val addRecipeRepository: Ad
         }
     }
 
-    fun addImageRecipe(name: String, images: Uri) {
+    fun addImageRecipe(nameRecipe: String, images: Uri) {
         _addImageRecipe.value = Result.Loading
         viewModelScope.launch {
-            addRecipeRepository.addImageRecipe(name, images) {
+            addRecipeRepository.addImageRecipe(nameRecipe, images) {
                 _addImageRecipe.value = it
             }
         }
     }
-
-
-
-
 }
