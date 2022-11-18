@@ -17,18 +17,23 @@ class ResepMasakankuAdapter(private val recipeList: ArrayList<Recipe>): Recycler
     }
 
     override fun onBindViewHolder(holder: ResepViewHolder, position: Int) {
-        val recipe: Recipe = recipeList[position]
-
-        Glide.with(holder.itemView.context)
-            .load(recipe.photoUser)
-            .placeholder(R.mipmap.ic_launcher_round)
-            .error(R.mipmap.ic_launcher_round)
-            .into(holder.binding.photoFood)
-
-        holder.binding.tvNamaresep.text = recipe.nameRecipe
+        holder.bind(recipeList[position])
     }
 
     override fun getItemCount(): Int = recipeList.size
 
-    class ResepViewHolder (var binding: ItemResepMasakankuBinding): RecyclerView.ViewHolder(binding.root)
+    class ResepViewHolder (var binding: ItemResepMasakankuBinding):
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(recipe: Recipe) {
+            with(binding) {
+                tvNamaresep.text = recipe.nameRecipe
+
+                Glide.with(itemView.context)
+                    .load(recipe.photoUser)
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .error(R.mipmap.ic_launcher_round)
+                    .into(photoFood)
+            }
+        }
+    }
 }
