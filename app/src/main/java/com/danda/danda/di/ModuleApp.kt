@@ -1,5 +1,7 @@
 package com.danda.danda.di
 
+import com.danda.danda.model.repository.addrecipe.AddRecipeRepository
+import com.danda.danda.model.repository.addrecipe.AddRecipeRepositoryImp
 import com.danda.danda.model.repository.banner.BannerRepository
 import com.danda.danda.model.repository.banner.BannerRepositoryImp
 import com.danda.danda.model.repository.home.HomeRepository
@@ -8,6 +10,7 @@ import com.danda.danda.model.repository.user.UserRepository
 import com.danda.danda.model.repository.user.UserRepositoryImp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +35,12 @@ object ModuleApp {
 
     @Provides
     @Singleton
+    fun provideDatabaseStorage(): FirebaseStorage {
+        return FirebaseStorage.getInstance()
+    }
+
+    @Provides
+    @Singleton
     fun provideRepositoryUser(auth: FirebaseAuth): UserRepository = UserRepositoryImp(auth)
 
     @Provides
@@ -43,4 +52,10 @@ object ModuleApp {
     @Singleton
     fun provideRepositoryHome(databaseFirestore: FirebaseFirestore): HomeRepository =
         HomeRepositoryImp(databaseFirestore)
+
+
+    @Provides
+    @Singleton
+    fun provideRepositoryAddRecipe(databaseFirestore: FirebaseFirestore, databaseStorage: FirebaseStorage): AddRecipeRepository =
+        AddRecipeRepositoryImp(databaseFirestore, databaseStorage)
 }

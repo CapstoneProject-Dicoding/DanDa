@@ -5,17 +5,13 @@ import android.app.Activity.RESULT_OK
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -23,20 +19,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
+import com.danda.danda.MainActivity
 import com.danda.danda.databinding.FragmentAddRecipeBinding
-import com.danda.danda.util.createCustomTempFile
-import com.danda.danda.util.uriToFile
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
+import com.danda.danda.model.dataclass.Recipe
+import com.danda.danda.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 @AndroidEntryPoint
 class AddRecipeFragment : Fragment() {
-
-    private lateinit var addRecipeViewModel: AddRecipeViewModel
+    private val addRecipeViewModel by viewModels<AddRecipeViewModel>()
     private var _binding: FragmentAddRecipeBinding? = null
     private val binding get() = _binding!!
     private var getFile: File? = null
@@ -48,82 +41,101 @@ class AddRecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupViewModel()
-
-        binding.btnTambahkan.setOnClickListener { addRecipe() }
-//        binding.photoFood.setOnClickListener { openCamera() }
         takeAPicture()
+        checkStatusUploadRecipe()
+        checkStatusUploadImageRecipe()
+        addRecipe()
     }
 
-    private fun setupViewModel() {
-        addRecipeViewModel = ViewModelProvider(this)[AddRecipeViewModel::class.java]
-    }
-
-    private fun addRecipe() {
-        val nameRecipe = binding.etNamaResep.text.toString()
-        val ingredients = binding.etBahan.text.toString()
-        val tools = binding.etAlat.text.toString()
-        val howToCook = binding.etTataCara.text.toString()
-
-        when {
-            nameRecipe.isEmpty() -> {
-                binding.etNamaResep.error = "Harap masukkan nama resep terlebih dahulu"
-            }
-            ingredients.isEmpty() -> {
-                binding.etBahan.error = "Harap masukkan bahan terlebih dahulu"
-            }
-            tools.isEmpty() -> {
-                binding.etAlat.error = "Harap masukkan alat masak terlebih dahulu"
-            }
-            howToCook.isEmpty() -> {
-                binding.etTataCara.error = "Harap masukkan tata cara masak terlebih dahulu"
-            }
-            else -> {
-                addRecipeViewModel.saveRecipeFireStore(nameRecipe, ingredients, tools, howToCook)
-
-                addRecipeViewModel.addSuccess.observe(viewLifecycleOwner) {
-                    it.getContentIfNotHandled()?.let {
-                        addSuccess()
-                    }
+    private fun checkStatusUploadRecipe() {
+        addRecipeViewModel.addRecipe.observe(viewLifecycleOwner) { status ->
+            when (status) {
+                is Result.Loading -> {
+                    showLoading(true, binding.progressBarAddRecipe)
                 }
-
-                addRecipeViewModel.isLoading.observe(viewLifecycleOwner) {
-                    it.getContentIfNotHandled()?.let { state ->
-                        showLoading(state)
-                    }
+                is Result.Failure -> {
+                    requireActivity().showToast(status.error.toString())
+                    showLoading(false, binding.progressBarAddRecipe)
                 }
-
-                addRecipeViewModel.isFailed.observe(viewLifecycleOwner) {
-                    it.getContentIfNotHandled()?.let {
-                        isFailed()
-                    }
+                is Result.Success -> {
+                    requireActivity().showToast(status.data)
+                    showLoading(false, binding.progressBarAddRecipe)
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    requireActivity().finish()
                 }
-
-                uploadImage(nameRecipe)
             }
         }
     }
 
-    private fun uploadImage(fileName: String) {
-        val storage = FirebaseStorage.getInstance()
-            .getReference("images/$fileName")
-
-        storage.putFile(getFile!!.toUri())
-            .addOnCanceledListener {
-                binding.photoFood.setImageURI(null)
-                Toast.makeText(requireContext(), "berhasil", Toast.LENGTH_SHORT).show()
+    private fun checkStatusUploadImageRecipe() {
+        addRecipeViewModel.addImageRecipe.observe(viewLifecycleOwner) { status ->
+            when (status) {
+                is Result.Loading -> {}
+                is Result.Failure -> requireActivity().showToast(status.error.toString())
+                is Result.Success -> {}
             }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "gagal", Toast.LENGTH_SHORT).show()
-            }
+        }
     }
+
+    private fun addRecipe() = binding.apply{
+        btnTambahkan.setOnClickListener {
+            val nameRecipe = etNamaResep.text.toString()
+            val ingredients = etBahan.text.toString()
+            val tools = etAlat.text.toString()
+            val howToCook = etTataCara.text.toString()
+
+            when {
+                nameRecipe.isEmpty() -> {
+                    requireActivity().showToast("Harap masukkan nama resep terlebih dahulu")
+                }
+                ingredients.isEmpty() -> {
+                    requireActivity().showToast("Harap masukkan bahan terlebih dahulu")
+                }
+                tools.isEmpty() -> {
+                    requireActivity().showToast("Harap masukkan alat masak terlebih dahulu")
+                }
+                howToCook.isEmpty() -> {
+                    requireActivity().showToast("Harap masukkan tata cara masak terlebih dahulu")
+                }
+                else -> {
+                    addRecipeViewModel.addRecipe(
+                        Recipe(
+                            "",
+                            nameRecipe,
+                            ingredients,
+                            tools,
+                            howToCook
+                        )
+                    )
+
+                    addRecipeViewModel.addImageRecipe(
+                        nameRecipe,
+                        getFile!!.toUri()
+                    )
+                }
+            }
+        }
+    }
+
+//    private fun uploadImage(fileName: String) {
+//        val storage = FirebaseStorage.getInstance()
+//            .getReference("images/$fileName")
+//
+//        storage.putFile(getFile!!.toUri())
+//            .addOnCanceledListener {
+//                binding.photoFood.setImageURI(null)
+//                Toast.makeText(requireContext(), "berhasil", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(requireContext(), "gagal", Toast.LENGTH_SHORT).show()
+//            }
+//    }
 
     private fun takeAPicture() = binding.photoFood.setOnClickListener {
         when {
@@ -212,37 +224,29 @@ class AddRecipeFragment : Fragment() {
     }
 
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.apply {
-            if (isLoading) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.INVISIBLE
-            }
-        }
-    }
 
-    private fun addSuccess() {
-        AlertDialog.Builder(requireContext()).apply {
-            setCancelable(false)
-            setTitle("Success")
-            setMessage("Recipe Added Successfully")
-            setPositiveButton("OK") { _, _ ->  }
-            create()
-            show()
-        }
-    }
 
-    private fun isFailed() {
-        AlertDialog.Builder(requireContext()).apply {
-            setCancelable(false)
-            setTitle("Failed")
-            setMessage("Recipe Failed To Add")
-            setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-            create()
-            show()
-        }
-    }
+//    private fun addSuccess() {
+//        AlertDialog.Builder(requireContext()).apply {
+//            setCancelable(false)
+//            setTitle("Success")
+//            setMessage("Recipe Added Successfully")
+//            setPositiveButton("OK") { _, _ ->  }
+//            create()
+//            show()
+//        }
+//    }
+//
+//    private fun isFailed() {
+//        AlertDialog.Builder(requireContext()).apply {
+//            setCancelable(false)
+//            setTitle("Failed")
+//            setMessage("Recipe Failed To Add")
+//            setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+//            create()
+//            show()
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
