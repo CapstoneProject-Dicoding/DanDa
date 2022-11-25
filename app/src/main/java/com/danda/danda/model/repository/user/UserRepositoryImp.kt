@@ -43,10 +43,6 @@ class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): Use
             val user = auth.currentUser
             if (user != null) {
                 auth.signOut()
-            } else {
-                result.invoke(
-                    Result.Failure("Kamu belum login")
-                )
             }
         } catch (e: Exception) {
             result.invoke(

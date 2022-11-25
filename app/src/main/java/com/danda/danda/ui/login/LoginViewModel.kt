@@ -17,10 +17,6 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
     val loginUser: LiveData<Result<String>>
         get() = _loginUser
 
-    private val _logoutUser = MutableLiveData<Result<String>>()
-    val logoutUser: LiveData<Result<String>>
-        get() = _logoutUser
-
     fun loginUser(email: String, password: String) {
         _loginUser.value = Result.Loading
         viewModelScope.launch {
@@ -28,13 +24,6 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
             userRepository.loginUser(email, password) {
                 _loginUser.value = it
             }
-        }
-    }
-
-    fun logout() {
-        _logoutUser.value = Result.Loading
-        userRepository.logout {
-            _logoutUser.value = it
         }
     }
 }

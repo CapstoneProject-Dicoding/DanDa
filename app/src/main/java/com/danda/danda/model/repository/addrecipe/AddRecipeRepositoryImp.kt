@@ -38,9 +38,6 @@ class AddRecipeRepositoryImp @Inject constructor(private val databaseFirebase: F
                     .downloadUrl
                     .addOnSuccessListener {
                         if (it != null) Constants.DATA_URL_IMAGE = it.toString()
-
-                        Log.d("TAG", "ini image nya $it")
-                        Log.d("TAG", "ini image nya ${Constants.DATA_URL_IMAGE}")
                     }
             }
 
@@ -51,23 +48,4 @@ class AddRecipeRepositoryImp @Inject constructor(private val databaseFirebase: F
             }
 
     }
-
-
-    private fun downloadurl(name: String) {
-//        val aa = databaseStorage.reference.child("images/$name").downloadUrl
-//            .addOnSuccessListener {
-//                Log.e("TAG", "success ${Constants.DATA_URL_IMAGE}}")
-//            }
-
-    }
-
-//    override suspend fun addImageRecipe(file: String, result: (Result<String>) -> Unit) {
-//        databaseStorage.reference.child("images/$file")
-//            .downloadUrl
-//            .addOnSuccessListener {
-//                Log.d("TAG", "success $it")
-//            }
-//    }
-
-
 }

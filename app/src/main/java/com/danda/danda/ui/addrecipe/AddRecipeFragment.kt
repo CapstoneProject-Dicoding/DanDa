@@ -125,41 +125,21 @@ class AddRecipeFragment : Fragment() {
                     } else {
                         addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
 
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            addRecipeViewModel.addRecipe(
-                                Recipe(
-                                    "",
-                                    nameRecipe,
-                                    ingredients,
-                                    tools,
-                                    howToCook,
-                                    Constants.DATA_URL_IMAGE
-                                )
+                        addRecipeViewModel.addRecipe(
+                            Recipe(
+                                "",
+                                nameRecipe,
+                                ingredients,
+                                tools,
+                                howToCook,
+                                Constants.DATA_URL_IMAGE
                             )
-                        }, 13000)
+                        )
                     }
                 }
             }
         }
     }
-
-//    private fun sadsa (url: String) {
-//
-//    }
-
-//    private fun uploadImage(fileName: String) {
-//        val storage = FirebaseStorage.getInstance()
-////            .getReference("images/$fileName")
-//
-//        storage.putFile(getFile!!.toUri())
-//            .addOnCanceledListener {
-//                binding.photoFood.setImageURI(null)
-//                Toast.makeText(requireContext(), "berhasil", Toast.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(requireContext(), "gagal", Toast.LENGTH_SHORT).show()
-//            }
-//    }
 
     private fun takeAPicture() = binding.photoFood.setOnClickListener {
         when {
