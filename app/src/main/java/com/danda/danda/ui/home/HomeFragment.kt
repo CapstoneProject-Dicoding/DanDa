@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.danda.danda.databinding.FragmentHomeBinding
+import com.danda.danda.ui.addrecipe.AddRecipeFragment
+import com.danda.danda.util.Constants
 import com.danda.danda.util.Result
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -20,6 +21,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val homeViewModel by viewModels<HomeViewModel>()
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,20 +37,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val auth = FirebaseAuth.getInstance()
-//        val user = auth.currentUser
-//        if (user != null) {
-//            binding.textHome.text = "welcome ${user.displayName}"
-////            auth.signOut()
-//            binding.imageTest.setImageURI(user.photoUrl)
-//
-//        } else {
-//            binding.textHome.text = "Anda belum login"
-//        }
-
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        if (user != null) {
+            binding.cobacoba.text = Constants.DATA_URL_IMAGE
+        } else {
+            binding.cobacoba.text = "belum login"
+        }
 
         getBanner()
-
 
     }
 

@@ -6,6 +6,7 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): UserRepository {
+
     override suspend fun registerUser(email: String, password: String, result: (Result<String>) -> Unit) {
         auth = FirebaseAuth.getInstance()
         try {

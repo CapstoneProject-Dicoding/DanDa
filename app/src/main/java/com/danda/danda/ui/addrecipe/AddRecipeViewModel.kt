@@ -21,12 +21,12 @@ class AddRecipeViewModel @Inject constructor(private val addRecipeRepository: Ad
 
     private val _addImageRecipe = MutableLiveData<Result<String>>()
     val addImageRecipe: LiveData<Result<String>>
-        get() = _addRecipe
+        get() = _addImageRecipe
 
     fun addRecipe(recipe: Recipe) {
         _addRecipe.value = Result.Loading
         viewModelScope.launch {
-            delay(2000)
+            delay(13000)
             addRecipeRepository.addRecipe(recipe) {
                 _addRecipe.value = it
             }

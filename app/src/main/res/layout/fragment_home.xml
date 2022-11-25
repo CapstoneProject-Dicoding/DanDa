@@ -9,6 +9,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,21 +26,28 @@
                 android:id="@+id/image_slider_home"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
+                android:background="@color/cardview_dark_background"
                 app:iss_auto_cycle="true"
-                app:iss_period="2000"
                 app:iss_delay="1000"
-                android:background="@color/cardview_dark_background" />
+                app:iss_period="2000" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                tools:listitem="@layout/item_resep_masakanku"/>
+                tools:listitem="@layout/item_resep_masakanku" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-
+    <TextView
+        android:id="@+id/cobacoba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="asdsad"
+        app:layout_constraintEnd_toEndOf="@+id/search_home"
+        app:layout_constraintStart_toStartOf="@+id/search_home"
+        app:layout_constraintTop_toBottomOf="@+id/search_home" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_home"

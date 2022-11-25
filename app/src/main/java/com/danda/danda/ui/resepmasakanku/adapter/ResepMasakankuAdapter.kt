@@ -29,7 +29,7 @@ class ResepMasakankuAdapter(private val recipeList: ArrayList<Recipe>): Recycler
                 tvNamaresep.text = recipe.nameRecipe
 
                 Glide.with(itemView.context)
-                    .load(recipe.photoUser)
+                    .load(recipe.imgUrl)
                     .placeholder(R.mipmap.ic_launcher_round)
                     .error(R.mipmap.ic_launcher_round)
                     .into(photoFood)

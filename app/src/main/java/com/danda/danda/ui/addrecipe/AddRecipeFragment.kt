@@ -8,10 +8,14 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -20,6 +24,7 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.danda.danda.MainActivity
 import com.danda.danda.databinding.FragmentAddRecipeBinding
 import com.danda.danda.model.dataclass.Recipe
@@ -34,6 +39,7 @@ class AddRecipeFragment : Fragment() {
     private val binding get() = _binding!!
     private var getFile: File? = null
     private lateinit var currentPhotoPath: String
+    private var imageName: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +57,9 @@ class AddRecipeFragment : Fragment() {
         checkStatusUploadRecipe()
         checkStatusUploadImageRecipe()
         addRecipe()
+
+//        Log.d("TAG", "image nya ${Constants.DATA_URL_IMAGE}")
+
     }
 
     private fun checkStatusUploadRecipe() {
@@ -78,7 +87,12 @@ class AddRecipeFragment : Fragment() {
             when (status) {
                 is Result.Loading -> {}
                 is Result.Failure -> requireActivity().showToast(status.error.toString())
-                is Result.Success -> {}
+                is Result.Success -> {
+//                    imageName = status.data
+//                    if (getFile != null) {
+//                        addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
+//                    }
+                }
             }
         }
     }
@@ -89,6 +103,8 @@ class AddRecipeFragment : Fragment() {
             val ingredients = etBahan.text.toString()
             val tools = etAlat.text.toString()
             val howToCook = etTataCara.text.toString()
+
+            showLoading(true, binding.progressBarAddRecipe)
 
             when {
                 nameRecipe.isEmpty() -> {
@@ -104,28 +120,36 @@ class AddRecipeFragment : Fragment() {
                     requireActivity().showToast("Harap masukkan tata cara masak terlebih dahulu")
                 }
                 else -> {
-                    addRecipeViewModel.addRecipe(
-                        Recipe(
-                            "",
-                            nameRecipe,
-                            ingredients,
-                            tools,
-                            howToCook
-                        )
-                    )
+                    if (getFile == null) {
+                        requireActivity().showToast("Harap masukkan Image terlebih dahulu")
+                    } else {
+                        addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
 
-                    addRecipeViewModel.addImageRecipe(
-                        nameRecipe,
-                        getFile!!.toUri()
-                    )
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            addRecipeViewModel.addRecipe(
+                                Recipe(
+                                    "",
+                                    nameRecipe,
+                                    ingredients,
+                                    tools,
+                                    howToCook,
+                                    Constants.DATA_URL_IMAGE
+                                )
+                            )
+                        }, 13000)
+                    }
                 }
             }
         }
     }
 
+//    private fun sadsa (url: String) {
+//
+//    }
+
 //    private fun uploadImage(fileName: String) {
 //        val storage = FirebaseStorage.getInstance()
-//            .getReference("images/$fileName")
+////            .getReference("images/$fileName")
 //
 //        storage.putFile(getFile!!.toUri())
 //            .addOnCanceledListener {
@@ -141,8 +165,8 @@ class AddRecipeFragment : Fragment() {
         when {
             !allPermissionsGranted() -> ActivityCompat.requestPermissions(
                 requireActivity(),
-                arrayOf(Manifest.permission.CAMERA),
-                10
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
             )
         }
 
@@ -176,7 +200,7 @@ class AddRecipeFragment : Fragment() {
         createCustomTempFile(requireContext()).also {
             val photoURI: Uri = FileProvider.getUriForFile(
                 requireContext(),
-                "com.danda.danda",
+                AUTHORITY,
                 it
             )
             currentPhotoPath = it.absolutePath
@@ -228,5 +252,15 @@ class AddRecipeFragment : Fragment() {
         _binding = null
     }
 
+    companion object {
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val AUTHORITY = "com.danda.danda"
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        var ImageUrl = "image_url"
+    }
 
+    override fun onResume() {
+        super.onResume()
+        imageName
+    }
 }

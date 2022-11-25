@@ -18,7 +18,7 @@ class ResepMasakankuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResepMasakankuBinding
     private lateinit var recipeList: ArrayList<Recipe>
     private var db = Firebase.firestore
-    private lateinit var databaseReference: DatabaseReference
+//    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class ResepMasakankuActivity : AppCompatActivity() {
 
         initializeFireStore()
         readFireStoreData()
-        readFireStorageData()
+//        readFireStorageData()
     }
 
     private fun initializeFireStore() {
@@ -57,23 +57,23 @@ class ResepMasakankuActivity : AppCompatActivity() {
             }
     }
 
-    private fun readFireStorageData() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("images/")
-        databaseReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (dataSnapShot in snapshot.children) {
-                        val image = dataSnapShot.getValue(Recipe::class.java)
-                        recipeList.add(image!!)
-                    }
-                    binding.rvResepMasakanku.adapter = ResepMasakankuAdapter(recipeList)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-//                Toast.makeText(this@ResepMasakankuActivity, error.toString(), Toast.LENGTH_SHORT).show()
-                showToast(error.toString())
-            }
-        })
-    }
+//    private fun readFireStorageData() {
+//        databaseReference = FirebaseDatabase.getInstance().getReference("images/")
+//        databaseReference.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if (snapshot.exists()) {
+//                    for (dataSnapShot in snapshot.children) {
+//                        val image = dataSnapShot.getValue(Recipe::class.java)
+//                        recipeList.add(image!!)
+//                    }
+//                    binding.rvResepMasakanku.adapter = ResepMasakankuAdapter(recipeList)
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+////                Toast.makeText(this@ResepMasakankuActivity, error.toString(), Toast.LENGTH_SHORT).show()
+//                showToast(error.toString())
+//            }
+//        })
+//    }
 }
