@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/tv_namaresep"
-            android:layout_width="170dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="@color/darkBlue"
@@ -44,7 +44,7 @@
             android:id="@+id/iv_nav_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

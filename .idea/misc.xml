@@ -6,7 +6,6 @@
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1515" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/custom_background.xml" value="0.1" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/custom_button.xml" value="0.1765" />
-        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/custom_search.xml" value="0.1045" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1515" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.1515" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1515" />
@@ -16,23 +15,17 @@
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/login_background.xml" value="0.1" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/drawable/register_background.xml" value="0.1" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_detail_recipe.xml" value="0.17083333333333334" />
-        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
-        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_email_and_password.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/activity_resep_masakanku.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_add_recipe.xml" value="0.17083333333333334" />
-        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_profile.xml" value="0.20364583333333333" />
+        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/item_resep_masakanku.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/list_comment.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
-        <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1915" />
-        <entry key="..\:/Users/Greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/activity_resep_masakanku.xml" value="0.32155797101449274" />
-        <entry key="..\:/Users/Greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/fragment_add_recipe.xml" value="0.31614583333333335" />
-        <entry key="..\:/Users/Greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/item_resep_masakanku.xml" value="0.32155797101449274" />
-        <entry key="..\:/Users/Greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/list_comment.xml" value="0.32155797101449274" />
+        <entry key="app/src/main/res/layout/activity_resep_masakanku.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_resep_masakanku.xml" value="0.5" />
       </map>
     </option>
   </component>
@@ -41,12 +34,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.2" />
-      </ProjectState>
-    </option>
   </component>
 </project>
