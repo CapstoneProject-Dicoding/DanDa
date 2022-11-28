@@ -26,6 +26,7 @@ class AddRecipeViewModel @Inject constructor(private val addRecipeRepository: Ad
     fun addRecipe(recipe: Recipe) {
         _addRecipe.value = Result.Loading
         viewModelScope.launch {
+            delay(6000L)
             addRecipeRepository.addRecipe(recipe) {
                 _addRecipe.value = it
             }

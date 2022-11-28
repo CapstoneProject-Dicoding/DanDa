@@ -30,6 +30,7 @@ import com.danda.danda.databinding.FragmentAddRecipeBinding
 import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.handleCoroutineException
 import java.io.File
 
 @AndroidEntryPoint
@@ -104,27 +105,21 @@ class AddRecipeFragment : Fragment() {
             val tools = etAlat.text.toString()
             val howToCook = etTataCara.text.toString()
 
-            showLoading(true, binding.progressBarAddRecipe)
-
-            when {
-                nameRecipe.isEmpty() -> {
+            if (getFile != null) {
+                addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
+                if (nameRecipe.isEmpty()) {
                     requireActivity().showToast("Harap masukkan nama resep terlebih dahulu")
                 }
-                ingredients.isEmpty() -> {
+                else if (ingredients.isEmpty()) {
                     requireActivity().showToast("Harap masukkan bahan terlebih dahulu")
                 }
-                tools.isEmpty() -> {
+                else if (tools.isEmpty()) {
                     requireActivity().showToast("Harap masukkan alat masak terlebih dahulu")
                 }
-                howToCook.isEmpty() -> {
+                else if (howToCook.isEmpty()) {
                     requireActivity().showToast("Harap masukkan tata cara masak terlebih dahulu")
-                }
-                else -> {
-                    if (getFile == null) {
-                        requireActivity().showToast("Harap masukkan Image terlebih dahulu")
-                    } else {
-                        addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
-
+                } else {
+                    Handler(Looper.getMainLooper()).postDelayed({
                         addRecipeViewModel.addRecipe(
                             Recipe(
                                 "",
@@ -135,9 +130,43 @@ class AddRecipeFragment : Fragment() {
                                 Constants.DATA_URL_IMAGE
                             )
                         )
-                    }
+                    }, 3000L)
+
                 }
+            } else {
+                requireActivity().showToast("Harap masukkan Image terlebih dahulu")
             }
+
+//            if (nameRecipe.isEmpty()) {
+//                requireActivity().showToast("Harap masukkan nama resep terlebih dahulu")
+//            }
+//            else if (ingredients.isEmpty()) {
+//                requireActivity().showToast("Harap masukkan bahan terlebih dahulu")
+//            }
+//            else if (tools.isEmpty()) {
+//                requireActivity().showToast("Harap masukkan alat masak terlebih dahulu")
+//            }
+//            else if (howToCook.isEmpty()) {
+//                requireActivity().showToast("Harap masukkan tata cara masak terlebih dahulu")
+//            }
+//            else {
+//                if (getFile == null) {
+//                    requireActivity().showToast("Harap masukkan Image terlebih dahulu")
+//                } else {
+//                    addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
+//
+//                    addRecipeViewModel.addRecipe(
+//                        Recipe(
+//                            "",
+//                            nameRecipe,
+//                            ingredients,
+//                            tools,
+//                            howToCook,
+//                            Constants.DATA_URL_IMAGE
+//                        )
+//                    )
+//                }
+//            }
         }
     }
 
