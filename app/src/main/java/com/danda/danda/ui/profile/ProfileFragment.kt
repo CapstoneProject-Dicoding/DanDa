@@ -9,15 +9,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.FragmentProfileBinding
-import com.danda.danda.ui.editprofile.EditProfileActivity
-import com.danda.danda.ui.home.HomeFragment
+import com.danda.danda.ui.change.ChangePasswordActivity
 import com.danda.danda.ui.login.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import com.danda.danda.util.Result
 import com.danda.danda.util.showToast
@@ -26,7 +22,6 @@ import com.danda.danda.util.showToast
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private lateinit var auth: FirebaseAuth
     private val viewModel by viewModels<ProfileViewModel>()
 
     override fun onCreateView(
@@ -42,7 +37,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.imageButton.setOnClickListener {
-            startActivity((Intent(requireContext(),EditProfileActivity::class.java)))
+            startActivity((Intent(requireContext(), ChangePasswordActivity::class.java)))
         }
 
         getUser()

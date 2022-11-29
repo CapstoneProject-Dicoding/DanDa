@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
             }
             is Result.Success -> {
                 showLoading(false, binding.progressBarLogin)
-                showToast("Login Success")
+                showToast(status.data)
                 startActivity(Intent(this, MainActivity::class.java))
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
                 finish()

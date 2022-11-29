@@ -53,7 +53,7 @@
             android:name=".ui.resepmasakanku.ResepMasakankuActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.change.EmailAndPasswordActivity"
+            android:name=".ui.change.ChangePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".ui.detailrecipe.DetailRecipeActivity"

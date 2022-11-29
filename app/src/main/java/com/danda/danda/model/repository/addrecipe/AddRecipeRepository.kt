@@ -5,6 +5,5 @@ import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.util.Result
 
 interface AddRecipeRepository {
-    suspend fun addRecipe(recipe: Recipe, result: (Result<String>) -> Unit)
-    suspend fun addImageRecipe(nameRecipe: String, file: Uri, result: (Result<String>) -> Unit)
+    suspend fun addRecipe(recipe: Recipe, file: Uri, result: (Result<String>) -> Unit)
 }

@@ -31,7 +31,7 @@
                 android:contentDescription="@string/app_name" />
 
             <TextView
-                android:id="@+id/tv_danda_app"
+                android:id="@+id/tv_name_recipe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -67,7 +67,7 @@
                 android:background="@drawable/register_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_danda_app" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_recipe" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
@@ -88,7 +88,7 @@
                     android:padding="10dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayoutEmailRegister"
+                        android:id="@+id/textInputLayoutEmailPassword"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -115,9 +115,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:hint="Masukan Password"
-                        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailRegister"
-                        app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailRegister"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailRegister"
+                        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailPassword"
+                        app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailPassword"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailPassword"
                         app:endIconMode="password_toggle">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -130,7 +130,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayoutUlangiPasswordRegister"
+                        android:id="@+id/textInputLayoutKonfirmasiPassword"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

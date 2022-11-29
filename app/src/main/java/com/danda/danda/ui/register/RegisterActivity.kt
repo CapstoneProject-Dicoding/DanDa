@@ -42,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         when (status) {
             is Result.Success -> {
                 showLoading(false, binding.progressBarRegister)
-                showToast("Created User")
+                showToast(status.data)
                 startActivity(Intent(this, LoginActivity::class.java))
                 overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
                 finish()

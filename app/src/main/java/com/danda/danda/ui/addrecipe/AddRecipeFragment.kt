@@ -8,14 +8,10 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -24,13 +20,12 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.danda.danda.MainActivity
+import com.danda.danda.R
 import com.danda.danda.databinding.FragmentAddRecipeBinding
 import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.util.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.handleCoroutineException
 import java.io.File
 
 @AndroidEntryPoint
@@ -55,118 +50,63 @@ class AddRecipeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         takeAPicture()
-        checkStatusUploadRecipe()
-        checkStatusUploadImageRecipe()
+        checkStatus()
         addRecipe()
-
-//        Log.d("TAG", "image nya ${Constants.DATA_URL_IMAGE}")
 
     }
 
-    private fun checkStatusUploadRecipe() {
+    private fun checkStatus() {
         addRecipeViewModel.addRecipe.observe(viewLifecycleOwner) { status ->
             when (status) {
-                is Result.Loading -> {
-                    showLoading(true, binding.progressBarAddRecipe)
-                }
+                is Result.Loading -> showLoading(true, binding.progressBarAddRecipe)
                 is Result.Failure -> {
-                    requireActivity().showToast(status.error.toString())
                     showLoading(false, binding.progressBarAddRecipe)
+                    requireActivity().showToast(status.error.toString())
                 }
                 is Result.Success -> {
                     requireActivity().showToast(status.data)
                     showLoading(false, binding.progressBarAddRecipe)
                     startActivity(Intent(requireContext(), MainActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
                     requireActivity().finish()
                 }
             }
         }
     }
 
-    private fun checkStatusUploadImageRecipe() {
-        addRecipeViewModel.addImageRecipe.observe(viewLifecycleOwner) { status ->
-            when (status) {
-                is Result.Loading -> {}
-                is Result.Failure -> requireActivity().showToast(status.error.toString())
-                is Result.Success -> {
-//                    imageName = status.data
-//                    if (getFile != null) {
-//                        addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
-//                    }
-                }
-            }
-        }
-    }
-
-    private fun addRecipe() = binding.apply{
+    private fun addRecipe() = binding.apply {
         btnTambahkan.setOnClickListener {
             val nameRecipe = etNamaResep.text.toString()
             val ingredients = etBahan.text.toString()
             val tools = etAlat.text.toString()
             val howToCook = etTataCara.text.toString()
 
-            if (getFile != null) {
-                addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
-                if (nameRecipe.isEmpty()) {
-                    requireActivity().showToast("Harap masukkan nama resep terlebih dahulu")
-                }
-                else if (ingredients.isEmpty()) {
-                    requireActivity().showToast("Harap masukkan bahan terlebih dahulu")
-                }
-                else if (tools.isEmpty()) {
-                    requireActivity().showToast("Harap masukkan alat masak terlebih dahulu")
-                }
-                else if (howToCook.isEmpty()) {
-                    requireActivity().showToast("Harap masukkan tata cara masak terlebih dahulu")
-                } else {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        addRecipeViewModel.addRecipe(
-                            Recipe(
-                                "",
-                                nameRecipe,
-                                ingredients,
-                                tools,
-                                howToCook,
-                                Constants.DATA_URL_IMAGE
-                            )
-                        )
-                    }, 3000L)
-
-                }
+            if (getFile == null) {
+                requireActivity().showToast("Masukkan Image terlebih dahulu")
             } else {
-                requireActivity().showToast("Harap masukkan Image terlebih dahulu")
-            }
+                if (nameRecipe.isEmpty()) {
+                    requireActivity().showToast("Masukkan nama resep masakan  terlebih dahulu")
+                } else if (ingredients.isEmpty()) {
+                    requireActivity().showToast("Masukkan bahan masakan  terlebih dahulu")
+                } else if (tools.isEmpty()) {
+                    requireActivity().showToast("Masukkan alat memasak terlebih dahulu")
+                } else if (howToCook.isEmpty()) {
+                    requireActivity().showToast("Masukkan tata cara memasak terlebih dahulu")
+                } else {
+                    addRecipeViewModel.addRecipe(
+                        Recipe(
+                            "",
+                            nameRecipe,
+                            ingredients,
+                            tools,
+                            howToCook,
+                            ""
 
-//            if (nameRecipe.isEmpty()) {
-//                requireActivity().showToast("Harap masukkan nama resep terlebih dahulu")
-//            }
-//            else if (ingredients.isEmpty()) {
-//                requireActivity().showToast("Harap masukkan bahan terlebih dahulu")
-//            }
-//            else if (tools.isEmpty()) {
-//                requireActivity().showToast("Harap masukkan alat masak terlebih dahulu")
-//            }
-//            else if (howToCook.isEmpty()) {
-//                requireActivity().showToast("Harap masukkan tata cara masak terlebih dahulu")
-//            }
-//            else {
-//                if (getFile == null) {
-//                    requireActivity().showToast("Harap masukkan Image terlebih dahulu")
-//                } else {
-//                    addRecipeViewModel.addImageRecipe("nameRecipe", getFile!!.toUri())
-//
-//                    addRecipeViewModel.addRecipe(
-//                        Recipe(
-//                            "",
-//                            nameRecipe,
-//                            ingredients,
-//                            tools,
-//                            howToCook,
-//                            Constants.DATA_URL_IMAGE
-//                        )
-//                    )
-//                }
-//            }
+                        ),
+                        getFile!!.toUri()
+                    )
+                }
+            }
         }
     }
 
@@ -265,7 +205,6 @@ class AddRecipeFragment : Fragment() {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val AUTHORITY = "com.danda.danda"
         private const val REQUEST_CODE_PERMISSIONS = 10
-        var ImageUrl = "image_url"
     }
 
     override fun onResume() {

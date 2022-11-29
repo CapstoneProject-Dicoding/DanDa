@@ -6,39 +6,50 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): UserRepository {
-
     override suspend fun registerUser(email: String, password: String, result: (Result<String>) -> Unit) {
-        auth = FirebaseAuth.getInstance()
         try {
             val dataRegister = auth.createUserWithEmailAndPassword(email, password).await()
             result.invoke(
-                Result.Success(dataRegister.toString())
+                Result.Success("Created User")
             )
             Result.Success(dataRegister)
         } catch (e: Exception) {
             result.invoke(
-                Result.Failure(e.message.toString())
+                Result.Failure(e.localizedMessage)
             )
         }
     }
 
     override suspend fun loginUser(email: String, password: String, result: (Result<String>) -> Unit) {
-        auth = FirebaseAuth.getInstance()
         try {
             val dataLogin = auth.signInWithEmailAndPassword(email, password).await()
             result.invoke(
-                Result.Success(dataLogin.toString())
+                Result.Success("Login Success")
             )
             Result.Success(dataLogin)
         } catch (e: Exception) {
             result.invoke(
-                Result.Failure(e.message.toString())
+                Result.Failure(e.localizedMessage)
             )
         }
     }
 
+    override suspend fun changePassword(newPassword: String, result: (Result<String>) -> Unit) {
+        auth.currentUser!!.updatePassword(newPassword)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    result.invoke(
+                        Result.Success("Change Password Successfully")
+                    )
+                } else {
+                    result.invoke(
+                        Result.Failure("Error")
+                    )
+                }
+            }
+    }
+
     override fun logout(result: (Result<String>) -> Unit) {
-        auth = FirebaseAuth.getInstance()
         try {
             val user = auth.currentUser
             if (user != null) {
@@ -46,7 +57,7 @@ class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): Use
             }
         } catch (e: Exception) {
             result.invoke(
-                Result.Failure(e.message.toString())
+                Result.Failure(e.localizedMessage)
             )
         }
     }
