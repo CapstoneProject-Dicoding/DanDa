@@ -24,6 +24,8 @@ import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.FragmentAddRecipeBinding
 import com.danda.danda.model.dataclass.Recipe
+import com.danda.danda.ui.login.LoginActivity
+import com.danda.danda.ui.profile.ProfileViewModel
 import com.danda.danda.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -31,11 +33,11 @@ import java.io.File
 @AndroidEntryPoint
 class AddRecipeFragment : Fragment() {
     private val addRecipeViewModel by viewModels<AddRecipeViewModel>()
+    private val profileViewModel by viewModels<ProfileViewModel>()
     private var _binding: FragmentAddRecipeBinding? = null
     private val binding get() = _binding!!
     private var getFile: File? = null
     private lateinit var currentPhotoPath: String
-    private var imageName: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +53,7 @@ class AddRecipeFragment : Fragment() {
 
         takeAPicture()
         checkStatus()
-        addRecipe()
+        checkUser()
 
     }
 
@@ -74,7 +76,22 @@ class AddRecipeFragment : Fragment() {
         }
     }
 
-    private fun addRecipe() = binding.apply {
+    private fun checkUser() {
+        profileViewModel.getUser.observe(viewLifecycleOwner) { status ->
+            when(status) {
+                is Result.Success -> {
+                    if (status.data?.email == null) {
+                        loginHere()
+                    } else {
+                        addRecipe(status.data.email.toString())
+                    }
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun addRecipe(emailUser: String) = binding.apply {
         btnTambahkan.setOnClickListener {
             val nameRecipe = etNamaResep.text.toString()
             val ingredients = etBahan.text.toString()
@@ -100,7 +117,8 @@ class AddRecipeFragment : Fragment() {
                             ingredients,
                             tools,
                             howToCook,
-                            ""
+                            "",
+                            emailUser
 
                         ),
                         getFile!!.toUri()
@@ -108,6 +126,26 @@ class AddRecipeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun loginHere() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("KONFIRMASI STATUS")
+            .setMessage("Jika kamu ingin menambahkan resep, anda harus login terlebih dahulu?")
+
+            .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            }
+
+            .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                requireActivity().finish()
+            }
+            .show()
     }
 
     private fun takeAPicture() = binding.photoFood.setOnClickListener {
@@ -205,10 +243,5 @@ class AddRecipeFragment : Fragment() {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val AUTHORITY = "com.danda.danda"
         private const val REQUEST_CODE_PERMISSIONS = 10
-    }
-
-    override fun onResume() {
-        super.onResume()
-        imageName
     }
 }

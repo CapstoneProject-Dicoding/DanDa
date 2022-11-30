@@ -14,6 +14,7 @@ import com.danda.danda.R
 import com.danda.danda.databinding.FragmentProfileBinding
 import com.danda.danda.ui.change.ChangePasswordActivity
 import com.danda.danda.ui.login.LoginActivity
+import com.danda.danda.ui.resepmasakanku.ResepMasakankuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import com.danda.danda.util.Result
 import com.danda.danda.util.showToast
@@ -37,7 +38,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.imageButton.setOnClickListener {
-            startActivity((Intent(requireContext(), ChangePasswordActivity::class.java)))
+            startActivity((Intent(requireContext(), ResepMasakankuActivity::class.java)))
         }
 
         getUser()

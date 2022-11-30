@@ -2,78 +2,63 @@ package com.danda.danda.ui.resepmasakanku
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danda.danda.databinding.ActivityResepMasakankuBinding
-import com.danda.danda.model.dataclass.Recipe
-import com.danda.danda.ui.resepmasakanku.adapter.ResepMasakankuAdapter
+import com.danda.danda.ui.profile.ProfileViewModel
+import com.danda.danda.util.Result
+import com.danda.danda.util.showLoading
 import com.danda.danda.util.showToast
-import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResepMasakankuActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityResepMasakankuBinding
-    private lateinit var recipeList: ArrayList<Recipe>
-    private var db = Firebase.firestore
-//    private lateinit var databaseReference: DatabaseReference
+    private val resepListAdapter: ResepMasakankuAdapter by lazy(::ResepMasakankuAdapter)
+    private val resepMasakankuViewModel by viewModels<ResepMasakankuViewModel>()
+    private val profileViewModel by viewModels<ProfileViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityResepMasakankuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recipeList = arrayListOf()
-        binding.rvResepMasakanku.layoutManager = LinearLayoutManager(this)
+        checkUser()
 
-        initializeFireStore()
-        readFireStoreData()
-//        readFireStorageData()
     }
 
-    private fun initializeFireStore() {
-        db = FirebaseFirestore.getInstance()
+    private fun checkUser() {
+        profileViewModel.getUser.observe(this) { status ->
+            when(status) {
+                is Result.Success -> {
+                    getListRecipe(status.data?.email.toString())
+                }
+                else -> {}
+            }
+        }
     }
 
-    private fun readFireStoreData() {
-        db.collection("recipe")
-            .get()
-            .addOnSuccessListener {
-                if (!it.isEmpty) {
-                    for (data in it.documents) {
-                        val recipe: Recipe? = data.toObject(Recipe::class.java)
-                        if (recipe != null) {
-                            recipeList.add(recipe)
-                        }
-                    }
-                    binding.rvResepMasakanku.adapter = ResepMasakankuAdapter(recipeList)
+    private fun getListRecipe(emailUser: String) {
+        binding.rvResepMasakanku.apply {
+            layoutManager = LinearLayoutManager(this@ResepMasakankuActivity)
+            adapter = resepListAdapter
+            setHasFixedSize(true)
+        }
+
+        resepMasakankuViewModel.recipe.observe(this) { status ->
+            when (status) {
+                is Result.Failure -> {
+                    showLoading(false, binding.progressBarResepMasakanku)
+                    showToast(status.error.toString())
+                }
+                is Result.Loading -> showLoading(true, binding.progressBarResepMasakanku)
+                is Result.Success -> {
+                    showLoading(false, binding.progressBarResepMasakanku)
+                    resepListAdapter.setListRecipe(status.data)
                 }
             }
-            .addOnFailureListener {
-                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
-            }
-    }
+        }
 
-//    private fun readFireStorageData() {
-//        databaseReference = FirebaseDatabase.getInstance().getReference("images/")
-//        databaseReference.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (snapshot.exists()) {
-//                    for (dataSnapShot in snapshot.children) {
-//                        val image = dataSnapShot.getValue(Recipe::class.java)
-//                        recipeList.add(image!!)
-//                    }
-//                    binding.rvResepMasakanku.adapter = ResepMasakankuAdapter(recipeList)
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-////                Toast.makeText(this@ResepMasakankuActivity, error.toString(), Toast.LENGTH_SHORT).show()
-//                showToast(error.toString())
-//            }
-//        })
-//    }
+        resepMasakankuViewModel.getListRecipe(emailUser)
+    }
 }

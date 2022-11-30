@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.danda.danda.databinding.FragmentHomeBinding
 import com.danda.danda.util.Result
+import com.danda.danda.util.showLoading
+import com.danda.danda.util.showToast
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,8 +20,8 @@ import java.util.ArrayList
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val homeViewModel by viewModels<HomeViewModel>()
     private val homeListAdapter: HomeListAdapter by lazy(::HomeListAdapter)
+    private val homeViewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +30,6 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
 
     }
 
@@ -40,8 +41,8 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun getListRecipe() = binding.apply {
-        rvHome.apply {
+    private fun getListRecipe() {
+        binding.rvHome.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = homeListAdapter
             setHasFixedSize(true)
@@ -50,13 +51,13 @@ class HomeFragment : Fragment() {
         homeViewModel.recipe.observe(viewLifecycleOwner) { status ->
             when (status) {
                 is Result.Failure -> {
-                    //
+                    showLoading(false, binding.progressBarHome)
+                    requireActivity().showToast(status.error.toString())
                 }
-                is Result.Loading -> {
-                    //
-                }
+                is Result.Loading -> showLoading(true, binding.progressBarHome)
                 is Result.Success -> {
-                    homeListAdapter.setListRecipe(status.data.toMutableList())
+                    showLoading(false, binding.progressBarHome)
+                    homeListAdapter.setListRecipe(status.data)
                 }
             }
         }

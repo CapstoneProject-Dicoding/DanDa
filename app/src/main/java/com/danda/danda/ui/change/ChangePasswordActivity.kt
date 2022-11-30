@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityChangePasswordBinding
-import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.util.Result
 import com.danda.danda.util.showLoading
 import com.danda.danda.util.showToast

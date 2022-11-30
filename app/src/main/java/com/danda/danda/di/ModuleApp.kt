@@ -8,6 +8,8 @@ import com.danda.danda.model.repository.home.HomeRepository
 import com.danda.danda.model.repository.home.HomeRepositoryImp
 import com.danda.danda.model.repository.profile.ProfileRepository
 import com.danda.danda.model.repository.profile.ProfileRepositoryImpl
+import com.danda.danda.model.repository.resepmasakanku.ResepMasakankuImp
+import com.danda.danda.model.repository.resepmasakanku.ResepMasakankuRepository
 import com.danda.danda.model.repository.user.UserRepository
 import com.danda.danda.model.repository.user.UserRepositoryImp
 import com.google.firebase.auth.FirebaseAuth
@@ -55,6 +57,10 @@ object ModuleApp {
     fun provideRepositoryHome(databaseFirestore: FirebaseFirestore): HomeRepository =
         HomeRepositoryImp(databaseFirestore)
 
+    @Provides
+    @Singleton
+    fun provideRepositoryResepMasakanku(databaseFirestore: FirebaseFirestore): ResepMasakankuRepository =
+        ResepMasakankuImp(databaseFirestore)
 
     @Provides
     @Singleton

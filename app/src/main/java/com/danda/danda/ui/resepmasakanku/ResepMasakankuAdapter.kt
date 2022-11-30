@@ -1,4 +1,4 @@
-package com.danda.danda.ui.home
+package com.danda.danda.ui.resepmasakanku
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.danda.danda.R
-import com.danda.danda.databinding.ItemListHomeBinding
+import com.danda.danda.databinding.ItemResepMasakankuBinding
 import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.ui.detailrecipe.DetailRecipeActivity
 
 @SuppressLint("NotifyDataSetChanged")
-class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.HomeViewHolder>() {
+class ResepMasakankuAdapter: RecyclerView.Adapter<ResepMasakankuAdapter.ResepViewHolder>() {
 
     private var listRecipe: List<Recipe>? = null
 
@@ -21,23 +21,23 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.HomeViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val binding = ItemListHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResepViewHolder {
+        val binding = ItemResepMasakankuBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ResepViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ResepViewHolder, position: Int) {
         val recipe = listRecipe?.get(position)
 
         holder.apply {
             binding.apply {
                 itemView.apply {
-                    tvNameRecipe.text = recipe?.nameRecipe
+                    tvNamaresep.text = recipe?.nameRecipe
 
                     Glide.with(itemView)
                         .load(recipe?.imgUrl)
                         .error(R.drawable.ic_baseline_account_circle_24)
-                        .into(ivRecipe)
+                        .into(photoFood)
 
                     setOnClickListener {
                         val intent = Intent(context, DetailRecipeActivity::class.java)
@@ -57,7 +57,5 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.HomeViewHolder>() {
 
     }
 
-    inner class HomeViewHolder (var binding: ItemListHomeBinding) : RecyclerView.ViewHolder(binding.root)
-
-
+    inner class ResepViewHolder (var binding: ItemResepMasakankuBinding) : RecyclerView.ViewHolder(binding.root)
 }

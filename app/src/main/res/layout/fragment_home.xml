@@ -8,60 +8,69 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView2"
-        android:layout_width="0dp"
+<!--    <ScrollView-->
+<!--        android:id="@+id/nestedScrollView2"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            -->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </ScrollView>-->
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/image_slider_home"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@color/cardview_dark_background"
+        app:iss_auto_cycle="true"
+        app:iss_delay="1000"
+        app:iss_period="2000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/image_slider_home">
 
-        <LinearLayout
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progress_bar_home"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/file_loading" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_margin="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_list_home" />
 
-            <com.denzcoskun.imageslider.ImageSlider
-                android:id="@+id/image_slider_home"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:background="@color/cardview_dark_background"
-                app:iss_auto_cycle="true"
-                app:iss_delay="1000"
-                app:iss_period="2000" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_home"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                tools:listitem="@layout/item_list_home" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/progress_bar_home"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/nestedScrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_home"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/file_loading" />
-
-    <TextView
-        android:id="@+id/cobacoba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="asdsad"
-        app:layout_constraintEnd_toEndOf="@+id/search_home"
-        app:layout_constraintStart_toStartOf="@+id/search_home"
-        app:layout_constraintTop_toBottomOf="@+id/search_home" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_home"
