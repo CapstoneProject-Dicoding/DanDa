@@ -18,7 +18,6 @@ class ResepMasakankuImp @Inject constructor(private val databaseFirestore: Fireb
                 val listRecipe = arrayListOf<Recipe>()
                 for (document in it) {
                     val recipe = document.toObject(Recipe::class.java)
-                    Result
                     listRecipe.add(recipe)
                 }
                 result.invoke(

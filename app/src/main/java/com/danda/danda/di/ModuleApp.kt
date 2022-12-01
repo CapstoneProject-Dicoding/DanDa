@@ -4,6 +4,8 @@ import com.danda.danda.model.repository.addrecipe.AddRecipeRepository
 import com.danda.danda.model.repository.addrecipe.AddRecipeRepositoryImp
 import com.danda.danda.model.repository.banner.BannerRepository
 import com.danda.danda.model.repository.banner.BannerRepositoryImp
+import com.danda.danda.model.repository.detail.DetailRepository
+import com.danda.danda.model.repository.detail.DetailRepositoryImp
 import com.danda.danda.model.repository.home.HomeRepository
 import com.danda.danda.model.repository.home.HomeRepositoryImp
 import com.danda.danda.model.repository.profile.ProfileRepository
@@ -61,6 +63,11 @@ object ModuleApp {
     @Singleton
     fun provideRepositoryResepMasakanku(databaseFirestore: FirebaseFirestore): ResepMasakankuRepository =
         ResepMasakankuImp(databaseFirestore)
+
+    @Provides
+    @Singleton
+    fun provideRepositoryDetail(databaseFirestore: FirebaseFirestore): DetailRepository =
+        DetailRepositoryImp(databaseFirestore)
 
     @Provides
     @Singleton
