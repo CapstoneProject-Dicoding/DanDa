@@ -12,6 +12,30 @@ class DetailRepositoryImp @Inject constructor(private val databaseFirestore: Fir
         result: (Result<List<Comment>>) -> Unit
     ) {
         databaseFirestore.collection(Constants.COMMENT)
+            .whereEqualTo("nameRecipe", nameRecipe).limit(3)
+            .get()
+            .addOnSuccessListener {
+                val listComment = arrayListOf<Comment>()
+                for (document in it) {
+                    val comment = document.toObject(Comment::class.java)
+                    listComment.add(comment)
+                }
+                result.invoke(
+                    Result.Success(listComment)
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    Result.Failure(it.localizedMessage)
+                )
+            }
+    }
+
+    override suspend fun commentListDetail(
+        nameRecipe: String,
+        result: (Result<List<Comment>>) -> Unit
+    ) {
+        databaseFirestore.collection(Constants.COMMENT)
             .whereEqualTo("nameRecipe", nameRecipe)
             .get()
             .addOnSuccessListener {

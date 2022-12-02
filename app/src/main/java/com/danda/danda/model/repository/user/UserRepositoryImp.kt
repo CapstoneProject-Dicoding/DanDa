@@ -36,16 +36,15 @@ class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): Use
 
     override suspend fun changePassword(newPassword: String, result: (Result<String>) -> Unit) {
         auth.currentUser!!.updatePassword(newPassword)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    result.invoke(
-                        Result.Success("Change Password Successfully")
-                    )
-                } else {
-                    result.invoke(
-                        Result.Failure("Error")
-                    )
-                }
+            .addOnCompleteListener {
+                result.invoke(
+                    Result.Success("Change Password Successfully")
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    Result.Failure("Error")
+                )
             }
     }
 

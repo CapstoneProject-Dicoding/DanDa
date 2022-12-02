@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.imageButton.setOnClickListener {
-            startActivity((Intent(requireContext(), ResepMasakankuActivity::class.java)))
+            startActivity((Intent(requireContext(), ChangePasswordActivity::class.java)))
         }
 
         getUser()

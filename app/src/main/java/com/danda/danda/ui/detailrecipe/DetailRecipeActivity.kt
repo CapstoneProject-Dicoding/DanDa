@@ -1,5 +1,6 @@
 package com.danda.danda.ui.detailrecipe
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -28,22 +29,24 @@ class DetailRecipeActivity : AppCompatActivity() {
 
         val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
 
+        moveToDetailComment(recipeData)
+        getDetailRecipe(recipeData)
         getListComment(recipeData.nameRecipe)
         checkStatus()
         checkUser(recipeData.nameRecipe, recipeData.imgUrl)
 
-        binding.apply {
-            Glide.with(applicationContext)
-                .load(recipeData.imgUrl)
-                .error(R.drawable.ic_baseline_account_circle_24)
-                .into(ivFoodDetail)
+    }
 
-            tvNameRecipe.text = recipeData.nameRecipe
-            tvBahan.text = recipeData.ingredients
-            tvAlat.text = recipeData.tools
-            tvCaraMasak.text = recipeData.howToCook
-        }
+    private fun getDetailRecipe(recipe: Recipe) = binding.apply {
+        Glide.with(applicationContext)
+            .load(recipe.imgUrl)
+            .error(R.drawable.ic_baseline_account_circle_24)
+            .into(ivFoodDetail)
 
+        tvNameRecipe.text = recipe.nameRecipe
+        tvBahan.text = recipe.ingredients
+        tvAlat.text = recipe.tools
+        tvCaraMasak.text = recipe.howToCook
     }
 
     private fun getListComment(nameRecipe: String) {
@@ -81,11 +84,7 @@ class DetailRecipeActivity : AppCompatActivity() {
         profileViewModel.getUser.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    if (status.data?.email.isNullOrEmpty()) {
-                        showToast("Anda belum login")
-                    } else {
-                        addComment(nameRecipe, imgUrl, status.data?.email.toString())
-                    }
+                    addComment(nameRecipe, imgUrl, status.data?.email.toString())
                 }
                 else -> {}
             }
@@ -96,18 +95,28 @@ class DetailRecipeActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             val comment = etComment.text.toString()
 
-            if (comment.isEmpty()) {
-                showToast("Masukan ulasanmu dahulu")
+            if (emailUser.isEmpty()) {
+                showToast("Anda belum login")
             } else {
-                detailViewModel.addComment(Comment(
-                    "",
-                    nameRecipe,
-                    comment,
-                    imgUrl,
-                    emailUser
-                ))
+                if (comment.isEmpty()) {
+                    showToast("Masukan ulasanmu dahulu")
+                } else {
+                    detailViewModel.addComment(Comment(
+                        "",
+                        nameRecipe,
+                        comment,
+                        imgUrl,
+                        emailUser
+                    ))
+                }
             }
         }
+    }
+
+    private fun moveToDetailComment(recipe: Recipe) = binding.tvNextPage.setOnClickListener {
+        val intent = Intent(this, DetailCommentActivity::class.java)
+        intent.putExtra(DetailCommentActivity.DATA_NAME_RECIPE, recipe)
+        startActivity(intent)
     }
 
     companion object {

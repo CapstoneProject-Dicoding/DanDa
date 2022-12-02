@@ -31,6 +31,15 @@ class DetailRecipeViewModel @Inject constructor(private val detailRepository: De
         }
     }
 
+    fun getCommentListDetail(nameRecipe: String) {
+        _listComment.value = Result.Loading
+        viewModelScope.launch {
+            detailRepository.commentListDetail(nameRecipe) {
+                _listComment.value = it
+            }
+        }
+    }
+
     fun addComment(comment: Comment){
         _addComment.value = Result.Loading
         viewModelScope.launch {
