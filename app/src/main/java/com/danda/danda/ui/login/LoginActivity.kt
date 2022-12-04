@@ -11,7 +11,6 @@ import androidx.activity.viewModels
 import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityLoginBinding
-import com.danda.danda.ui.home.HomeFragment
 import com.danda.danda.ui.register.RegisterActivity
 import com.danda.danda.util.Result
 import com.danda.danda.util.showLoading

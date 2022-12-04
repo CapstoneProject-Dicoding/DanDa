@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#302C2C"
     tools:context=".ui.register.RegisterActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -17,180 +18,182 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/icon_danda_app"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_food"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/app_name" />
-
-            <TextView
-                android:id="@+id/tv_name_recipe"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:gravity="center_horizontal"
-                android:text="DanDa"
-                android:textColor="#FF4500"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/icon_danda_app" />
-
-            <TextView
-                android:id="@+id/tv_register"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:gravity="center_horizontal"
-                android:text="Register"
-                android:textColor="#FF4500"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
 
             <View
-                android:id="@+id/view"
-                android:layout_width="210dp"
-                android:layout_height="400dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/register_background"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/view_ellipse"
+                android:layout_width="0dp"
+                android:layout_height="230dp"
+                android:background="@drawable/img_regist"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name_recipe" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+            <TextView
+                android:id="@+id/danda_regis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:elevation="5dp"
-                app:cardCornerRadius="15dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
+                android:gravity="center"
+                android:text="Danda Register"
+                android:textAppearance="@style/danda_regis"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view">
+                app:layout_constraintTop_toBottomOf="@+id/view_ellipse" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmailPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:hint="Masukan Email"
+                app:boxStrokeColor="#FFF500"
+                app:boxStrokeWidth="3dp"
+                app:boxStrokeErrorColor="#FFF500"
+                app:boxStrokeWidthFocused="3dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                android:textColorHint="#FFF500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/danda_regis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/custom_background"
-                    android:padding="10dp">
+                    android:textColor="#FFF500"
+                    android:drawableEnd="@drawable/ic_baseline_email_24"
+                    android:inputType="textEmailAddress" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayoutEmailPassword"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:hint="Masukan Email"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_email_register"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutPasswordRegister"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Masukan Password"
+                app:boxStrokeColor="#FFF500"
+                app:boxStrokeWidth="3dp"
+                app:boxStrokeErrorColor="#FFF500"
+                app:boxStrokeWidthFocused="3dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                android:textColorHint="#FFF500"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailPassword"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailPassword"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailPassword"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#FFF500">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF500"
+                    android:inputType="textPassword" />
 
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayoutPasswordRegister"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:hint="Masukan Password"
-                        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmailPassword"
-                        app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmailPassword"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailPassword"
-                        app:endIconMode="password_toggle">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutKonfirmasiPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Ulangi Password"
+                app:boxStrokeColor="#FFF500"
+                app:boxStrokeWidth="3dp"
+                app:boxStrokeErrorColor="#FFF500"
+                app:boxStrokeWidthFocused="3dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                android:textColorHint="#FFF500"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordRegister"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutPasswordRegister"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordRegister"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#FFF500">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_password_register"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPassword"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_ulangi_password_register"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF500"
+                    android:inputType="textPassword" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayoutKonfirmasiPassword"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:hint="Ulangi Password"
-                        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutPasswordRegister"
-                        app:layout_constraintStart_toStartOf="@+id/textInputLayoutPasswordRegister"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordRegister"
-                        app:endIconMode="password_toggle">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_ulangi_password_register"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPassword"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/progress_bar_register"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:visibility="gone"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/file_loading"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_register"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/custom_button"
                 android:text="Register"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/cardView2"
-                app:layout_constraintStart_toStartOf="@+id/cardView2"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutKonfirmasiPassword"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutKonfirmasiPassword"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutKonfirmasiPassword" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
+                android:id="@+id/sudah_punya_akun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:text="already have an account ?"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/login_here"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+            <TextView
                 android:id="@+id/login_here"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_background"
-                android:padding="15dp"
-                android:text="Masuk disini"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/view"
-                app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/tv_register" />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:text="Login"
+                android:textColor="#FFF500"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/sudah_punya_akun"
+                app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/progress_bar_register"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutKonfirmasiPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textInputLayoutEmailPassword"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/file_loading" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

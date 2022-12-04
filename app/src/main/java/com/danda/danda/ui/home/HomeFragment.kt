@@ -1,9 +1,12 @@
 package com.danda.danda.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,16 +41,48 @@ class HomeFragment : Fragment() {
 
         getBanner()
         getListRecipe()
+        setUpRecyclerView()
+        setUpSearchView()
 
     }
 
-    private fun getListRecipe() {
-        binding.rvHome.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = homeListAdapter
-            setHasFixedSize(true)
-        }
+    private fun setUpSearchView() {
+        binding.apply {
+            searchHome.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    homeViewModel.searchListRecipe(query)
+                    closedKeyboard()
+                    homeViewModel.recipe.observe(viewLifecycleOwner) { status ->
+                        when (status) {
+                            is Result.Failure -> {
+                                showLoading(false, binding.progressBarHome)
+                                requireActivity().showToast(status.error.toString())
+                            }
+                            is Result.Loading -> showLoading(true, binding.progressBarHome)
+                            is Result.Success -> {
+                                showLoading(false, binding.progressBarHome)
+                                homeListAdapter.setListRecipe(status.data)
+                            }
+                        }
+                    }
+                    return true
+                }
 
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
+
+            })
+        }
+    }
+
+    private fun setUpRecyclerView() = binding.rvHome.apply {
+        layoutManager = GridLayoutManager(requireContext(), 2)
+        adapter = homeListAdapter
+        setHasFixedSize(true)
+    }
+
+    private fun getListRecipe() {
         homeViewModel.recipe.observe(viewLifecycleOwner) { status ->
             when (status) {
                 is Result.Failure -> {
@@ -83,6 +118,17 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.getBanner()
+    }
+
+    private fun closedKeyboard() {
+        val view: View? = activity?.currentFocus
+        val inputMethodManager: InputMethodManager
+        when {
+            view != null -> {
+                inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
     }
 
     override fun onDestroyView() {

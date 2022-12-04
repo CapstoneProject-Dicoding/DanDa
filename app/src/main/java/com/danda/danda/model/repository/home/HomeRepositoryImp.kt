@@ -27,4 +27,28 @@ class HomeRepositoryImp @Inject constructor(private val databaseFirestore: Fireb
                 )
             }
     }
+
+    override suspend fun searchHomeList(
+        nameRecipe: String?,
+        result: (Result<List<Recipe>?>) -> Unit
+    ) {
+        databaseFirestore.collection(Constants.RECIPE)
+            .orderBy("nameRecipe").startAt(nameRecipe).endAt(nameRecipe + "\ufbff")
+            .get()
+            .addOnSuccessListener {
+                val listComment = arrayListOf<Recipe>()
+                for (document in it) {
+                    val comment = document.toObject(Recipe::class.java)
+                    listComment.add(comment)
+                }
+                result.invoke(
+                    Result.Success(listComment)
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    Result.Failure(it.localizedMessage)
+                )
+            }
+    }
 }

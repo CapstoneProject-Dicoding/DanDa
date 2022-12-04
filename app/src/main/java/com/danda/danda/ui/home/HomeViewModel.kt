@@ -22,8 +22,8 @@ class HomeViewModel @Inject constructor(
     val banner: LiveData<Result<List<String>>>
         get() = _banner
 
-    private val _listRecipe = MutableLiveData<Result<List<Recipe>>>()
-    val recipe: LiveData<Result<List<Recipe>>>
+    private val _listRecipe = MutableLiveData<Result<List<Recipe>?>>()
+    val recipe: LiveData<Result<List<Recipe>?>>
         get() = _listRecipe
 
     fun getBanner() {
@@ -38,6 +38,15 @@ class HomeViewModel @Inject constructor(
         _listRecipe.value = Result.Loading
         viewModelScope.launch {
             homeRepository.homeList {
+                _listRecipe.value = it
+            }
+        }
+    }
+
+    fun searchListRecipe(nameRecipe: String?) {
+        _listRecipe.value = Result.Loading
+        viewModelScope.launch {
+            homeRepository.searchHomeList(nameRecipe) {
                 _listRecipe.value = it
             }
         }

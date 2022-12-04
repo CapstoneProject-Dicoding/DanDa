@@ -69,7 +69,7 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.register.RegisterActivity"
-            android:exported="false"
+            android:exported="true"
             android:launchMode="singleTask" />
         <activity
             android:name=".MainActivity"

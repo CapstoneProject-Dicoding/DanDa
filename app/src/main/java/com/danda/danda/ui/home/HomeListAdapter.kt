@@ -16,7 +16,7 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.HomeViewHolder>() {
 
     private var listRecipe: List<Recipe>? = null
 
-    fun setListRecipe(list: List<Recipe>){
+    fun setListRecipe(list: List<Recipe>?){
         this.listRecipe = list
         notifyDataSetChanged()
     }

@@ -13,6 +13,7 @@ import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.FragmentProfileBinding
 import com.danda.danda.ui.change.ChangePasswordActivity
+import com.danda.danda.ui.favorite.FavoriteActivity
 import com.danda.danda.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 import com.danda.danda.util.Result

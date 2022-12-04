@@ -31,6 +31,7 @@ class DetailRecipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
 
@@ -142,8 +143,8 @@ class DetailRecipeActivity : AppCompatActivity() {
 //    }
 
     private fun moveToDetailComment(recipe: Recipe) = binding.tvNextPage.setOnClickListener {
-        val intent = Intent(this, FavoriteActivity::class.java)
-        intent.putExtra(FavoriteActivity.DATA_FAVORITE, recipe)
+        val intent = Intent(this, DetailCommentActivity::class.java)
+        intent.putExtra(DetailCommentActivity.DATA_NAME_RECIPE, recipe)
         startActivity(intent)
     }
 

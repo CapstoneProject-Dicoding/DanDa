@@ -2,6 +2,7 @@ package com.danda.danda.ui.addrecipe
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,10 +13,12 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -125,6 +128,8 @@ class AddRecipeFragment : Fragment() {
                     )
                 }
             }
+
+            closedKeyboard()
         }
     }
 
@@ -230,6 +235,17 @@ class AddRecipeFragment : Fragment() {
                 getFile = myFile
 
                 binding.photoFood.setImageURI(selectedImg)
+            }
+        }
+    }
+
+    private fun closedKeyboard() {
+        val view: View? = activity?.currentFocus
+        val inputMethodManager: InputMethodManager
+        when {
+            view != null -> {
+                inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
             }
         }
     }
