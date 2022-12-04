@@ -6,6 +6,8 @@ import com.danda.danda.model.repository.banner.BannerRepository
 import com.danda.danda.model.repository.banner.BannerRepositoryImp
 import com.danda.danda.model.repository.detail.DetailRepository
 import com.danda.danda.model.repository.detail.DetailRepositoryImp
+import com.danda.danda.model.repository.favorite.FavoriteRepository
+import com.danda.danda.model.repository.favorite.FavoriteRepositoryImp
 import com.danda.danda.model.repository.home.HomeRepository
 import com.danda.danda.model.repository.home.HomeRepositoryImp
 import com.danda.danda.model.repository.profile.ProfileRepository
@@ -66,8 +68,8 @@ object ModuleApp {
 
     @Provides
     @Singleton
-    fun provideRepositoryDetail(databaseFirestore: FirebaseFirestore): DetailRepository =
-        DetailRepositoryImp(databaseFirestore)
+    fun provideRepositoryDetail(databaseFirestore: FirebaseFirestore, databaseStorage: FirebaseStorage): DetailRepository =
+        DetailRepositoryImp(databaseFirestore, databaseStorage)
 
     @Provides
     @Singleton
@@ -79,4 +81,9 @@ object ModuleApp {
     fun provideRepositoryProfile(databaseAuth: FirebaseAuth
     ): ProfileRepository =
         ProfileRepositoryImpl(databaseAuth)
+
+    @Provides
+    @Singleton
+    fun provideRepositoryFavorite(databaseFirestore: FirebaseFirestore): FavoriteRepository =
+        FavoriteRepositoryImp(databaseFirestore)
 }

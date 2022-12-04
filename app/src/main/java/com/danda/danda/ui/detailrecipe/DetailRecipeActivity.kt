@@ -4,16 +4,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityDetailRecipeBinding
 import com.danda.danda.model.dataclass.Comment
+import com.danda.danda.model.dataclass.Favorite
 import com.danda.danda.model.dataclass.Recipe
+import com.danda.danda.ui.favorite.FavoriteActivity
 import com.danda.danda.ui.profile.ProfileViewModel
 import com.danda.danda.util.Result
 import com.danda.danda.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class DetailRecipeActivity : AppCompatActivity() {
@@ -21,6 +25,7 @@ class DetailRecipeActivity : AppCompatActivity() {
     private val commentListAdapter: DetailRecipeAdapter by lazy(::DetailRecipeAdapter)
     private val detailViewModel by viewModels<DetailRecipeViewModel>()
     private val profileViewModel by viewModels<ProfileViewModel>()
+//    private var getFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +90,7 @@ class DetailRecipeActivity : AppCompatActivity() {
             when (status) {
                 is Result.Success -> {
                     addComment(nameRecipe, imgUrl, status.data?.email.toString())
+//                    addFavorite(status.data?.email.toString())
                 }
                 else -> {}
             }
@@ -113,13 +119,37 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
+//    private fun addFavorite(emailUser: String) {
+//        binding.apply {
+//            btnFavorite.setOnClickListener {
+//                val nameRecipe = tvNameRecipe.text.toString()
+//                val ingredients = tvBahan.text.toString()
+//                val tools = tvAlat.text.toString()
+//                val howToCook = tvCaraMasak.text.toString()
+//
+//                detailViewModel.addFavorite(
+//                    Favorite(
+//                        "",
+//                        nameRecipe,
+//                        ingredients,
+//                        tools,
+//                        howToCook,
+//                        emailUser
+//                    ), getFile!!.toUri()
+//                )
+//            }
+//        }
+//    }
+
     private fun moveToDetailComment(recipe: Recipe) = binding.tvNextPage.setOnClickListener {
-        val intent = Intent(this, DetailCommentActivity::class.java)
-        intent.putExtra(DetailCommentActivity.DATA_NAME_RECIPE, recipe)
+        val intent = Intent(this, FavoriteActivity::class.java)
+        intent.putExtra(FavoriteActivity.DATA_FAVORITE, recipe)
         startActivity(intent)
     }
 
     companion object {
         const val DATA_RECIPE = "data_recipe"
+
+//        val favorite = Favorite()
     }
 }

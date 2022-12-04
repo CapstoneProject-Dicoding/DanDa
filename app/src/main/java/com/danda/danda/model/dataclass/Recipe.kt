@@ -11,5 +11,6 @@ data class Recipe (
         val tools: String = "",
         val howToCook: String = "",
         var imgUrl: String = "",
-        val emailUser: String = ""
+        val emailUser: String = "",
+        val username: String = ""
 ) : Parcelable

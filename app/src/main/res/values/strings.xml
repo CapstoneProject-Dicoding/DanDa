@@ -11,4 +11,6 @@
     <string name="input_comment">Masukkan Komentar anda..</string>
     <string name="submit">Submit</string>
     <string name="title_change_email_password">Ubah Email dan Password</string>
+    <string name="text_username">username</string>
+    <string name="favorite_recipe_list">Favorite Recipe List</string>
 </resources>

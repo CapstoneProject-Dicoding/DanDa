@@ -5,4 +5,5 @@ object Constants{
     const val IMAGE_SLIDER = "image_slider"
     const val RECIPE = "recipe"
     const val COMMENT = "comment"
+    const val FAVORITE = "favorite"
 }
