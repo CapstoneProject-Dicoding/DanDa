@@ -32,12 +32,13 @@ class ResepMasakankuAdapter: RecyclerView.Adapter<ResepMasakankuAdapter.ResepVie
         holder.apply {
             binding.apply {
                 itemView.apply {
-                    tvNamaresep.text = recipe?.nameRecipe
+                    nameRecipeTv.text = recipe?.nameRecipe
+                    usernameTv.text = recipe?.username
 
                     Glide.with(itemView)
                         .load(recipe?.imgUrl)
                         .error(R.drawable.ic_baseline_account_circle_24)
-                        .into(photoFood)
+                        .into(photoRecipe)
 
                     setOnClickListener {
                         val intent = Intent(context, DetailRecipeActivity::class.java)

@@ -25,7 +25,7 @@ class DetailRecipeActivity : AppCompatActivity() {
     private val commentListAdapter: DetailRecipeAdapter by lazy(::DetailRecipeAdapter)
     private val detailViewModel by viewModels<DetailRecipeViewModel>()
     private val profileViewModel by viewModels<ProfileViewModel>()
-//    private var getFile: File? = null
+    private var getFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,18 +85,35 @@ class DetailRecipeActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun checkUser(nameRecipe: String, imgUrl: String) {
         profileViewModel.getUser.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
                     addComment(nameRecipe, imgUrl, status.data?.email.toString())
-//                    addFavorite(status.data?.email.toString())
                 }
                 else -> {}
             }
         }
     }
+
+//    private fun checkUser(
+//        nameRecipe: String,
+//        ingredients: String,
+//        tools: String,
+//        howToCook: String,
+//        imgUrl: String,
+//        username: String
+//    ) {
+//        profileViewModel.getUser.observe(this) { status ->
+//            when (status) {
+//                is Result.Success -> {
+//                    addComment(nameRecipe, imgUrl, status.data?.email.toString())
+//                    addFavorite(nameRecipe, ingredients, tools, howToCook, imgUrl, username, status.data?.email.toString())
+//                }
+//                else -> {}
+//            }
+//        }
+//    }
 
     private fun addComment(nameRecipe: String, imgUrl: String, emailUser: String) = binding.apply{
         submitButton.setOnClickListener {
@@ -120,13 +137,17 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
-//    private fun addFavorite(emailUser: String) {
+//    private fun addFavorite(
+//        nameRecipe: String,
+//        ingredients: String,
+//        tools: String,
+//        howToCook: String,
+//        imgUrl: String,
+//        username: String,
+//        emailUser: String
+//    ) {
 //        binding.apply {
 //            btnFavorite.setOnClickListener {
-//                val nameRecipe = tvNameRecipe.text.toString()
-//                val ingredients = tvBahan.text.toString()
-//                val tools = tvAlat.text.toString()
-//                val howToCook = tvCaraMasak.text.toString()
 //
 //                detailViewModel.addFavorite(
 //                    Favorite(
@@ -135,6 +156,8 @@ class DetailRecipeActivity : AppCompatActivity() {
 //                        ingredients,
 //                        tools,
 //                        howToCook,
+//                        imgUrl,
+//                        username,
 //                        emailUser
 //                    ), getFile!!.toUri()
 //                )
@@ -151,6 +174,6 @@ class DetailRecipeActivity : AppCompatActivity() {
     companion object {
         const val DATA_RECIPE = "data_recipe"
 
-//        val favorite = Favorite()
+        val favorite = Favorite()
     }
 }

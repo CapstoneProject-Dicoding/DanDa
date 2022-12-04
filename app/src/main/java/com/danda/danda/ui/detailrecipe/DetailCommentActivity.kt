@@ -20,9 +20,13 @@ class DetailCommentActivity : AppCompatActivity() {
         binding = ActivityDetailCommentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val recipeData = intent.getParcelableExtra<Recipe>(DATA_NAME_RECIPE) as Recipe
 
         getListComment(recipeData.nameRecipe)
+
+        binding.btnBack.setOnClickListener { onBackPressed() }
     }
 
     private fun getListComment(nameRecipe: String) {

@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="20dp"
     app:strokeWidth="3dp"
-    app:strokeColor="@color/black"
-    app:cardBackgroundColor="@color/brown">
+    app:strokeColor="#00FFF0"
+    app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,10 +23,10 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="14dp"
             android:layout_marginBottom="8dp"
             app:civ_border_color="@color/black"
-            app:civ_border_width="3dp"
+            app:civ_border_width="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,24 +37,34 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:background="@color/darkBlue"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/photoUser"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/photoUser"
-            app:layout_constraintTop_toTopOf="@+id/photoUser"
-            app:layout_constraintVertical_bias="0.156"
-            tools:text="username" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DanDa" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="260dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/usernameTv"
+            app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
 
         <TextView
             android:id="@+id/commentValue"
-            android:layout_width="200dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/darkBlue"
-            android:textColor="@color/white"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/usernameTv"
             app:layout_constraintTop_toBottomOf="@+id/usernameTv"
-            tools:text="@string/Comment" />
+            tools:text="@string/Comment"
+            tools:ignore="SmallSp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

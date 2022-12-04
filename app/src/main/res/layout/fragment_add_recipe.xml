@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
+
+
         <ImageView
             android:id="@+id/photoFood"
             android:layout_width="138dp"
@@ -26,7 +28,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Nama Resep"
+            android:text="Name Recipe :"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/photoFood" />
@@ -44,14 +49,41 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_namaResep" />
 
         <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Description :"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/et_namaResep"
+            app:layout_constraintStart_toStartOf="@+id/et_namaResep"
+            app:layout_constraintTop_toBottomOf="@+id/et_namaResep" />
+
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="name"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="@+id/tv_description"
+            app:layout_constraintStart_toStartOf="@+id/tv_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+        <TextView
             android:id="@+id/tv_bahan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Bahan: "
-            app:layout_constraintEnd_toEndOf="@+id/et_namaResep"
-            app:layout_constraintStart_toStartOf="@+id/et_namaResep"
-            app:layout_constraintTop_toBottomOf="@+id/et_namaResep" />
+            android:text="Ingredients :"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/et_description"
+            app:layout_constraintStart_toStartOf="@+id/et_description"
+            app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
         <EditText
             android:id="@+id/et_bahan"
@@ -69,7 +101,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Alat: "
+            android:text="Tools :"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/et_bahan"
             app:layout_constraintStart_toStartOf="@+id/et_bahan"
             app:layout_constraintTop_toBottomOf="@+id/et_bahan" />
@@ -90,7 +125,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Tata cara masak: "
+            android:text="How To Cook :"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/et_alat"
             app:layout_constraintStart_toStartOf="@+id/et_alat"
             app:layout_constraintTop_toBottomOf="@+id/et_alat" />
@@ -106,12 +144,19 @@
             app:layout_constraintStart_toStartOf="@+id/tv_tataCara"
             app:layout_constraintTop_toBottomOf="@+id/tv_tataCara" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_tambahkan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tambahkan"
+            android:text="ADD"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_marginTop="10dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1dp"
+            app:cornerRadius="20dp"
+            android:backgroundTint="@color/green_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/et_tataCara"
             app:layout_constraintStart_toStartOf="@+id/et_tataCara"

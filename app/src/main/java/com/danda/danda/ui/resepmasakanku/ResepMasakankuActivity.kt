@@ -25,6 +25,7 @@ class ResepMasakankuActivity : AppCompatActivity() {
 
         checkUser()
 
+        binding.btnBack.setOnClickListener { onBackPressed() }
     }
 
     private fun checkUser() {

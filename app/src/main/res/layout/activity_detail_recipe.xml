@@ -51,9 +51,9 @@
             android:id="@+id/txt_bahan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:text="Bahan Masakan"
+            android:text="Bahan "
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -130,22 +130,43 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Ulasan"
+            android:text="Komentar"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/tv_caraMasak"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txt_caraMasak"
             app:layout_constraintTop_toBottomOf="@+id/tv_caraMasak" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvComment"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/containerComment"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@+id/commentTv"
             app:layout_constraintStart_toStartOf="@+id/commentTv"
-            app:layout_constraintTop_toBottomOf="@+id/commentTv"
-            tools:listitem="@layout/list_comment" />
+            app:layout_constraintTop_toBottomOf="@+id/commentTv">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    tools:listitem="@layout/list_comment" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_nextPage"
@@ -153,13 +174,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="end"
-            android:text="Selengkapnya"
+            android:text="Selengkapnya.."
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="@+id/rvComment"
-            app:layout_constraintStart_toStartOf="@+id/rvComment"
-            app:layout_constraintTop_toBottomOf="@+id/rvComment" />
+            app:layout_constraintEnd_toEndOf="@+id/containerComment"
+            app:layout_constraintStart_toStartOf="@+id/containerComment"
+            app:layout_constraintTop_toBottomOf="@+id/containerComment" />
 
 <!--        <com.google.android.material.card.MaterialCardView-->
 <!--            android:id="@+id/cardComment"-->

@@ -79,37 +79,13 @@ class DetailRepositoryImp @Inject constructor(private val databaseFirestore: Fir
     }
 
 //    override suspend fun addFavorite(favorite: Favorite, file: Uri, result: (Result<String>) -> Unit) {
-//        databaseStorage.getReference("images/${favorite.nameRecipe}")
-//            .getFile(file)
+//        val document = databaseFirestore.collection(Constants.FAVORITE).document()
+//        favorite.id = document.id
+//        document.set(favorite)
 //            .addOnSuccessListener {
-//                databaseStorage.reference.child("images/${favorite.nameRecipe}")
-//                    .downloadUrl
-//                    .addOnSuccessListener { url ->
-//                        if (url != null) {
-//                            CoroutineScope(Dispatchers.IO).launch {
-//                                delay(2000)
-//                                val document = databaseFirestore.collection(Constants.FAVORITE).document()
-//                                favorite.id = document.id
-//                                favorite.imgUrl = url.toString()
-//                                document.set(favorite)
-//                                    .addOnSuccessListener {
-//                                        result.invoke(
-//                                            Result.Success("Berhasil menambahkan ke favorite")
-//                                        )
-//                                    }
-//                                    .addOnFailureListener {
-//                                        result.invoke(
-//                                            Result.Failure(it.localizedMessage)
-//                                        )
-//                                    }
-//                            }
-//                        }
-//                    }
-//                    .addOnFailureListener {
-//                        result.invoke(
-//                            Result.Failure(it.localizedMessage)
-//                        )
-//                    }
+//                result.invoke(
+//                    Result.Success("Berhasil menambahkan ke favorite")
+//                )
 //            }
 //            .addOnFailureListener {
 //                result.invoke(

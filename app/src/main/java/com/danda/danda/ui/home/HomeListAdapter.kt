@@ -32,7 +32,8 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.HomeViewHolder>() {
         holder.apply {
             binding.apply {
                 itemView.apply {
-                    tvNameRecipe.text = recipe?.nameRecipe
+                    nameRecipeTv.text = recipe?.nameRecipe
+                    usernameTv.text = recipe?.username
 
                     Glide.with(itemView)
                         .load(recipe?.imgUrl)
