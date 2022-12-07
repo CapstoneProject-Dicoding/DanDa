@@ -17,8 +17,10 @@ import com.danda.danda.util.showLoading
 import com.danda.danda.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel by viewModels<LoginViewModel>()
 

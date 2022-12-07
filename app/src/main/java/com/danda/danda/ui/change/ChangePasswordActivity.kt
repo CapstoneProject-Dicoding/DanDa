@@ -49,9 +49,9 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     private fun changePassword() = binding.apply {
         btnChange.setOnClickListener {
-            val passwordLama = etPasswordLama.text.toString()
-            val passwordBaru = etPasswordBaru.text.toString()
-            val konfirmasiPassword = etKonfirmasiPassword.text.toString()
+            val passwordLama = etOldPassword.text.toString()
+            val passwordBaru = etNewPassword.text.toString()
+            val konfirmasiPassword = etConfirmationPassword.text.toString()
 
             if (passwordLama.isEmpty()) {
                 showToast("Masukan password lama dahulu")

@@ -51,7 +51,6 @@ class DetailRecipeActivity : AppCompatActivity() {
 
         tvNameRecipe.text = recipe.nameRecipe
         tvBahan.text = recipe.ingredients
-        tvAlat.text = recipe.tools
         tvCaraMasak.text = recipe.howToCook
     }
 
