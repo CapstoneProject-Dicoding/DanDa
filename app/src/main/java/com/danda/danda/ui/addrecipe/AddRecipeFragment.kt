@@ -97,6 +97,7 @@ class AddRecipeFragment : Fragment() {
         btnTambahkan.setOnClickListener {
             val nameRecipe = etNamaResep.text.toString()
             val ingredients = etBahan.text.toString()
+            val description = etDescription.text.toString()
             val tools = etAlat.text.toString()
             val howToCook = etTataCara.text.toString()
 
@@ -107,7 +108,7 @@ class AddRecipeFragment : Fragment() {
                     requireActivity().showToast("Masukkan nama resep masakan  terlebih dahulu")
                 } else if (ingredients.isEmpty()) {
                     requireActivity().showToast("Masukkan bahan masakan  terlebih dahulu")
-                } else if (tools.isEmpty()) {
+                } else if (description.isEmpty()) {
                     requireActivity().showToast("Masukkan alat memasak terlebih dahulu")
                 } else if (howToCook.isEmpty()) {
                     requireActivity().showToast("Masukkan tata cara memasak terlebih dahulu")
@@ -117,11 +118,12 @@ class AddRecipeFragment : Fragment() {
                             "",
                             nameRecipe,
                             ingredients,
+                            description,
                             tools,
                             howToCook,
                             "",
-                            emailUser
-
+                            emailUser,
+                            ""
                         ),
                         getFile!!.toUri()
                     )

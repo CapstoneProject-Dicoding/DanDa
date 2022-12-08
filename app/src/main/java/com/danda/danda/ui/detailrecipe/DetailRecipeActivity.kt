@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -81,7 +80,7 @@ class DetailRecipeActivity : AppCompatActivity() {
         profileViewModel.getUser.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    if (status.data != null) {
+                    if (status.data?.email != null) {
                         addComment(nameRecipe, imgUrl, status.data.email.toString())
                         getFavoriteByNameRecipe(recipe, status.data.email.toString(), nameRecipe)
                     } else {
@@ -136,11 +135,7 @@ class DetailRecipeActivity : AppCompatActivity() {
         favoriteViewModel.getFavorite.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    if (status.data.isNotEmpty()) {
-                        addFavorite(emailUser, recipe, status.data)
-                    } else {
-                        addFavorite(emailUser, recipe, null)
-                    }
+                    addFavorite(emailUser, recipe, status.data)
                 }
                 else -> {}
             }
@@ -158,9 +153,9 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun addFavorite(emailUser: String?, recipe: Recipe, fav: List<Favorite>?) {
+    private fun addFavorite(emailUser: String?, recipe: Recipe, fav: List<Favorite>) {
         if (emailUser.isNullOrEmpty()) {
-            if (fav.isNullOrEmpty()) {
+            if (fav.isEmpty()) {
                 binding.btnFavorite.apply {
                     setImageResource(R.drawable.ic_baseline_favorite_border_24)
 
@@ -178,7 +173,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                 }
             }
         } else {
-            if (fav.isNullOrEmpty()) {
+            if (fav.isEmpty()) {
                 binding.btnFavorite.apply {
                     setImageResource(R.drawable.ic_baseline_favorite_border_24)
 
@@ -187,7 +182,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                             "",
                             recipe.nameRecipe,
                             recipe.ingredients,
-                            recipe.tools,
+                            recipe.description,
                             recipe.howToCook,
                             recipe.imgUrl,
                             recipe.emailUser,
