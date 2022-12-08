@@ -1,11 +1,14 @@
 package com.danda.danda.model.repository.user
 
+import com.danda.danda.model.dataclass.User
+import com.danda.danda.util.Constants
 import com.danda.danda.util.Result
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): UserRepository {
+class UserRepositoryImp @Inject constructor(private val databaseFirebase: FirebaseFirestore, private var auth: FirebaseAuth): UserRepository {
     override suspend fun registerUser(email: String, password: String, result: (Result<String>) -> Unit) {
         try {
             val dataRegister = auth.createUserWithEmailAndPassword(email, password).await()
@@ -44,6 +47,22 @@ class UserRepositoryImp @Inject constructor(private var auth: FirebaseAuth): Use
             .addOnFailureListener {
                 result.invoke(
                     Result.Failure("Error")
+                )
+            }
+    }
+
+    override suspend fun addUser(user: User, result: (Result<String>) -> Unit) {
+        val document = databaseFirebase.collection(Constants.USER).document()
+        user.id = document.id
+        document.set(user)
+            .addOnSuccessListener {
+                result.invoke(
+                    Result.Success("Sukses menambahkan resep")
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    Result.Failure(it.localizedMessage)
                 )
             }
     }

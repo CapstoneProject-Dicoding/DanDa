@@ -18,7 +18,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -137,6 +136,7 @@ class AddRecipeFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("KONFIRMASI STATUS")
             .setMessage("Jika kamu ingin menambahkan resep, anda harus login terlebih dahulu?")
+            .setCancelable(false)
 
             .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()

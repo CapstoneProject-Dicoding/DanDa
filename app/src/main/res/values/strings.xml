@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">DanDa Recipe App</string>
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
@@ -13,4 +13,5 @@
     <string name="title_change_email_password">Ubah Email dan Password</string>
     <string name="text_username">username</string>
     <string name="favorite_recipe_list">Favorite Recipe List</string>
+    <string name="default_web_client">1095846942779-2j351nnl3fkq2pt57lrkghmopotieph8.apps.googleusercontent.com</string>
 </resources>

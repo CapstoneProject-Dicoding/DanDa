@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.imageButton.setOnClickListener {
-            startActivity((Intent(requireContext(), ChangePasswordActivity::class.java)))
+            startActivity((Intent(requireContext(), FavoriteActivity::class.java)))
         }
 
         getUser()
@@ -51,13 +51,14 @@ class ProfileFragment : Fragment() {
             when(user){
                 is Result.Success->{
                     binding.profileUsernameTv.text = user.data?.displayName
-                } is Result.Failure ->{
-                binding.profileUsernameTv.text = user.error.toString()
-            }else->{
-                requireActivity().showToast("bang jago")
+                }
+                is Result.Failure -> {
+                    binding.profileUsernameTv.text = user.error.toString()
+                }
+                else->{
+                    requireActivity().showToast("bang jago")
+                }
             }
-            }
-
         }
     }
 

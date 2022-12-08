@@ -5,5 +5,6 @@ data class Comment(
     val nameRecipe: String = "",
     val comment: String = "",
     val imgUrl: String = "",
-    val emailUser: String = ""
+    val emailUser: String = "",
+    val username: String = ""
 )

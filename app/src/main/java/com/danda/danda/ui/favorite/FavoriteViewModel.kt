@@ -19,11 +19,37 @@ class FavoriteViewModel @Inject constructor(private val favoriteRepository: Favo
     val listFavorite: LiveData<Result<List<Favorite>>>
         get() = _listFavorite
 
+    private val _getFavorite = MutableLiveData<Result<List<Favorite>>>()
+    val getFavorite: LiveData<Result<List<Favorite>>>
+        get() = _getFavorite
+
+    private val _addFavorite = MutableLiveData<Result<String>>()
+    val addFavorite: LiveData<Result<String>>
+        get() = _addFavorite
+
     fun getFavoriteList(emailUser: String) {
         _listFavorite.value = Result.Loading
         viewModelScope.launch {
             favoriteRepository.favoriteList(emailUser) {
                 _listFavorite.value = it
+            }
+        }
+    }
+
+    fun getFavoriteByNameRecipe(emailUser: String?, namaRecipe: String) {
+        _listFavorite.value = Result.Loading
+        viewModelScope.launch {
+            favoriteRepository.getFavorite(emailUser, namaRecipe) {
+                _getFavorite.value = it
+            }
+        }
+    }
+
+    fun addFavorite(fav: Favorite) {
+        _addFavorite.value = Result.Loading
+        viewModelScope.launch {
+            favoriteRepository.addFavorite(fav) {
+                _addFavorite.value = it
             }
         }
     }

@@ -2,10 +2,13 @@ package com.danda.danda.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -25,6 +28,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeListAdapter: HomeListAdapter by lazy(::HomeListAdapter)
     private val homeViewModel by viewModels<HomeViewModel>()
+    private var doubleBackToExit = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +47,7 @@ class HomeFragment : Fragment() {
         getListRecipe()
         setUpRecyclerView()
         setUpSearchView()
+        doubleBackExit()
 
     }
 
@@ -104,8 +109,7 @@ class HomeFragment : Fragment() {
         homeViewModel.banner.observe(viewLifecycleOwner) { status ->
             when (status) {
                 is Result.Loading -> {}
-                is Result.Failure -> {
-                }
+                is Result.Failure -> {}
                 is Result.Success -> {
                     val data = status.data
                     val imageList = ArrayList<SlideModel>()
@@ -130,6 +134,26 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    private fun doubleBackExit() = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            when {
+                doubleBackToExit -> {
+                    activity?.finish()
+                }
+                else -> {
+                    getListRecipe()
+                    doubleBackToExit = true
+                    requireContext().showToast("Tekan sekali lagi untuk keluar")
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        run {
+                            doubleBackToExit = false
+                        }
+                    }, 2000)
+                }
+            }
+        }
+    })
 
     override fun onDestroyView() {
         super.onDestroyView()

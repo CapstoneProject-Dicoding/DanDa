@@ -8,8 +8,10 @@ import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.fragment.app.strictmode.SetRetainInstanceUsageViolation
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityRegisterBinding
+import com.danda.danda.model.dataclass.User
 import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.util.Result
 import com.danda.danda.util.showLoading

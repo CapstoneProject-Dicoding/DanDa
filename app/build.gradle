@@ -52,6 +52,7 @@ dependencies {
     // image slider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
 
     // livedata, viewmodel
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'

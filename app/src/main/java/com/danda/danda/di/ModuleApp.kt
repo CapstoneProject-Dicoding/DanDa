@@ -49,7 +49,8 @@ object ModuleApp {
 
     @Provides
     @Singleton
-    fun provideRepositoryUser(auth: FirebaseAuth): UserRepository = UserRepositoryImp(auth)
+    fun provideRepositoryUser(databaseFirestore: FirebaseFirestore, auth: FirebaseAuth): UserRepository =
+        UserRepositoryImp(databaseFirestore, auth)
 
     @Provides
     @Singleton

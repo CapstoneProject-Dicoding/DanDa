@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.danda.danda.model.dataclass.User
 import com.danda.danda.model.repository.user.UserRepository
 import com.danda.danda.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,11 +18,24 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
     val registerUser: LiveData<Result<String>>
             get() = _registerUser
 
+    private val _addUser = MutableLiveData<Result<String>>()
+    val addUser: LiveData<Result<String>>
+            get() = _addUser
+
     fun registerUser(email: String, password: String) {
         _registerUser.value = Result.Loading
         viewModelScope.launch {
             delay(2000)
             userRepository.registerUser(email, password) {
+                _registerUser.value = it
+            }
+        }
+    }
+
+    fun addUser(user: User) {
+        _registerUser.value = Result.Loading
+        viewModelScope.launch {
+            userRepository.addUser(user) {
                 _registerUser.value = it
             }
         }

@@ -1,11 +1,13 @@
 package com.danda.danda.view
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.danda.danda.data.DataDummy
 import com.danda.danda.data.MainCoroutinesRule
 import com.danda.danda.data.getOrAwaitValue
 import com.danda.danda.model.dataclass.Comment
+import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.model.repository.detail.DetailRepositoryImp
 import com.danda.danda.ui.detailrecipe.DetailRecipeViewModel
 import com.danda.danda.util.Result
@@ -18,6 +20,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
+import kotlin.math.exp
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
@@ -42,22 +45,21 @@ class DetailRecipeViewModelTest {
     }
 
     @Test
-    fun `Ketika ambil mengambil list komentar berdasarkan nama resep`() = runTest {
-        val expected = MutableLiveData<Result<List<Comment>>>()
-        expected.value = dataDummy
+    fun `Ketika mengambil list komentar berdasarkan nama resep`() = runTest {
+//        val expected = MutableLiveData<Result<List<Comment>>>()
+        val expected = MutableLiveData<(Result<List<Comment>>)-> Unit>()
+//        expected.value = dataDummy
 
-        Mockito.`when`(detailRepositoryImp.commentListDetail(nameRecipe) {
-            dataDummy
-        }).thenAnswer {
-            dataDummy
+        expected.value.let {
+            Mockito.`when`(detailRepositoryImp.commentListDetail(nameRecipe,  it!!)).thenReturn(it.invoke(dataDummy))
         }
+
 
         detailRecipeViewModel.getCommentListDetail(nameRecipe)
 
-        val actual = detailRecipeViewModel.listComment.getOrAwaitValue()
+        val actual = detailRecipeViewModel.listComment.value
 
         Assert.assertNotNull(actual)
-//        Assert.assertTrue(actual is Result.Success)
-//        Assert.assertEquals((expected.value as Result.Success).data, (actual as Result.Success).data)
+        Assert.assertEquals(dataDummy, (actual as Result.Success).data)
     }
 }
