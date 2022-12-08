@@ -9,7 +9,6 @@ data class Recipe (
         val nameRecipe: String = "",
         val ingredients: String = "",
         val description: String = "",
-        val tools: String = "",
         val howToCook: String = "",
         var imgUrl: String = "",
         val emailUser: String = "",

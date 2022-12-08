@@ -43,12 +43,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setAction()
+    }
+
+    private fun setAction() {
         getBanner()
         getListRecipe()
         setUpRecyclerView()
         setUpSearchView()
         doubleBackExit()
-
     }
 
     private fun setUpSearchView() {

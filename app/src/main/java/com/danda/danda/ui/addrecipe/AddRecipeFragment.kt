@@ -96,9 +96,8 @@ class AddRecipeFragment : Fragment() {
     private fun addRecipe(emailUser: String) = binding.apply {
         btnTambahkan.setOnClickListener {
             val nameRecipe = etNamaResep.text.toString()
-            val ingredients = etBahan.text.toString()
             val description = etDescription.text.toString()
-            val tools = etAlat.text.toString()
+            val ingredients = etBahan.text.toString()
             val howToCook = etTataCara.text.toString()
 
             if (getFile == null) {
@@ -119,11 +118,10 @@ class AddRecipeFragment : Fragment() {
                             nameRecipe,
                             ingredients,
                             description,
-                            tools,
                             howToCook,
                             "",
-                            emailUser,
-                            ""
+                            emailUser
+
                         ),
                         getFile!!.toUri()
                     )

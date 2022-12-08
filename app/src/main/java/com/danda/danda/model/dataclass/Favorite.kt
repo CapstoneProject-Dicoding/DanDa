@@ -8,7 +8,7 @@ data class Favorite (
     var id: String = "",
     val nameRecipe: String = "",
     val ingredients: String = "",
-    val tools: String = "",
+    val description: String = "",
     val howToCook: String = "",
     var imgUrl: String = "",
     val emailUser: String = "",

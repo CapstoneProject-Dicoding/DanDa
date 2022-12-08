@@ -22,6 +22,10 @@ class ChangePasswordActivity : AppCompatActivity() {
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setAction()
+    }
+
+    private fun setAction() {
         changePassword()
         checkStatus()
     }

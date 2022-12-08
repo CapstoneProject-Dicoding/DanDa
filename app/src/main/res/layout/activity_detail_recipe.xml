@@ -20,74 +20,160 @@
             app:layout_constraintTop_toTopOf="parent"
             android:background="@color/black"
             tools:ignore="ImageContrastCheck"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
             tools:src="@drawable/ic_food" />
 
         <ImageView
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toEndOf="@+id/tv_nameRecipe"
+            app:layout_constraintTop_toBottomOf="@+id/iv_foodDetail" />
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/arrow_back_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/btnFavorite"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            tools:src="@drawable/ic_baseline_favorite_24"
+            tools:src="@drawable/ic_heart_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_nameRecipe"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:gravity="center"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_foodDetail"
             tools:text="Nama Resep" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photoUser"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_nameRecipe"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nameRecipe"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/photoUser"
+            app:layout_constraintStart_toEndOf="@+id/photoUser"
+            app:layout_constraintTop_toTopOf="@+id/photoUser"
+            app:layout_constraintVertical_bias="0.25"
+            tools:text="DanDa Recipe" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="danda" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_nameRecipe"
+            app:layout_constraintTop_toBottomOf="@+id/photoUser"
+            tools:text="deskripsi" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="380dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
         <TextView
             android:id="@+id/txt_bahan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:text="Ingredients :"
+            android:layout_marginTop="16dp"
+            android:text="Bahan - Bahan"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nameRecipe" />
+            app:layout_constraintStart_toStartOf="@+id/tv_description"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
 
         <TextView
             android:id="@+id/tv_bahan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
             android:text="@string/bahan"
             android:textAlignment="inherit"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_bahan"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="@+id/txt_bahan" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/txt_bahan"
+            app:layout_constraintTop_toBottomOf="@+id/txt_bahan" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="380dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_bahan"
+            app:layout_constraintTop_toBottomOf="@+id/tv_bahan" />
 
         <TextView
             android:id="@+id/txt_caraMasak"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="How To Cook :"
+            android:layout_marginTop="16dp"
+            android:text="Cara Masak"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/txt_bahan"
-            app:layout_constraintStart_toStartOf="@+id/txt_bahan"
-            app:layout_constraintTop_toBottomOf="@+id/txt_bahan" />
+            app:layout_constraintStart_toStartOf="@+id/tv_bahan"
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
 
         <TextView
             android:id="@+id/tv_caraMasak"
@@ -100,29 +186,40 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_bahan"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_bahan"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bahan" />
+            app:layout_constraintStart_toStartOf="@+id/txt_caraMasak"
+            app:layout_constraintTop_toBottomOf="@+id/txt_caraMasak" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="380dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_caraMasak"
+            app:layout_constraintTop_toBottomOf="@+id/tv_caraMasak" />
 
         <TextView
             android:id="@+id/commentTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Comment"
+            android:layout_marginTop="16dp"
+            android:text="Komentar"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/tv_caraMasak"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txt_caraMasak"
-            app:layout_constraintTop_toBottomOf="@+id/tv_caraMasak" />
+            app:layout_constraintTop_toBottomOf="@+id/line3" />
 
         <LinearLayout
             android:id="@+id/containerComment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@+id/commentTv"
@@ -148,17 +245,27 @@
 
         <TextView
             android:id="@+id/tv_nextPage"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="end"
-            android:text="Selengkapnya.."
+            android:text="Lihat Selengkapnya.."
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:textStyle="normal"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/containerComment"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/containerComment"
             app:layout_constraintTop_toBottomOf="@+id/containerComment" />
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/tv_nextPage"
+            app:layout_constraintStart_toStartOf="@+id/tv_nextPage"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nextPage" />
 
 <!--        <com.google.android.material.card.MaterialCardView-->
 <!--            android:id="@+id/cardComment"-->
@@ -203,7 +310,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submitButton"
             style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
@@ -211,9 +318,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/darkBlue"
-            android:text="@string/submit"
+            android:text="Kirim"
             android:textColor="@color/white"
             android:textSize="14sp"
+            app:cornerRadius="10dp"
             app:layout_constraintStart_toStartOf="@+id/textInputLayoutComment"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutComment" />
 
@@ -222,7 +330,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="116dp" />
+            app:layout_constraintGuide_begin="130dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

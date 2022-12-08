@@ -23,8 +23,11 @@ class ResepMasakankuActivity : AppCompatActivity() {
         binding = ActivityResepMasakankuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        checkUser()
+        setAction()
+    }
 
+    private fun setAction() {
+        checkUser()
         binding.btnBack.setOnClickListener { onBackPressed() }
     }
 

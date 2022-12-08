@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_add_recipe"
     tools:context=".ui.addrecipe.AddRecipeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +12,18 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_round_rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoFood"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/photoFood"
@@ -27,140 +39,195 @@
             android:id="@+id/tv_namaResep"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Name Recipe :"
-            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="Nama Resep :"
             android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/photoFood" />
+            app:layout_constraintTop_toTopOf="@+id/view4" />
 
-        <EditText
-            android:id="@+id/et_namaResep"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutNameRecipe"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="name"
-            android:inputType="textMultiLine"
-            android:labelFor="@id/et_namaResep"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeWidth="2dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:boxStrokeColor="@color/grey_add"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/tv_namaResep"
             app:layout_constraintStart_toStartOf="@+id/tv_namaResep"
-            app:layout_constraintTop_toBottomOf="@+id/tv_namaResep" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_namaResep" >
+
+            <EditText
+                android:id="@+id/et_namaResep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="11sp"
+                android:autofillHints="name"
+                android:inputType="textMultiLine"
+                android:labelFor="@id/et_namaResep"
+                android:textColor="@color/grey_add"
+                tools:text="..." />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Description :"
-            android:textSize="14sp"
+            android:text="Deskripsi :"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/et_namaResep"
-            app:layout_constraintStart_toStartOf="@+id/et_namaResep"
-            app:layout_constraintTop_toBottomOf="@+id/et_namaResep" />
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutNameRecipe"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutNameRecipe"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNameRecipe" />
 
-        <EditText
-            android:id="@+id/et_description"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDescription"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="name"
-            android:inputType="textMultiLine"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeWidth="2dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:boxStrokeColor="@color/grey_add"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/tv_description"
             app:layout_constraintStart_toStartOf="@+id/tv_description"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" >
+
+            <EditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="11sp"
+                android:autofillHints="name"
+                android:inputType="textMultiLine"
+                android:textColor="@color/grey_add"
+                tools:text="..." />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_bahan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Ingredients :"
-            android:textSize="14sp"
+            android:text="Bahan :"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/et_description"
-            app:layout_constraintStart_toStartOf="@+id/et_description"
-            app:layout_constraintTop_toBottomOf="@+id/et_description" />
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutDescription"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescription" />
 
-        <EditText
-            android:id="@+id/et_bahan"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutIngredients"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="name"
-            android:inputType="textMultiLine"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeWidth="2dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:boxStrokeColor="@color/grey_add"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/tv_bahan"
             app:layout_constraintStart_toStartOf="@+id/tv_bahan"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bahan" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_bahan" >
 
-        <TextView
-            android:id="@+id/tv_alat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Tools :"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/et_bahan"
-            app:layout_constraintStart_toStartOf="@+id/et_bahan"
-            app:layout_constraintTop_toBottomOf="@+id/et_bahan" />
+            <EditText
+                android:id="@+id/et_bahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="11sp"
+                android:autofillHints="name"
+                android:inputType="textMultiLine"
+                android:textColor="@color/grey_add"
+                tools:text="..." />
 
-        <EditText
-            android:id="@+id/et_alat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="name"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="@+id/tv_alat"
-            app:layout_constraintStart_toStartOf="@+id/tv_alat"
-            app:layout_constraintTop_toBottomOf="@+id/tv_alat" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_tataCara"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="How To Cook :"
-            android:textSize="14sp"
+            android:text="Cara Masak :"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/et_alat"
-            app:layout_constraintStart_toStartOf="@+id/et_alat"
-            app:layout_constraintTop_toBottomOf="@+id/et_alat" />
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutIngredients"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutIngredients"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutIngredients" />
 
-        <EditText
-            android:id="@+id/et_tataCara"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutHowToCook"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="name"
-            android:inputType="textMultiLine"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeWidth="2dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:boxStrokeColor="@color/grey_add"
+            app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/tv_tataCara"
             app:layout_constraintStart_toStartOf="@+id/tv_tataCara"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tataCara" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_tataCara" >
+
+            <EditText
+                android:id="@+id/et_tataCara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="11sp"
+                android:autofillHints="name"
+                android:inputType="textMultiLine"
+                android:textColor="@color/grey_add"
+                tools:text="..." />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_tambahkan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD"
-            android:textSize="15dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp"
-            app:cornerRadius="20dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/green_light"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/et_tataCara"
-            app:layout_constraintStart_toStartOf="@+id/et_tataCara"
-            app:layout_constraintTop_toBottomOf="@+id/et_tataCara" />
+            android:text="ADD"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayoutHowToCook"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutHowToCook"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutHowToCook"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progress_bar_addRecipe"

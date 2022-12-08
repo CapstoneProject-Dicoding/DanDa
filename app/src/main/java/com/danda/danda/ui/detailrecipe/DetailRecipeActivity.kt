@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -33,6 +34,10 @@ class DetailRecipeActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        setAction()
+    }
+
+    private fun setAction() {
         val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
 
         setRecyclerView()
@@ -43,6 +48,8 @@ class DetailRecipeActivity : AppCompatActivity() {
         checkStatus()
         checkUser(recipeData, recipeData.nameRecipe, recipeData.imgUrl)
 
+
+        binding.btnBack.setOnClickListener { onBackPressed() }
     }
 
     private fun getDetailRecipe(recipe: Recipe) = binding.apply {
@@ -52,8 +59,22 @@ class DetailRecipeActivity : AppCompatActivity() {
             .into(ivFoodDetail)
 
         tvNameRecipe.text = recipe.nameRecipe
+        tvDescription.text = recipe.description
         tvBahan.text = recipe.ingredients
         tvCaraMasak.text = recipe.howToCook
+
+    }
+
+    private fun getDetailRecipeFavorite(favorite: Favorite) = binding.apply {
+        Glide.with(applicationContext)
+            .load(favorite.imgUrl)
+            .error(R.drawable.ic_baseline_account_circle_24)
+            .into(ivFoodDetail)
+
+        tvNameRecipe.text = favorite.nameRecipe
+        tvDescription.text = favorite.description
+        tvBahan.text = favorite.ingredients
+        tvCaraMasak.text = favorite.howToCook
     }
 
     private fun setRecyclerView() = binding.rvComment.apply {
@@ -80,7 +101,7 @@ class DetailRecipeActivity : AppCompatActivity() {
         profileViewModel.getUser.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    if (status.data?.email != null) {
+                    if (status.data != null) {
                         addComment(nameRecipe, imgUrl, status.data.email.toString())
                         getFavoriteByNameRecipe(recipe, status.data.email.toString(), nameRecipe)
                     } else {
@@ -135,7 +156,11 @@ class DetailRecipeActivity : AppCompatActivity() {
         favoriteViewModel.getFavorite.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    addFavorite(emailUser, recipe, status.data)
+                    if (status.data.isNotEmpty()) {
+                        addFavorite(emailUser, recipe, status.data)
+                    } else {
+                        addFavorite(emailUser, recipe, null)
+                    }
                 }
                 else -> {}
             }
@@ -153,11 +178,11 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun addFavorite(emailUser: String?, recipe: Recipe, fav: List<Favorite>) {
+    private fun addFavorite(emailUser: String?, recipe: Recipe, fav: List<Favorite>?) {
         if (emailUser.isNullOrEmpty()) {
-            if (fav.isEmpty()) {
+            if (fav.isNullOrEmpty()) {
                 binding.btnFavorite.apply {
-                    setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                    setImageResource(R.drawable.ic_heart_white)
 
                     setOnClickListener {
                         showToast("Anda belum login")
@@ -165,7 +190,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                 }
             } else {
                 binding.btnFavorite.apply {
-                    setImageResource(R.drawable.ic_baseline_favorite_24)
+                    setImageResource(R.drawable.ic_heart_red)
 
                     setOnClickListener {
                         showToast("Anda belum login")
@@ -173,9 +198,9 @@ class DetailRecipeActivity : AppCompatActivity() {
                 }
             }
         } else {
-            if (fav.isEmpty()) {
+            if (fav.isNullOrEmpty()) {
                 binding.btnFavorite.apply {
-                    setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                    setImageResource(R.drawable.ic_heart_white)
 
                     setOnClickListener {
                         favoriteViewModel.addFavorite(Favorite(
@@ -192,7 +217,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                 }
             } else {
                 binding.btnFavorite.apply {
-                    setImageResource(R.drawable.ic_baseline_favorite_24)
+                    setImageResource(R.drawable.ic_heart_red)
 
                     setOnClickListener {
                         showToast("Resep ini sudah ada di favoritmu")

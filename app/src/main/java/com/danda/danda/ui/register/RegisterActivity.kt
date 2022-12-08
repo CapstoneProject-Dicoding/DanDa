@@ -29,10 +29,13 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        setAction()
+    }
+
+    private fun setAction() {
         checkStatus()
         registerUser()
         goToLogin()
-
     }
 
     private fun registerUser() = binding.btnRegister.setOnClickListener {

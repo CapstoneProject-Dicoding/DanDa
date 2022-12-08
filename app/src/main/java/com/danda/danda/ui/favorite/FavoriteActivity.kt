@@ -1,6 +1,5 @@
 package com.danda.danda.ui.favorite
 
-import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,9 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danda.danda.databinding.ActivityFavoriteBinding
-import com.danda.danda.model.dataclass.Recipe
-import com.danda.danda.ui.detailrecipe.DetailRecipeActivity
-import com.danda.danda.ui.profile.ProfileFragment
 import com.danda.danda.ui.profile.ProfileViewModel
 import com.danda.danda.util.Result
 import com.danda.danda.util.showLoading
@@ -34,10 +30,13 @@ class FavoriteActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        setAction()
+    }
+
+    private fun setAction() {
         checkUser()
 
         binding.btnBack.setOnClickListener { onBackPressed() }
-
     }
 
     private fun checkUser() {
@@ -86,9 +85,5 @@ class FavoriteActivity : AppCompatActivity() {
             val itemDecoration = DividerItemDecoration(applicationContext, layoutManager.orientation)
             rvFavoriteList.addItemDecoration(itemDecoration)
         }
-    }
-
-    companion object {
-        const val DATA_FAVORITE = "data_favorite"
     }
 }

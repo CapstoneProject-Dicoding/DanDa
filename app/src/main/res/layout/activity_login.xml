@@ -71,6 +71,7 @@
                 app:boxStrokeErrorColor="@color/colorPrimary"
                 app:boxStrokeWidth="3dp"
                 app:boxStrokeWidthFocused="3dp"
+                app:boxBackgroundColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/danda_login"

@@ -30,7 +30,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
@@ -46,10 +45,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        checkStatus()
-        loginUser()
-        goToRegister()
-        signIn()
+        setAction()
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions
@@ -63,7 +59,13 @@ class LoginActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
+    }
 
+    private fun setAction() {
+        checkStatus()
+        loginUser()
+        goToRegister()
+        signIn()
     }
 
     private fun signIn() = binding.loginWithGoogle.setOnClickListener {

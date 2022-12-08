@@ -22,6 +22,10 @@ class DetailCommentActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        setAction()
+    }
+
+    private fun setAction() {
         val recipeData = intent.getParcelableExtra<Recipe>(DATA_NAME_RECIPE) as Recipe
 
         getListComment(recipeData.nameRecipe)
