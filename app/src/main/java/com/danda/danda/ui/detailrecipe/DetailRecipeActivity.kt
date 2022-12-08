@@ -185,7 +185,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                             recipe.description,
                             recipe.howToCook,
                             recipe.imgUrl,
-                            recipe.emailUser,
+                            emailUser,
                             recipe.username
                         ))
                     }
