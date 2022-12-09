@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.FragmentProfileBinding
 import com.danda.danda.ui.change.ChangePasswordActivity
+import com.danda.danda.ui.editprofile.EditProfileActivity
 import com.danda.danda.ui.favorite.FavoriteActivity
 import com.danda.danda.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +45,7 @@ class ProfileFragment : Fragment() {
 
         getUser()
         checkLogout()
+        listNavigation()
 
     }
 
@@ -51,6 +54,9 @@ class ProfileFragment : Fragment() {
             when(user){
                 is Result.Success->{
                     binding.profileUsernameTv.text = user.data?.displayName
+                    Glide.with(requireContext())
+                        .load(user.data?.photoUrl)
+                        .into(binding.profileIv)
                 }
                 is Result.Failure -> {
                     binding.profileUsernameTv.text = user.error.toString()
@@ -77,6 +83,26 @@ class ProfileFragment : Fragment() {
                     }
                 }
                 else -> {}
+            }
+        }
+    }
+
+    private fun listNavigation(){
+        val listView = binding.buttonList
+        val listButton: ArrayList<ListButton> = ArrayList()
+        listButton.add(ListButton("edit profile", R.drawable.ic_profile))
+        listButton.add(ListButton("edit password",R.drawable.ic_baseline_login_24))
+        //add lagi kalau mau nambah
+        listView.adapter = CustomProfileAdapter(requireContext(),listButton)
+        listView.setOnItemClickListener { _, _, position, _ ->
+            when(position) {
+                0 -> {
+                    startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+                }
+                1 -> {
+                    val intentToEditPassword = Intent(requireContext(),ChangePasswordActivity::class.java)
+                    startActivity(intentToEditPassword)
+                }
             }
         }
     }

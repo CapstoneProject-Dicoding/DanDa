@@ -23,13 +23,13 @@ class EditProfileViewModel @Inject constructor(
     private val _getUser = MutableLiveData<Result<FirebaseUser?>>()
     val getUser: LiveData<Result<FirebaseUser?>> = _getUser
 
-//    fun updateProfile(displayName:String,urlPhoto:String){
-//        viewModelScope.launch {
-//            profileRepository.editProfile(urlPhoto,displayName){
-//                _updateResponse.value = it
-//            }
-//        }
-//    }
+    fun updateProfile(displayName:String,urlPhoto:String){
+        viewModelScope.launch {
+            profileRepository.editProfile(displayName,urlPhoto){
+                _updateResponse.value = it
+            }
+        }
+    }
 
     init {
         getUserProfile()
