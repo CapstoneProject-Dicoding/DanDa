@@ -8,7 +8,6 @@ import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
-import androidx.fragment.app.strictmode.SetRetainInstanceUsageViolation
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityRegisterBinding
 import com.danda.danda.model.dataclass.User
@@ -46,11 +45,14 @@ class RegisterActivity : AppCompatActivity() {
     private fun checkStatus() = registerViewModel.registerUser.observe(this) { status ->
         when (status) {
             is Result.Success -> {
+                val username = binding.etUsernameRegister.text.toString()
+
                 showLoading(false, binding.progressBarRegister)
                 showToast(status.data)
                 startActivity(Intent(this, LoginActivity::class.java))
                 overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
                 finish()
+                registerViewModel.addUsername(username)
             }
             is Result.Loading -> {
                 showLoading(true, binding.progressBarRegister)

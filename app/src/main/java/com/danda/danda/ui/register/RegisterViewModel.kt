@@ -18,9 +18,9 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
     val registerUser: LiveData<Result<String>>
             get() = _registerUser
 
-    private val _addUser = MutableLiveData<Result<String>>()
-    val addUser: LiveData<Result<String>>
-            get() = _addUser
+    private val _addUsername = MutableLiveData<Result<String>>()
+    val addUsername: LiveData<Result<String>>
+            get() = _addUsername
 
     fun registerUser(email: String, password: String) {
         _registerUser.value = Result.Loading
@@ -32,11 +32,11 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
         }
     }
 
-    fun addUser(user: User) {
-        _registerUser.value = Result.Loading
+    fun addUsername(username: String) {
+        _addUsername.value = Result.Loading
         viewModelScope.launch {
-            userRepository.addUser(user) {
-                _registerUser.value = it
+            userRepository.addUsername(username) {
+                _addUsername.value = it
             }
         }
     }

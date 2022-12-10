@@ -46,20 +46,21 @@ class DetailRecipeViewModelTest {
 
     @Test
     fun `Ketika mengambil list komentar berdasarkan nama resep`() = runTest {
-//        val expected = MutableLiveData<Result<List<Comment>>>()
-        val expected = MutableLiveData<(Result<List<Comment>>)-> Unit>()
-//        expected.value = dataDummy
+        val expected = MutableLiveData<Result<List<Comment>>>()
 
-        expected.value.let {
-            Mockito.`when`(detailRepositoryImp.commentListDetail(nameRecipe,  it!!)).thenReturn(it.invoke(dataDummy))
-        }
-
+        Mockito.`when`(detailRepositoryImp.commentListDetail(nameRecipe){
+            expected.value = it
+        }).thenReturn(Unit)
 
         detailRecipeViewModel.getCommentListDetail(nameRecipe)
 
-        val actual = detailRecipeViewModel.listComment.value
+        val actual = detailRecipeViewModel.listComment.getOrAwaitValue()
+
+        Mockito.verify(detailRepositoryImp).commentListDetail(nameRecipe) {
+            expected.value = it
+        }
 
         Assert.assertNotNull(actual)
-        Assert.assertEquals(dataDummy, (actual as Result.Success).data)
+
     }
 }

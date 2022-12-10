@@ -4,6 +4,7 @@ import com.danda.danda.model.dataclass.User
 import com.danda.danda.util.Constants
 import com.danda.danda.util.Result
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -51,20 +52,24 @@ class UserRepositoryImp @Inject constructor(private val databaseFirebase: Fireba
             }
     }
 
-    override suspend fun addUser(user: User, result: (Result<String>) -> Unit) {
-        val document = databaseFirebase.collection(Constants.USER).document()
-        user.id = document.id
-        document.set(user)
-            .addOnSuccessListener {
+    override suspend fun addUsername(username: String, result: (Result<String>) -> Unit) {
+        val user = auth.currentUser
+        user?.let {
+            val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(username)
+                .build()
+
+            try {
+                user.updateProfile(profileUpdates).await()
                 result.invoke(
-                    Result.Success("Sukses menambahkan resep")
+                    Result.Success("Success")
+                )
+            } catch (e: Exception) {
+                result.invoke(
+                    Result.Failure(e.message)
                 )
             }
-            .addOnFailureListener {
-                result.invoke(
-                    Result.Failure(it.localizedMessage)
-                )
-            }
+        }
     }
 
     override fun logout(result: (Result<String>) -> Unit) {

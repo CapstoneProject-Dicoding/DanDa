@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/darkBlue"
     tools:context=".ui.login.LoginActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -71,7 +71,6 @@
                 app:boxStrokeErrorColor="@color/colorPrimary"
                 app:boxStrokeWidth="3dp"
                 app:boxStrokeWidthFocused="3dp"
-                app:boxBackgroundColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/danda_login"

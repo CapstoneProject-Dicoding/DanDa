@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,16 +27,19 @@ import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.FragmentAddRecipeBinding
 import com.danda.danda.model.dataclass.Recipe
+import com.danda.danda.ui.editprofile.EditProfileViewModel
 import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.ui.profile.ProfileViewModel
 import com.danda.danda.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import kotlin.math.log
 
 @AndroidEntryPoint
 class AddRecipeFragment : Fragment() {
     private val addRecipeViewModel by viewModels<AddRecipeViewModel>()
     private val profileViewModel by viewModels<ProfileViewModel>()
+    private val getUser by viewModels<EditProfileViewModel>()
     private var _binding: FragmentAddRecipeBinding? = null
     private val binding get() = _binding!!
     private var getFile: File? = null
@@ -82,10 +86,10 @@ class AddRecipeFragment : Fragment() {
         profileViewModel.getUser.observe(viewLifecycleOwner) { status ->
             when(status) {
                 is Result.Success -> {
-                    if (status.data?.email == null) {
+                    if (status.data?.email == null && status.data?.displayName == null) {
                         loginHere()
                     } else {
-                        addRecipe(status.data.email.toString())
+                        getUser(status.data.email.toString())
                     }
                 }
                 else -> {}
@@ -93,7 +97,20 @@ class AddRecipeFragment : Fragment() {
         }
     }
 
-    private fun addRecipe(emailUser: String) = binding.apply {
+    private fun getUser(emailUser: String){
+        getUser.getDataFromUser(emailUser)
+
+        getUser.getFromUser.observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Success -> {
+                    addRecipe(it.data?.email.toString(), it.data?.username.toString())
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun addRecipe(emailUser: String, username: String) = binding.apply {
         btnTambahkan.setOnClickListener {
             val nameRecipe = etNamaResep.text.toString()
             val description = etDescription.text.toString()
@@ -120,7 +137,8 @@ class AddRecipeFragment : Fragment() {
                             description,
                             howToCook,
                             "",
-                            emailUser
+                            emailUser,
+                            username
 
                         ),
                         getFile!!.toUri()

@@ -1,23 +1,27 @@
 package com.danda.danda.ui.detailrecipe
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityDetailRecipeBinding
 import com.danda.danda.model.dataclass.Comment
 import com.danda.danda.model.dataclass.Favorite
 import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.ui.favorite.FavoriteViewModel
+import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.ui.profile.ProfileViewModel
 import com.danda.danda.util.Result
 import com.danda.danda.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import org.checkerframework.common.returnsreceiver.qual.This
 
 @AndroidEntryPoint
 @SuppressLint("NotifyDataSetChanged")
@@ -47,6 +51,7 @@ class DetailRecipeActivity : AppCompatActivity() {
         getListComment(recipeData.nameRecipe)
         checkStatus()
         checkUser(recipeData, recipeData.nameRecipe, recipeData.imgUrl)
+        shareRecipeData(recipeData)
 
 
         binding.btnBack.setOnClickListener { onBackPressed() }
@@ -120,6 +125,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                 is Result.Loading -> {}
                 is Result.Failure -> {}
                 is Result.Success -> {
+                    status()
                     showToast(status.data)
                 }
             }
@@ -159,7 +165,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     if (status.data.isNotEmpty()) {
                         addFavorite(emailUser, recipe, status.data)
                     } else {
-                        addFavorite(emailUser, recipe, null)
+                        addFavorite("", recipe, null)
                     }
                 }
                 else -> {}
@@ -213,6 +219,8 @@ class DetailRecipeActivity : AppCompatActivity() {
                             emailUser,
                             recipe.username
                         ))
+
+                        setImageResource(R.drawable.ic_heart_red)
                     }
                 }
             } else {
@@ -227,13 +235,56 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
+    private fun status() {
+        AlertDialog.Builder(this)
+            .setTitle("KONFIRMASI BERHASIL")
+            .setMessage("Ingin melihat komentar anda?")
+
+            .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
+                startActivity(Intent(this, DetailCommentActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                dialogInterface.cancel()
+                dialogInterface.dismiss()
+            }
+
+            .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
+                recreate()
+                dialogInterface.cancel()
+                dialogInterface.dismiss()
+
+            }
+            .show()
+    }
+
     private fun moveToDetailComment(recipe: Recipe) = binding.tvNextPage.setOnClickListener {
         val intent = Intent(this, DetailCommentActivity::class.java)
         intent.putExtra(DetailCommentActivity.DATA_NAME_RECIPE, recipe)
         startActivity(intent)
     }
 
+    private fun shareRecipeData(recipe: Recipe) = binding.btnShare.setOnClickListener {
+        val shareUserData = "Username: ${recipe.nameRecipe}\n"
+        val share: Intent = Intent()
+            .apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, shareUserData)
+                type = "text/plain"
+            }
+        Intent.createChooser(share, "Share to").apply {
+            startActivity(this)
+        }
+    }
+
     companion object {
         const val DATA_RECIPE = "data_recipe"
     }
+
+    override fun onResume() {
+        super.onResume()
+        val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
+
+        getListComment(recipeData.nameRecipe)
+        setRecyclerView()
+    }
+
 }

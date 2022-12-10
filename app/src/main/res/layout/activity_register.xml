@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/darkBlue"
     tools:context=".ui.register.RegisterActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -52,14 +52,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/view_ellipse" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutEmailPassword"
+                android:id="@+id/textInputLayoutUsernamePassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="30dp"
-                android:hint="Enter Email"
+                android:hint="Enter Username"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:boxStrokeWidth="3dp"
                 app:boxStrokeErrorColor="@color/colorPrimary"
@@ -74,12 +74,42 @@
                 app:layout_constraintTop_toBottomOf="@+id/danda_regis">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_email_register"
+                    android:id="@+id/et_username_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
                     android:drawableEnd="@drawable/ic_baseline_email_24"
                     android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmailPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Enter Email"
+                android:textColorHint="@color/colorPrimary"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:boxStrokeErrorColor="@color/colorPrimary"
+                app:boxStrokeWidth="3dp"
+                app:boxStrokeWidthFocused="3dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutUsernamePassword"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutUsernamePassword"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUsernamePassword">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_email_24"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/colorPrimary" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

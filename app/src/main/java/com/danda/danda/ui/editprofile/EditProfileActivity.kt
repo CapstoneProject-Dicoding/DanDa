@@ -91,7 +91,7 @@ class EditProfileActivity : AppCompatActivity() {
                 is Result.Failure ->{
                     showToast("update failed")
                 }else->{
-                binding.usernameEt.setText("ggbang")
+                binding.nameEt.setText("ggbang")
             }
             }
         }
@@ -101,7 +101,7 @@ class EditProfileActivity : AppCompatActivity() {
         viewModel.getUser.observe(this){
             when(it){
                 is Result.Success ->{
-                    binding.usernameEt.setText(it.data?.displayName.toString())
+                    binding.nameEt.setText(it.data?.displayName.toString())
                     Glide.with(this)
                         .load(it.data?.photoUrl)
                         .into(binding.profileIv)
@@ -109,9 +109,9 @@ class EditProfileActivity : AppCompatActivity() {
 
                 }
                 is Result.Failure ->{
-                    binding.usernameEt.setText(it.error.toString())
+                    binding.nameEt.setText(it.error.toString())
                 }else->{
-                binding.usernameEt.setText("ggbang")
+                binding.nameEt.setText("ggbang")
                 }
             }
         }
@@ -121,7 +121,7 @@ class EditProfileActivity : AppCompatActivity() {
         viewModel.getFromUser.observe(this){
             when(it){
                 is Result.Success ->{
-                    binding.nameEt.setText(it.data?.name)
+                    binding.usernameEt.setText(it.data?.username)
                 }
                 is Result.Failure ->{
                     showToast(it.error.toString())

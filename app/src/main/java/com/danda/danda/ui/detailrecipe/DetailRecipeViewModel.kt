@@ -24,10 +24,6 @@ class DetailRecipeViewModel @Inject constructor(private val detailRepository: De
     val comment: LiveData<Result<String>>
         get() = _addComment
 
-//    private val _addFavorite = MutableLiveData<Result<String>>()
-//    val addFavorite: LiveData<Result<String>>
-//        get() = _addFavorite
-
     fun getListComment(nameRecipe: String) {
         _listComment.value = Result.Loading
         viewModelScope.launch {
@@ -54,13 +50,4 @@ class DetailRecipeViewModel @Inject constructor(private val detailRepository: De
             }
         }
     }
-
-//    fun addFavorite(favorite: Favorite, file: Uri) {
-//        _addFavorite.value = Result.Loading
-//        viewModelScope.launch {
-//            detailRepository.addFavorite(favorite, file) {
-//                _addFavorite.value = it
-//            }
-//        }
-//    }
 }

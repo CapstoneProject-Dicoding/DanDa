@@ -53,13 +53,13 @@ class ProfileFragment : Fragment() {
         viewModel.getUser.observe(viewLifecycleOwner){user->
             when(user){
                 is Result.Success->{
-                    binding.profileUsernameTv.text = user.data?.displayName
+                    binding.profileNameTv.text = user.data?.displayName
                     Glide.with(requireContext())
                         .load(user.data?.photoUrl)
                         .into(binding.profileIv)
                 }
                 is Result.Failure -> {
-                    binding.profileUsernameTv.text = user.error.toString()
+                    binding.profileNameTv.text = user.error.toString()
                 }
                 else->{
                     requireActivity().showToast("bang jago")

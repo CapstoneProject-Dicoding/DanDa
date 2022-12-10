@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.danda.danda.model.dataclass.Recipe
+import com.danda.danda.model.dataclass.User
 import com.danda.danda.model.repository.addrecipe.AddRecipeRepository
 import com.danda.danda.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,10 @@ class AddRecipeViewModel @Inject constructor(private val addRecipeRepository: Ad
     private val _addRecipe = MutableLiveData<Result<String>>()
     val addRecipe: LiveData<Result<String>>
         get() = _addRecipe
+
+    private val _getUser = MutableLiveData<Result<User?>>()
+    val getUser: LiveData<Result<User?>>
+        get() = _getUser
 
     fun addRecipe(recipe: Recipe, file: Uri) {
         _addRecipe.value = Result.Loading
