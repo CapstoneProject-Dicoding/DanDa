@@ -105,6 +105,7 @@ class EditProfileActivity : AppCompatActivity() {
                     Glide.with(this)
                         .load(it.data?.photoUrl)
                         .into(binding.profileIv)
+                    getProfileFromUser(it.data?.email)
 
                 }
                 is Result.Failure ->{
@@ -113,6 +114,22 @@ class EditProfileActivity : AppCompatActivity() {
                 binding.usernameEt.setText("ggbang")
                 }
             }
+        }
+    }
+    private fun getProfileFromUser(email:String?){
+        viewModel.getDataFromUser(email)
+        viewModel.getFromUser.observe(this){
+            when(it){
+                is Result.Success ->{
+                    binding.nameEt.setText(it.data?.name)
+                }
+                is Result.Failure ->{
+                    showToast(it.error.toString())
+                }else->{
+                binding.usernameEt.setText("ggbang")
+            }
+            }
+
         }
     }
 

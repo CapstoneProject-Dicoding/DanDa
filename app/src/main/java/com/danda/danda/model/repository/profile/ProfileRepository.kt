@@ -7,4 +7,5 @@ import com.google.firebase.auth.FirebaseUser
 interface ProfileRepository {
     suspend fun getProfile(result :  (Result<FirebaseUser?>) -> Unit)
     suspend fun editProfile(username : String,urlPhoto : String ,result : (Result<String?>)-> Unit)
+    suspend fun getProfileUser(email:String?,result : (Result<User>) -> Unit)
 }
