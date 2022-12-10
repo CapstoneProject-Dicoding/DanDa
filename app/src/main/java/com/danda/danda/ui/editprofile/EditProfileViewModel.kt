@@ -1,5 +1,6 @@
 package com.danda.danda.ui.editprofile
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,10 +28,19 @@ class EditProfileViewModel @Inject constructor(
     private val _getUser = MutableLiveData<Result<FirebaseUser?>>()
     val getUser: LiveData<Result<FirebaseUser?>> = _getUser
 
-    fun updateProfile(displayName:String,urlPhoto:String){
+    fun updateProfile(username:String,name : String,id:String,email:String,file : Uri){
+        _updateResponse.value = Result.Loading
         viewModelScope.launch {
-            profileRepository.editProfile(displayName,urlPhoto){
+
+            profileRepository.editProfile(username,name,id,email,file){
                 _updateResponse.value = it
+            }
+        }
+    }
+    fun updateFireStore(username: String, name: String, id: String, imgUrl: String){
+        viewModelScope.launch {
+            profileRepository.updateProfileUser(username,name,id,imgUrl){
+
             }
         }
     }

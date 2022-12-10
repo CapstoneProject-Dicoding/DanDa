@@ -9,12 +9,18 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
     private var auth: FirebaseAuth,
-    private val fireStoreUser : FirebaseFirestore
+    private val fireStoreUser : FirebaseFirestore,
+    private val databaseStorage: FirebaseStorage
     ):ProfileRepository {
     override suspend fun getProfile(result: (Result<FirebaseUser?>) -> Unit) {
         auth = FirebaseAuth.getInstance()
@@ -28,26 +34,52 @@ class ProfileRepositoryImpl @Inject constructor(
 
     override suspend fun editProfile(
         username: String,
-        urlPhoto: String,
+        name: String,
+        id: String,
+        email: String,
+        file: Uri,
         result: (Result<String?>) -> Unit
     ) {
-        auth = FirebaseAuth.getInstance()
-        val user = auth.currentUser
-        val profileUpdate = userProfileChangeRequest {
-            displayName = username
-            photoUri = Uri.parse(urlPhoto)
-        }
-        user!!.updateProfile(profileUpdate)
-            .addOnCompleteListener{task->
-                try {
-                    if(task.isSuccessful){
-                        result.invoke(Result.Success("update success"))
-                    }
+        databaseStorage.getReference("user_profile/${email}")
+            .putFile(file)
+            .addOnSuccessListener {
+                databaseStorage.reference.child("user_profile/${email}")
+                    .downloadUrl
+                    .addOnSuccessListener { url->
+                        if (url!=null){
+                            CoroutineScope(Dispatchers.IO).launch {
+                                delay(3000)
 
-                }catch (e:Exception){
-                    result.invoke(Result.Failure("update failed"))
-                }
+                                fireStoreUser.collection(Constants.USER)
+                                    .document(id)
+                                    .update(mapOf(
+                                        "username" to username,
+                                        "name" to name,
+                                        "imgProfile" to url.toString()
+                                    ))
+
+                                auth = FirebaseAuth.getInstance()
+                                val user = auth.currentUser
+                                val profileUpdate = userProfileChangeRequest {
+                                    displayName = name
+                                    photoUri = Uri.parse(url.toString())
+                                }
+                                user!!.updateProfile(profileUpdate)
+                                    .addOnCompleteListener{task->
+                                        try {
+                                            if(task.isSuccessful){
+                                                result.invoke(Result.Success("update success"))
+                                            }
+
+                                        }catch (e:Exception){
+                                            result.invoke(Result.Failure("update failed"))
+                                        }
+                                    }
+                            }
+                        }
+                    }
             }
+
 
     }
 
@@ -65,6 +97,28 @@ class ProfileRepositoryImpl @Inject constructor(
                 }catch (e:Exception){
                     result.invoke(Result.Failure("fail to get data"))
                 }
+            }
+    }
+
+    override suspend fun updateProfileUser(
+        username: String,
+        name: String,
+        id: String,
+        imgUrl: String,
+        result: (Result<String>) -> Unit
+    ) {
+        fireStoreUser.collection(Constants.USER)
+            .document(id)
+            .update(mapOf(
+                "username" to username,
+                "name" to name,
+                "imgProfile" to imgUrl
+            ))
+            .addOnSuccessListener {
+                result.invoke(Result.Success("success"))
+            }
+            .addOnFailureListener {
+                result.invoke(Result.Failure("failed"))
             }
     }
 

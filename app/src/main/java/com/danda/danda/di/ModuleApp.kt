@@ -79,9 +79,9 @@ object ModuleApp {
 
     @Provides
     @Singleton
-    fun provideRepositoryProfile(databaseAuth: FirebaseAuth, fireStore: FirebaseFirestore
+    fun provideRepositoryProfile(databaseAuth: FirebaseAuth, fireStore: FirebaseFirestore,databaseStorage: FirebaseStorage
     ): ProfileRepository =
-        ProfileRepositoryImpl(databaseAuth,fireStore)
+        ProfileRepositoryImpl(databaseAuth,fireStore,databaseStorage)
 
     @Provides
     @Singleton
