@@ -54,12 +54,30 @@ class ProfileFragment : Fragment() {
             when(user){
                 is Result.Success->{
                     binding.profileNameTv.text = user.data?.displayName
+                    binding.emailTv.text=user.data?.email.toString()
                     Glide.with(requireContext())
                         .load(user.data?.photoUrl)
                         .into(binding.profileIv)
+                    viewModel.getUserFromFireStore(user.data?.email.toString())
+                    resultFireStore()
                 }
                 is Result.Failure -> {
                     binding.profileNameTv.text = user.error.toString()
+                }
+                else->{
+                    requireActivity().showToast("bang jago")
+                }
+            }
+        }
+    }
+    private fun resultFireStore(){
+        viewModel.getFromUser.observe(requireActivity()){fireStore->
+            when(fireStore){
+                is Result.Success->{
+                    binding.profileUsernameTv.text = fireStore.data?.username
+                }
+                is Result.Failure -> {
+
                 }
                 else->{
                     requireActivity().showToast("bang jago")
@@ -146,5 +164,8 @@ class ProfileFragment : Fragment() {
         super.onResume()
         checkLogout()
         getUser()
+    }
+    companion object{
+        private var email = ""
     }
 }
