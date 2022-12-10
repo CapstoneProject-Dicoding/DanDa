@@ -9,19 +9,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityDetailRecipeBinding
 import com.danda.danda.model.dataclass.Comment
 import com.danda.danda.model.dataclass.Favorite
 import com.danda.danda.model.dataclass.Recipe
+import com.danda.danda.ui.favorite.FavoriteActivity
 import com.danda.danda.ui.favorite.FavoriteViewModel
-import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.ui.profile.ProfileViewModel
 import com.danda.danda.util.Result
 import com.danda.danda.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import org.checkerframework.common.returnsreceiver.qual.This
 
 @AndroidEntryPoint
 @SuppressLint("NotifyDataSetChanged")
@@ -49,7 +47,7 @@ class DetailRecipeActivity : AppCompatActivity() {
         moveToDetailComment(recipeData)
         getDetailRecipe(recipeData)
         getListComment(recipeData.nameRecipe)
-        checkStatus()
+        checkStatusComment(recipeData)
         checkUser(recipeData, recipeData.nameRecipe, recipeData.imgUrl)
         shareRecipeData(recipeData)
 
@@ -68,18 +66,6 @@ class DetailRecipeActivity : AppCompatActivity() {
         tvBahan.text = recipe.ingredients
         tvCaraMasak.text = recipe.howToCook
 
-    }
-
-    private fun getDetailRecipeFavorite(favorite: Favorite) = binding.apply {
-        Glide.with(applicationContext)
-            .load(favorite.imgUrl)
-            .error(R.drawable.ic_baseline_account_circle_24)
-            .into(ivFoodDetail)
-
-        tvNameRecipe.text = favorite.nameRecipe
-        tvDescription.text = favorite.description
-        tvBahan.text = favorite.ingredients
-        tvCaraMasak.text = favorite.howToCook
     }
 
     private fun setRecyclerView() = binding.rvComment.apply {
@@ -119,14 +105,16 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkStatus() {
+    private fun checkStatusComment(recipe: Recipe) {
         detailViewModel.comment.observe(this) { status ->
             when(status) {
                 is Result.Loading -> {}
-                is Result.Failure -> {}
+                is Result.Failure -> {
+                    showToast(status.error.toString())
+                }
                 is Result.Success -> {
-                    status()
-                    showToast(status.data)
+                    statusAddComment(recipe)
+                    binding.etComment.setText("")
                 }
             }
         }
@@ -165,7 +153,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     if (status.data.isNotEmpty()) {
                         addFavorite(emailUser, recipe, status.data)
                     } else {
-                        addFavorite("", recipe, null)
+                        addFavorite(emailUser, recipe, null)
                     }
                 }
                 else -> {}
@@ -177,7 +165,10 @@ class DetailRecipeActivity : AppCompatActivity() {
         favoriteViewModel.addFavorite.observe(this) {status ->
             when(status) {
                 is Result.Success -> {
-                    showToast(status.data)
+                    statusAddFavorite()
+                }
+                is Result.Failure -> {
+                    showToast(status.error.toString())
                 }
                 else -> {}
             }
@@ -235,21 +226,39 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun status() {
+    private fun statusAddComment(recipe: Recipe) {
         AlertDialog.Builder(this)
             .setTitle("KONFIRMASI BERHASIL")
-            .setMessage("Ingin melihat komentar anda?")
+            .setMessage("Ingin melihat daftar favorite anda?")
+            .setCancelable(false)
 
             .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
-                startActivity(Intent(this, DetailCommentActivity::class.java))
-                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
-                dialogInterface.cancel()
+                val intent = Intent(this, DetailCommentActivity::class.java)
+                intent.putExtra(DetailCommentActivity.DATA_NAME_RECIPE, recipe)
+                startActivity(intent)
                 dialogInterface.dismiss()
             }
 
             .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
-                recreate()
-                dialogInterface.cancel()
+                dialogInterface.dismiss()
+
+            }
+            .show()
+    }
+
+    private fun statusAddFavorite() {
+        AlertDialog.Builder(this)
+            .setTitle("KONFIRMASI BERHASIL")
+            .setMessage("Ingin melihat daftar favorite anda?")
+            .setCancelable(false)
+
+            .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
+                startActivity(Intent(this, FavoriteActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                dialogInterface.dismiss()
+            }
+
+            .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
 
             }

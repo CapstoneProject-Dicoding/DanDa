@@ -1,7 +1,6 @@
 package com.danda.danda.ui.favorite
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,11 +8,14 @@ import com.bumptech.glide.Glide
 import com.danda.danda.R
 import com.danda.danda.databinding.ListFavoriteBinding
 import com.danda.danda.model.dataclass.Favorite
-import com.danda.danda.ui.detailrecipe.DetailRecipeActivity
+import com.danda.danda.util.Constants
+import com.danda.danda.util.showToast
+import com.google.firebase.firestore.FirebaseFirestore
 
 @SuppressLint("NotifyDataSetChanged")
 class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
+    private lateinit var databaseFirestore: FirebaseFirestore
     private var listFavorite: List<Favorite>? = null
 
     fun setListFavorite(list: List<Favorite>) {
@@ -41,11 +43,24 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(
                     nameRecipeTv.text = favorite?.nameRecipe
                     usernameTv.text = favorite?.username
 
-//                    setOnClickListener {
-//                        val intent = Intent(context, DetailRecipeActivity::class.java)
-//                        intent.putExtra(DetailRecipeActivity.DATA_RECIPE, favorite)
-//                        context.startActivity(intent)
-//                    }
+                    btnDelete.setOnClickListener {
+                        databaseFirestore = FirebaseFirestore.getInstance()
+
+                        databaseFirestore.collection(Constants.FAVORITE).document(favorite!!.id)
+                            .delete()
+
+                            .addOnSuccessListener {
+                                (context as FavoriteActivity).recreate()
+
+                                context.showToast("Success delete data ${favorite.nameRecipe}")
+                            }
+
+                            .addOnFailureListener {
+                                (context as FavoriteActivity).recreate()
+
+                                context.showToast("Gagal delete data ${favorite.nameRecipe}")
+                            }
+                    }
                 }
             }
         }
