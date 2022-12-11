@@ -215,14 +215,6 @@ class DetailRecipeActivity : AppCompatActivity() {
                         loginHere()
                     }
                 }
-            } else {
-                binding.btnFavorite.apply {
-                    setImageResource(R.drawable.ic_heart_red)
-
-                    setOnClickListener {
-                        loginHere()
-                    }
-                }
             }
         } else {
             if (fav.isNullOrEmpty()) {
@@ -364,7 +356,6 @@ class DetailRecipeActivity : AppCompatActivity() {
 
         val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
         getListComment(recipeData.nameRecipe)
-        getFavoriteByNameRecipe(recipeData, recipeData.emailUser, recipeData.nameRecipe)
-        binding.btnFavorite
+        binding.submitButton
     }
 }
