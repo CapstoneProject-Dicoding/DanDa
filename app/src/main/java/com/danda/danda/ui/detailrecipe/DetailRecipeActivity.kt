@@ -5,19 +5,26 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.danda.danda.MainActivity
 import com.danda.danda.R
 import com.danda.danda.databinding.ActivityDetailRecipeBinding
 import com.danda.danda.model.dataclass.Comment
 import com.danda.danda.model.dataclass.Favorite
 import com.danda.danda.model.dataclass.Recipe
+import com.danda.danda.ui.editprofile.EditProfileActivity
+import com.danda.danda.ui.editprofile.EditProfileViewModel
 import com.danda.danda.ui.favorite.FavoriteActivity
 import com.danda.danda.ui.favorite.FavoriteViewModel
+import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.ui.profile.ProfileViewModel
 import com.danda.danda.util.Result
+import com.danda.danda.util.showLoading
 import com.danda.danda.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailRecipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailRecipeBinding
     private val commentListAdapter: DetailRecipeAdapter by lazy(::DetailRecipeAdapter)
+    private val editProfileViewModel by viewModels<EditProfileViewModel>()
     private val detailViewModel by viewModels<DetailRecipeViewModel>()
     private val profileViewModel by viewModels<ProfileViewModel>()
     private val favoriteViewModel by viewModels<FavoriteViewModel>()
@@ -48,9 +56,8 @@ class DetailRecipeActivity : AppCompatActivity() {
         getDetailRecipe(recipeData)
         getListComment(recipeData.nameRecipe)
         checkStatusComment(recipeData)
-        checkUser(recipeData, recipeData.nameRecipe, recipeData.imgUrl)
+        checkUser(recipeData, recipeData.nameRecipe)
         shareRecipeData(recipeData)
-
 
         binding.btnBack.setOnClickListener { onBackPressed() }
     }
@@ -78,8 +85,10 @@ class DetailRecipeActivity : AppCompatActivity() {
         detailViewModel.listComment.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    commentListAdapter.setListComment(status.data)
-                    commentListAdapter.notifyDataSetChanged()
+                    if (status.data.isNotEmpty()) {
+                        commentListAdapter.setListComment(status.data)
+                        commentListAdapter.notifyDataSetChanged()
+                    }
                 }
                 else -> {}
             }
@@ -88,16 +97,33 @@ class DetailRecipeActivity : AppCompatActivity() {
         detailViewModel.getListComment(nameRecipe)
     }
 
-    private fun checkUser(recipe: Recipe, nameRecipe: String, imgUrl: String) {
+    private fun checkUser(recipe: Recipe, nameRecipe: String) {
         profileViewModel.getUser.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    if (status.data != null) {
-                        addComment(nameRecipe, imgUrl, status.data.email.toString())
-                        getFavoriteByNameRecipe(recipe, status.data.email.toString(), nameRecipe)
+                    if (status.data?.email.toString().isNotEmpty()) {
+                        editProfileViewModel.getDataFromUser(status.data?.email.toString())
+                        getUser(nameRecipe, status.data?.email.toString())
+                        getFavoriteByNameRecipe(recipe, status.data?.email.toString(), nameRecipe)
                     } else {
-                        addComment(nameRecipe, imgUrl, null)
+                        getUser(nameRecipe, null)
                         getFavoriteByNameRecipe(recipe, null, nameRecipe)
+                    }
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun getUser(nameRecipe: String, emailUser: String?) {
+        editProfileViewModel.getFromUser.observe(this) { status ->
+            when(status) {
+                is Result.Success -> {
+                    if (status.data?.imgProfile!!.isNotEmpty()) {
+                        addComment(nameRecipe, status.data.imgProfile, emailUser, status.data.username)
+                        Log.d("Tag", status.data.username +  status.data.imgProfile)
+                    } else {
+                        addComment(nameRecipe, null, emailUser, status.data.username)
                     }
                 }
                 else -> {}
@@ -108,22 +134,29 @@ class DetailRecipeActivity : AppCompatActivity() {
     private fun checkStatusComment(recipe: Recipe) {
         detailViewModel.comment.observe(this) { status ->
             when(status) {
-                is Result.Loading -> {}
+                is Result.Loading -> {
+                    showLoading(true, binding.progressBarDetail)
+                }
                 is Result.Failure -> {
                     showToast(status.error.toString())
+                    showLoading(false, binding.progressBarDetail)
                 }
                 is Result.Success -> {
+                    showLoading(false, binding.progressBarDetail)
                     statusAddComment(recipe)
-                    binding.etComment.setText("")
                 }
             }
         }
     }
 
-    private fun addComment(nameRecipe: String, imgUrl: String, emailUser: String?) = binding.apply {
+    private fun addComment(nameRecipe: String, imgUrl: String?, emailUser: String?, username: String) = binding.apply {
         if (emailUser.isNullOrEmpty()) {
             submitButton.setOnClickListener {
-                showToast("Anda belum login")
+                loginHere()
+            }
+        } else if (imgUrl.isNullOrEmpty()) {
+            submitButton.setOnClickListener {
+                statusUpdateProfile()
             }
         } else {
             submitButton.setOnClickListener {
@@ -137,7 +170,8 @@ class DetailRecipeActivity : AppCompatActivity() {
                         nameRecipe,
                         comment,
                         imgUrl,
-                        emailUser
+                        emailUser,
+                        username
                     ))
                 }
             }
@@ -182,7 +216,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     setImageResource(R.drawable.ic_heart_white)
 
                     setOnClickListener {
-                        showToast("Anda belum login")
+                        loginHere()
                     }
                 }
             } else {
@@ -190,7 +224,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                     setImageResource(R.drawable.ic_heart_red)
 
                     setOnClickListener {
-                        showToast("Anda belum login")
+                        loginHere()
                     }
                 }
             }
@@ -228,8 +262,8 @@ class DetailRecipeActivity : AppCompatActivity() {
 
     private fun statusAddComment(recipe: Recipe) {
         AlertDialog.Builder(this)
-            .setTitle("KONFIRMASI BERHASIL")
-            .setMessage("Ingin melihat daftar favorite anda?")
+            .setTitle("KONFIRMASI KOMENTAR")
+            .setMessage("Berhasil menambahkan komentar, Ingin melihat daftar komentar anda?")
             .setCancelable(false)
 
             .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
@@ -248,8 +282,8 @@ class DetailRecipeActivity : AppCompatActivity() {
 
     private fun statusAddFavorite() {
         AlertDialog.Builder(this)
-            .setTitle("KONFIRMASI BERHASIL")
-            .setMessage("Ingin melihat daftar favorite anda?")
+            .setTitle("KONFIRMASI FAVORITE")
+            .setMessage("Berhasil menambahkan ke favorite, Ingin melihat daftar favorite anda?")
             .setCancelable(false)
 
             .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
@@ -261,6 +295,43 @@ class DetailRecipeActivity : AppCompatActivity() {
             .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
 
+            }
+            .show()
+    }
+
+    private fun statusUpdateProfile() {
+        AlertDialog.Builder(this)
+            .setTitle("KONFIRMASI LENGKAPI PROFILE")
+            .setMessage("Anda belum melengkapi profile, Ingin lengkapi profile sekarang?")
+            .setCancelable(false)
+
+            .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
+                startActivity(Intent(this, EditProfileActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                dialogInterface.dismiss()
+            }
+
+            .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+
+            }
+            .show()
+    }
+
+    private fun loginHere() {
+        AlertDialog.Builder(this)
+            .setTitle("KONFIRMASI LOGIN")
+            .setMessage("Anda belum login, mau login sekarang?")
+            .setCancelable(false)
+
+            .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+                startActivity(Intent(this, LoginActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            }
+
+            .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
             }
             .show()
     }
@@ -286,14 +357,6 @@ class DetailRecipeActivity : AppCompatActivity() {
 
     companion object {
         const val DATA_RECIPE = "data_recipe"
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
-
-        getListComment(recipeData.nameRecipe)
-        setRecyclerView()
     }
 
 }

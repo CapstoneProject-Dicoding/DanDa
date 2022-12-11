@@ -10,6 +10,7 @@ import com.danda.danda.model.dataclass.Favorite
 import com.danda.danda.model.repository.detail.DetailRepository
 import com.danda.danda.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,6 +37,7 @@ class DetailRecipeViewModel @Inject constructor(private val detailRepository: De
     fun getCommentListDetail(nameRecipe: String) {
         _listComment.value = Result.Loading
         viewModelScope.launch {
+            delay(2000)
             detailRepository.commentListDetail(nameRecipe) {
                 _listComment.value = it
             }
@@ -45,6 +47,7 @@ class DetailRecipeViewModel @Inject constructor(private val detailRepository: De
     fun addComment(comment: Comment){
         _addComment.value = Result.Loading
         viewModelScope.launch {
+            delay(2000)
             detailRepository.addComment(comment) {
                 _addComment.value = it
             }

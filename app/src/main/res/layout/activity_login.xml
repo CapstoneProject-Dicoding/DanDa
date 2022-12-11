@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBlue"
+    android:background="@color/white"
     tools:context=".ui.login.LoginActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -137,7 +137,7 @@
                 android:layout_marginTop="40dp"
                 android:background="@drawable/custom_button"
                 android:text="Login"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/forgot_password"
@@ -239,8 +239,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/progress_bar_login"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutPasswordLogin"
                 app:layout_constraintEnd_toEndOf="parent"

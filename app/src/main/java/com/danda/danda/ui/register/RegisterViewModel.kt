@@ -32,10 +32,10 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
         }
     }
 
-    fun addUsername(username: String) {
+    fun addUsername(user: User) {
         _addUsername.value = Result.Loading
         viewModelScope.launch {
-            userRepository.addUsername(username) {
+            userRepository.addUsername(user) {
                 _addUsername.value = it
             }
         }

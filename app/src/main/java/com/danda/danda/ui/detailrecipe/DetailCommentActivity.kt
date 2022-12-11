@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.danda.danda.databinding.ActivityDetailCommentBinding
 import com.danda.danda.model.dataclass.Recipe
 import com.danda.danda.util.Result
+import com.danda.danda.util.showLoading
+import com.danda.danda.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,10 +44,17 @@ class DetailCommentActivity : AppCompatActivity() {
 
         detailViewModel.listComment.observe(this) { status ->
             when (status) {
+                is Result.Loading -> {
+                    showLoading(true, binding.progressBarComment)
+                }
+                is Result.Failure -> {
+                    showLoading(false, binding.progressBarComment)
+                    showToast(status.error.toString())
+                }
                 is Result.Success -> {
+                    showLoading(false, binding.progressBarComment)
                     commentListAdapter.setListComment(status.data)
                 }
-                else -> {}
             }
         }
 

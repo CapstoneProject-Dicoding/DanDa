@@ -17,6 +17,7 @@ import com.danda.danda.ui.change.ChangePasswordActivity
 import com.danda.danda.ui.editprofile.EditProfileActivity
 import com.danda.danda.ui.favorite.FavoriteActivity
 import com.danda.danda.ui.login.LoginActivity
+import com.danda.danda.ui.resepmasakanku.ResepMasakankuActivity
 import dagger.hilt.android.AndroidEntryPoint
 import com.danda.danda.util.Result
 import com.danda.danda.util.showToast
@@ -39,13 +40,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imageButton.setOnClickListener {
-            startActivity((Intent(requireContext(), FavoriteActivity::class.java)))
-        }
-
         getUser()
         checkLogout()
-        listNavigation()
 
     }
 
@@ -53,35 +49,41 @@ class ProfileFragment : Fragment() {
         viewModel.getUser.observe(viewLifecycleOwner){user->
             when(user){
                 is Result.Success->{
-                    binding.profileNameTv.text = user.data?.displayName
-                    binding.emailTv.text=user.data?.email.toString()
-                    Glide.with(requireContext())
-                        .load(user.data?.photoUrl)
-                        .into(binding.profileIv)
-                    viewModel.getUserFromFireStore(user.data?.email.toString())
-                    resultFireStore()
+                    if (user.data?.email != null) {
+                        binding.profileNameTv.text = user.data.displayName
+                        binding.emailTv.text=user.data.email.toString()
+                        Glide.with(requireContext())
+                            .load(user.data.photoUrl)
+                            .into(binding.profileIv)
+                        viewModel.getUserFromFireStore(user.data.email.toString())
+                        resultFireStore()
+                        setUpAction(user.data.email.toString())
+                    } else {
+                        binding.emailTv.text = "-"
+                        binding.profileNameTv.text = "-"
+                        setUpAction(null)
+                    }
                 }
                 is Result.Failure -> {
                     binding.profileNameTv.text = user.error.toString()
                 }
-                else->{
-                    requireActivity().showToast("bang jago")
-                }
+                else->{}
             }
         }
     }
+
     private fun resultFireStore(){
         viewModel.getFromUser.observe(requireActivity()){fireStore->
             when(fireStore){
                 is Result.Success->{
-                    binding.profileUsernameTv.text = fireStore.data?.username
+                    if (fireStore.data?.username != null) {
+                        binding.profileUsernameTv.text = fireStore.data.username
+                    } else {
+                        binding.profileUsernameTv.text = "-"
+                    }
                 }
-                is Result.Failure -> {
-
-                }
-                else->{
-                    requireActivity().showToast("bang jago")
-                }
+                is Result.Failure -> {}
+                else->{}
             }
         }
     }
@@ -91,12 +93,12 @@ class ProfileFragment : Fragment() {
             when(it){
                 is Result.Success -> {
                     if (it.data?.email == null) {
-                        loginLogoutTv.text = "Login"
-                        loginLogoutBt.setImageResource(R.drawable.ic_baseline_login_24)
+                        tvLogoutLogin.text = "Login"
+                        imageView7.setImageResource(R.drawable.ic_baseline_login_24)
                         login()
                     } else {
-                        binding.loginLogoutTv.text = "Logout"
-                        loginLogoutBt.setImageResource(R.drawable.ic_baseline_logout_24)
+                        binding.tvLogoutLogin.text = "Logout"
+                        imageView7.setImageResource(R.drawable.ic_baseline_logout_24)
                         logout()
                     }
                 }
@@ -105,35 +107,80 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun listNavigation(){
-        val listView = binding.buttonList
-        val listButton: ArrayList<ListButton> = ArrayList()
-        listButton.add(ListButton("edit profile", R.drawable.ic_profile))
-        listButton.add(ListButton("edit password",R.drawable.ic_baseline_login_24))
-        //add lagi kalau mau nambah
-        listView.adapter = CustomProfileAdapter(requireContext(),listButton)
-        listView.setOnItemClickListener { _, _, position, _ ->
-            when(position) {
-                0 -> {
-                    startActivity(Intent(requireContext(), EditProfileActivity::class.java))
-                }
-                1 -> {
-                    val intentToEditPassword = Intent(requireContext(),ChangePasswordActivity::class.java)
-                    startActivity(intentToEditPassword)
-                }
+    private fun setUpAction (email: String?) {
+        if (email.isNullOrEmpty()) {
+            binding.tvEditProfile.setOnClickListener {
+                loginHere()
+            }
+
+            binding.tvChangePassword.setOnClickListener {
+                loginHere()
+            }
+
+            binding.tvResepMasakanku.setOnClickListener {
+                loginHere()
+            }
+
+            binding.tvInformasi.setOnClickListener {
+                //
+            }
+
+            binding.imageButtonFavorite.setOnClickListener {
+                loginHere()
+            }
+        } else {
+            binding.tvEditProfile.setOnClickListener {
+                startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            }
+
+            binding.tvChangePassword.setOnClickListener {
+                startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            }
+
+            binding.tvResepMasakanku.setOnClickListener {
+                startActivity(Intent(requireContext(), ResepMasakankuActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            }
+
+            binding.tvInformasi.setOnClickListener {
+                //
+            }
+
+            binding.imageButtonFavorite.setOnClickListener {
+                startActivity((Intent(requireContext(), FavoriteActivity::class.java)))
             }
         }
     }
 
+    private fun loginHere() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("KONFIRMASI LOGIN")
+            .setMessage("Anda belum login, mau login sekarang?")
+            .setCancelable(false)
+
+            .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+                requireActivity().startActivity(Intent(requireContext(), LoginActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            }
+
+            .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
+                dialogInterface.dismiss()
+            }
+            .show()
+    }
+
     private fun login() {
-        binding.loginLogoutTv.setOnClickListener {
+        binding.tvLogoutLogin.setOnClickListener {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
         }
     }
 
     private fun logout() {
-        binding.loginLogoutTv.setOnClickListener {
+        binding.tvLogoutLogin.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("KONFIRMASI LOGOUT")
                 .setMessage("Apakah kamu yakin logout?")

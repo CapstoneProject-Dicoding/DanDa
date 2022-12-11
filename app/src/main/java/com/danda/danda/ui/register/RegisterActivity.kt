@@ -46,13 +46,14 @@ class RegisterActivity : AppCompatActivity() {
         when (status) {
             is Result.Success -> {
                 val username = binding.etUsernameRegister.text.toString()
+                val email = binding.etEmailRegister.text.toString()
 
                 showLoading(false, binding.progressBarRegister)
                 showToast(status.data)
                 startActivity(Intent(this, LoginActivity::class.java))
                 overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
                 finish()
-                registerViewModel.addUsername(username)
+                registerViewModel.addUsername(User("", "", username, "", email))
             }
             is Result.Loading -> {
                 showLoading(true, binding.progressBarRegister)

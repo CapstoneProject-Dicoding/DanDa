@@ -52,24 +52,20 @@ class UserRepositoryImp @Inject constructor(private val databaseFirebase: Fireba
             }
     }
 
-    override suspend fun addUsername(username: String, result: (Result<String>) -> Unit) {
-        val user = auth.currentUser
-        user?.let {
-            val profileUpdates = UserProfileChangeRequest.Builder()
-                .setDisplayName(username)
-                .build()
-
-            try {
-                user.updateProfile(profileUpdates).await()
+    override suspend fun addUsername(user: User, result: (Result<String>) -> Unit) {
+        val document = databaseFirebase.collection(Constants.USER).document()
+        user.id = document.id
+        document.set(user)
+            .addOnSuccessListener {
                 result.invoke(
-                    Result.Success("Success")
-                )
-            } catch (e: Exception) {
-                result.invoke(
-                    Result.Failure(e.message)
+                    Result.Success("Sukses menambahkan resep")
                 )
             }
-        }
+            .addOnFailureListener {
+                result.invoke(
+                    Result.Failure(it.localizedMessage)
+                )
+            }
     }
 
     override fun logout(result: (Result<String>) -> Unit) {

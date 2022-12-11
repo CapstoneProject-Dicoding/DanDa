@@ -267,29 +267,6 @@
             app:layout_constraintStart_toStartOf="@+id/tv_nextPage"
             app:layout_constraintTop_toBottomOf="@+id/tv_nextPage" />
 
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:id="@+id/cardComment"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="200dp"-->
-<!--            android:layout_margin="16dp"-->
-<!--            app:cardCornerRadius="10dp"-->
-<!--            app:strokeColor="@color/black"-->
-<!--            app:strokeWidth="2dp"-->
-<!--            android:backgroundTint="@color/grey"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/commentTv">-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
-
-<!--                -->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </com.google.android.material.card.MaterialCardView>-->
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutComment"
             android:layout_width="0dp"
@@ -331,6 +308,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="130dp" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progress_bar_detail"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/file_loading" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

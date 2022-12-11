@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/navigation_add_recipe"
-        android:icon="@drawable/ic_add_recipe"
+        android:icon="@drawable/ic_baseline_add_filled"
         android:title="@string/title_add_recipe" />
 
     <item
@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_profiles"
+        android:icon="@drawable/ic_baseline_account_filled"
         android:title="@string/title_profile" />
 
 </menu>

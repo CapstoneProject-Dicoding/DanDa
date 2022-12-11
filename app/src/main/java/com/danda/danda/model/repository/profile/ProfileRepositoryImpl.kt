@@ -83,7 +83,7 @@ class ProfileRepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun getProfileUser(email: String?, result: (Result<User>) -> Unit) {
+    override suspend fun getProfileUser(email: String?, result: (Result<User?>) -> Unit) {
         fireStoreUser.collection(Constants.USER)
             .whereEqualTo("email",email)
             .get()
