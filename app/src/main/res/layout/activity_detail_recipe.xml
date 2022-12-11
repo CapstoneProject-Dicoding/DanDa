@@ -281,9 +281,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/input_comment"
+                android:inputType="textMultiLine"
                 android:textColorHint="@color/black"
-                android:textSize="13sp"
-                android:inputType="textMultiLine"/>
+                android:textSize="13sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

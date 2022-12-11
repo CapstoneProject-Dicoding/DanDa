@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/arrow_back_yellow"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/arrow_back_darkblue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:id="@+id/frame"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line">
@@ -61,39 +61,29 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="150dp"
-            android:layout_marginTop="90dp"
-            android:src="@drawable/ic_heart_red" />
+            android:layout_marginTop="105dp"
+            android:src="@drawable/ic_add_circle" />
 
     </FrameLayout>
 
-<!--    <de.hdodenhof.circleimageview.CircleImageView-->
-<!--        android:id="@+id/profile_iv"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="150dp"-->
-<!--        android:layout_marginStart="120dp"-->
-<!--        android:layout_marginTop="60dp"-->
-<!--        android:background="@drawable/ic_profile"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
         android:hint="Masukan Username"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:boxStrokeWidth="3dp"
-        app:boxStrokeErrorColor="@color/colorPrimary"
-        app:boxStrokeWidthFocused="3dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
+        android:textColorHint="@color/colorPrimary"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
-        android:textColorHint="@color/colorPrimary"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:boxStrokeErrorColor="@color/colorPrimary"
+        app:boxStrokeWidth="3dp"
+        app:boxStrokeWidthFocused="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame">
@@ -101,7 +91,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username_et"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,17 +101,17 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:hint="Masukan Name"
-        app:boxStrokeColor="@color/colorPrimary"
-        app:boxStrokeWidth="3dp"
-        app:boxStrokeErrorColor="@color/colorPrimary"
-        app:boxStrokeWidthFocused="3dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
+        android:textColorHint="@color/colorPrimary"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
-        android:textColorHint="@color/colorPrimary"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:boxStrokeErrorColor="@color/colorPrimary"
+        app:boxStrokeWidth="3dp"
+        app:boxStrokeWidthFocused="3dp"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -128,7 +119,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_et"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.airbnb.lottie.LottieAnimationView
@@ -148,9 +140,10 @@
         android:id="@+id/change_profile_bt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Ganti Profile"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/custom_button"
+        android:text="Update Profile"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
