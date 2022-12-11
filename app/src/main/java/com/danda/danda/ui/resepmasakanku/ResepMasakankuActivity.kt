@@ -23,6 +23,8 @@ class ResepMasakankuActivity : AppCompatActivity() {
         binding = ActivityResepMasakankuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         setAction()
     }
 

@@ -58,7 +58,7 @@
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_person_black"
+        android:src="@drawable/ic_person_primary"
         app:layout_constraintStart_toStartOf="@+id/nameRecipeTv"
         app:layout_constraintTop_toBottomOf="@+id/nameRecipeTv" />
 

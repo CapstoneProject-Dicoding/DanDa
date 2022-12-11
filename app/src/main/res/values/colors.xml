@@ -16,4 +16,5 @@
     <color name="greyEditText">#D9D9D9</color>
     <color name="green_light">#CCFF00</color>
     <color name="grey_add">#666161</color>
+    <color name="red">#FF0000</color>
 </resources>

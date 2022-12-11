@@ -37,12 +37,19 @@ class EditProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
+
+       setAction()
+    }
+
+    private fun setAction() {
         getProfile()
         updateProfile()
         resultUpdateProfile()
         takeAPicture()
 
-
+        binding.btnBack.setOnClickListener { onBackPressed() }
     }
 
 

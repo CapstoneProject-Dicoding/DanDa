@@ -57,10 +57,13 @@ class AddRecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setAction()
+    }
+
+    private fun setAction() {
         takeAPicture()
         checkStatus()
         checkUser()
-
     }
 
     private fun checkStatus() {
