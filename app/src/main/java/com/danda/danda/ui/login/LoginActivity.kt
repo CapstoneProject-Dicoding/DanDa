@@ -65,46 +65,6 @@ class LoginActivity : AppCompatActivity() {
         checkStatus()
         loginUser()
         goToRegister()
-        signIn()
-    }
-
-    private fun signIn() = binding.loginWithGoogle.setOnClickListener {
-        val signInIntent = googleSignInClient.signInIntent
-        resultLauncher.launch(signInIntent)
-    }
-
-    private var resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account: GoogleSignInAccount = task.getResult(ApiException::class.java)!!
-                Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w("TAG", "Google sign in failed", e)
-            }
-        }
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d("TAG", "signInWithCredential:success")
-                    showToast("success")
-                    startActivity(Intent(this, MainActivity::class.java))
-                    overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
-                    finish()
-                } else {
-                    showToast("error")
-                    Log.w("TAG", "signInWithCredential:failure", task.exception)
-                }
-            }
     }
 
     private fun loginUser() = binding.btnLogin.setOnClickListener {

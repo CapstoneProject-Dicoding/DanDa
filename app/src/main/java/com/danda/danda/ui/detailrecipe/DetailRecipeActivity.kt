@@ -101,13 +101,22 @@ class DetailRecipeActivity : AppCompatActivity() {
         profileViewModel.getUser.observe(this) { status ->
             when (status) {
                 is Result.Success -> {
-                    if (status.data?.email.toString().isNotEmpty()) {
-                        editProfileViewModel.getDataFromUser(status.data?.email.toString())
-                        getUser(nameRecipe, status.data?.email.toString())
-                        getFavoriteByNameRecipe(recipe, status.data?.email.toString(), nameRecipe)
+                    if (status.data?.email != null) {
+                        editProfileViewModel.getDataFromUser(status.data.email.toString())
+                        getFavoriteByNameRecipe(recipe, status.data.email.toString(), nameRecipe)
+                        if (status.data.photoUrl != null) {
+                            getUser(nameRecipe, status.data.photoUrl.toString(), status.data.email.toString())
+                        } else {
+                            binding.submitButton.setOnClickListener {
+                                statusUpdateProfile()
+                            }
+                        }
                     } else {
-                        getUser(nameRecipe, null)
+                        getUser(nameRecipe, "","")
                         getFavoriteByNameRecipe(recipe, null, nameRecipe)
+                        binding.submitButton.setOnClickListener {
+                            loginHere()
+                        }
                     }
                 }
                 else -> {}
@@ -115,16 +124,11 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUser(nameRecipe: String, emailUser: String?) {
+    private fun getUser(nameRecipe: String, imgUrl: String, emailUser: String) {
         editProfileViewModel.getFromUser.observe(this) { status ->
             when(status) {
                 is Result.Success -> {
-                    if (status.data?.imgProfile!!.isNotEmpty()) {
-                        addComment(nameRecipe, status.data.imgProfile, emailUser, status.data.username)
-                        Log.d("Tag", status.data.username +  status.data.imgProfile)
-                    } else {
-                        addComment(nameRecipe, null, emailUser, status.data.username)
-                    }
+                    addComment(nameRecipe, imgUrl, emailUser, status.data?.username.toString())
                 }
                 else -> {}
             }
@@ -149,31 +153,21 @@ class DetailRecipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun addComment(nameRecipe: String, imgUrl: String?, emailUser: String?, username: String) = binding.apply {
-        if (emailUser.isNullOrEmpty()) {
-            submitButton.setOnClickListener {
-                loginHere()
-            }
-        } else if (imgUrl.isNullOrEmpty()) {
-            submitButton.setOnClickListener {
-                statusUpdateProfile()
-            }
-        } else {
-            submitButton.setOnClickListener {
-                val comment = etComment.text.toString()
+    private fun addComment(nameRecipe: String, imgUrl: String, emailUser: String, username: String) = binding.apply {
+        submitButton.setOnClickListener {
+            val comment = etComment.text.toString()
 
-                if (comment.isEmpty()) {
-                    showToast("Masukan ulasanmu dahulu")
-                } else {
-                    detailViewModel.addComment(Comment(
-                        "",
-                        nameRecipe,
-                        comment,
-                        imgUrl,
-                        emailUser,
-                        username
-                    ))
-                }
+            if (comment.isEmpty()) {
+                showToast("Masukan ulasanmu dahulu")
+            } else {
+                detailViewModel.addComment(Comment(
+                    "",
+                    nameRecipe,
+                    comment,
+                    imgUrl,
+                    emailUser,
+                    username
+                ))
             }
         }
     }
@@ -343,7 +337,9 @@ class DetailRecipeActivity : AppCompatActivity() {
     }
 
     private fun shareRecipeData(recipe: Recipe) = binding.btnShare.setOnClickListener {
-        val shareUserData = "Username: ${recipe.nameRecipe}\n"
+        val shareUserData = "Name Recipe: ${recipe.nameRecipe}\n" +
+                "Description: ${recipe.description}\n" +
+                "Image Recipe: ${recipe.imgUrl}"
         val share: Intent = Intent()
             .apply {
                 action = Intent.ACTION_SEND
@@ -359,4 +355,10 @@ class DetailRecipeActivity : AppCompatActivity() {
         const val DATA_RECIPE = "data_recipe"
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
+        getListComment(recipeData.nameRecipe)
+    }
 }
