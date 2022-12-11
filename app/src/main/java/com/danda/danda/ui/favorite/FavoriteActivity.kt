@@ -73,7 +73,6 @@ class FavoriteActivity : AppCompatActivity() {
         favoriteViewModel.getFavoriteList(emailUser)
     }
 
-
     private fun showRecyclerView() {
         val layoutManager = LinearLayoutManager(this@FavoriteActivity)
         binding.apply {

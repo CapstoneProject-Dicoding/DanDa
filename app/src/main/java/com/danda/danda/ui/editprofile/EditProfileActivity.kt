@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.danda.danda.MainActivity
+import com.danda.danda.R
 import com.danda.danda.databinding.ActivityEditProfileBinding
 import com.danda.danda.util.*
 import com.google.firebase.auth.FirebaseAuth
@@ -137,15 +138,6 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
-//    private fun updateFromFireStore(){
-//        binding.apply {
-//            val image = img
-//            val username = usernameEt.text.toString()
-//            val name = nameEt.text.toString()
-//            viewModel.updateFireStore(username,name,id,image)
-//        }
-//
-//    }
     private fun takeAPicture() = binding.profileIv.setOnClickListener {
         when {
             !allPermissionsGranted() -> ActivityCompat.requestPermissions(
@@ -235,6 +227,12 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         getProfile()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
     }
 
     companion object{

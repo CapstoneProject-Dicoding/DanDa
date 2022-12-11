@@ -123,7 +123,8 @@ class ProfileFragment : Fragment() {
             }
 
             binding.tvInformasi.setOnClickListener {
-                //
+                startActivity(Intent(requireContext(), InformationActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
             binding.imageButtonFavorite.setOnClickListener {
@@ -133,11 +134,13 @@ class ProfileFragment : Fragment() {
             binding.tvEditProfile.setOnClickListener {
                 startActivity(Intent(requireContext(), EditProfileActivity::class.java))
                 requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                requireActivity().finish()
             }
 
             binding.tvChangePassword.setOnClickListener {
                 startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
                 requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                requireActivity().finish()
             }
 
             binding.tvResepMasakanku.setOnClickListener {
@@ -152,6 +155,7 @@ class ProfileFragment : Fragment() {
 
             binding.imageButtonFavorite.setOnClickListener {
                 startActivity((Intent(requireContext(), FavoriteActivity::class.java)))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
         }
     }
@@ -166,6 +170,7 @@ class ProfileFragment : Fragment() {
                 dialogInterface.dismiss()
                 requireActivity().startActivity(Intent(requireContext(), LoginActivity::class.java))
                 requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                requireActivity().finish()
             }
 
             .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
@@ -178,6 +183,7 @@ class ProfileFragment : Fragment() {
         binding.tvLogoutLogin.setOnClickListener {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+            requireActivity().finish()
         }
     }
 

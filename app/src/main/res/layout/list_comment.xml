@@ -59,12 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:textColor="@color/white"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/usernameTv"
             app:layout_constraintTop_toBottomOf="@+id/usernameTv"
-            tools:text="@string/Comment"
-            tools:ignore="SmallSp" />
+            tools:text="@string/Comment"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

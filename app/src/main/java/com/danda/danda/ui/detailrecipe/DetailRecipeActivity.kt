@@ -168,6 +168,8 @@ class DetailRecipeActivity : AppCompatActivity() {
                     emailUser,
                     username
                 ))
+
+                etComment.setText("")
             }
         }
     }
@@ -302,6 +304,7 @@ class DetailRecipeActivity : AppCompatActivity() {
             .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
                 startActivity(Intent(this, EditProfileActivity::class.java))
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                finish()
                 dialogInterface.dismiss()
             }
 
@@ -322,6 +325,7 @@ class DetailRecipeActivity : AppCompatActivity() {
                 dialogInterface.dismiss()
                 startActivity(Intent(this, LoginActivity::class.java))
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                finish()
             }
 
             .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
@@ -360,5 +364,7 @@ class DetailRecipeActivity : AppCompatActivity() {
 
         val recipeData = intent.getParcelableExtra<Recipe>(DATA_RECIPE) as Recipe
         getListComment(recipeData.nameRecipe)
+        getFavoriteByNameRecipe(recipeData, recipeData.emailUser, recipeData.nameRecipe)
+        binding.btnFavorite
     }
 }

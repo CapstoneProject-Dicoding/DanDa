@@ -1,13 +1,17 @@
 package com.danda.danda.ui.favorite
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.danda.danda.R
 import com.danda.danda.databinding.ListFavoriteBinding
 import com.danda.danda.model.dataclass.Favorite
+import com.danda.danda.ui.editprofile.EditProfileActivity
 import com.danda.danda.util.Constants
 import com.danda.danda.util.showToast
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,22 +48,35 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(
                     usernameTv.text = favorite?.username
 
                     btnDelete.setOnClickListener {
-                        databaseFirestore = FirebaseFirestore.getInstance()
+                        AlertDialog.Builder(context)
+                            .setTitle("KONFIRMASI HAPUS")
+                            .setMessage("Apakah anda yakin ingin menghapus resep ${favorite?.nameRecipe} ini?")
+                            .setCancelable(false)
 
-                        databaseFirestore.collection(Constants.FAVORITE).document(favorite!!.id)
-                            .delete()
+                            .setPositiveButton("YA"){ dialogInterface: DialogInterface, _: Int ->
+                                databaseFirestore = FirebaseFirestore.getInstance()
 
-                            .addOnSuccessListener {
-                                (context as FavoriteActivity).recreate()
+                                databaseFirestore.collection(Constants.FAVORITE).document(favorite!!.id)
+                                    .delete()
 
-                                context.showToast("Success delete data ${favorite.nameRecipe}")
+                                    .addOnSuccessListener {
+                                        context.showToast("Sukses hapus data ${favorite.nameRecipe}")
+                                        (context as FavoriteActivity).recreate()
+                                    }
+
+                                    .addOnFailureListener {
+                                        context.showToast("Gagal hapus data ${favorite.nameRecipe}")
+                                        (context as FavoriteActivity).recreate()
+                                    }
+                                dialogInterface.dismiss()
                             }
 
-                            .addOnFailureListener {
-                                (context as FavoriteActivity).recreate()
-
-                                context.showToast("Gagal delete data ${favorite.nameRecipe}")
+                            .setNegativeButton("TIDAK"){ dialogInterface: DialogInterface, _: Int ->
+                                dialogInterface.dismiss()
                             }
+                            .show()
+
+
                     }
                 }
             }
