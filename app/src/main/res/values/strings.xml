@@ -14,4 +14,17 @@
     <string name="text_username">username</string>
     <string name="favorite_recipe_list">Favorite Recipe List</string>
     <string name="default_web_client">1095846942779-2j351nnl3fkq2pt57lrkghmopotieph8.apps.googleusercontent.com</string>
+
+    <!-- Layout Information -->
+    <string name="txt_information">Information</string>
+    <string name="txt_capstone_project">Capstone Project</string>
+    <string name="txt_team_id">Team ID C22–121</string>
+    <string name="txt_revan">Muhammad Revansyah Rifky Al-basith</string>
+    <string name="txt_revan_id">A009X0076</string>
+    <string name="txt_chalim">Noor Chalim</string>
+    <string name="txt_chalim_id">A355X0914</string>
+    <string name="txt_rifaldi">Rifaldi Febrianto</string>
+    <string name="txt_rifaldi_id">A314x0835</string>
+    <string name="txt_waslim">Waslim</string>
+    <string name="txt_waslim_id">A314X0836</string>
 </resources>

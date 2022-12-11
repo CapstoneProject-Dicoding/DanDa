@@ -16,6 +16,7 @@ import com.danda.danda.databinding.FragmentProfileBinding
 import com.danda.danda.ui.change.ChangePasswordActivity
 import com.danda.danda.ui.editprofile.EditProfileActivity
 import com.danda.danda.ui.favorite.FavoriteActivity
+import com.danda.danda.ui.information.InformationActivity
 import com.danda.danda.ui.login.LoginActivity
 import com.danda.danda.ui.resepmasakanku.ResepMasakankuActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -145,7 +146,8 @@ class ProfileFragment : Fragment() {
             }
 
             binding.tvInformasi.setOnClickListener {
-                //
+                startActivity(Intent(requireContext(), InformationActivity::class.java))
+                requireActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
             }
 
             binding.imageButtonFavorite.setOnClickListener {

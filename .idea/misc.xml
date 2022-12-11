@@ -46,6 +46,25 @@
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/layout/profile_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Dicoding.X.KampusMerdeka/capstone_project/DanDaRecipeApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.169" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/drawable/ellipse_custom.xml" value="0.2185" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.311" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/drawable/ic_favorite.xml" value="0.2185" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/drawable/ic_person.xml" value="0.311" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/account_button_list.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_change_password.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_detail_comment.xml" value="0.33" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_detail_recipe.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_edit_profile.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_favorite.xml" value="0.33" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_information.xml" value="0.33" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_login.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/activity_register.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/fragment_home.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/fragment_profile.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/item_list_home.xml" value="0.33" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/list_comment.xml" value="0.3875" />
+        <entry key="..\:/Users/Greed/AndroidStudioProjects/CapstoneProject/app/src/main/res/layout/list_favorite.xml" value="0.4776978417266187" />
         <entry key="..\:/Users/Greed/AndroidStudioProjects/DanDa/app/src/main/res/drawable/ic_person.xml" value="0.245" />
         <entry key="..\:/Users/Greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/activity_change_password.xml" value="0.32382246376811596" />
         <entry key="..\:/Users/Greed/AndroidStudioProjects/DanDa/app/src/main/res/layout/activity_detail_comment.xml" value="0.371875" />

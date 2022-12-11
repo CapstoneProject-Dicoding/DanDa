@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBlue"
     tools:context=".ui.register.RegisterActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -184,7 +183,7 @@
                 android:layout_marginTop="40dp"
                 android:background="@drawable/custom_button"
                 android:text="Register"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayoutKonfirmasiPassword"
