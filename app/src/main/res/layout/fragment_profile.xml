@@ -261,9 +261,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:textSize="17dp"
+            android:textSize="17sp"
             android:layout_marginStart="15dp"
-            android:textColor="@color/red"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView7"
             app:layout_constraintEnd_toEndOf="@+id/line5"
@@ -283,7 +283,5 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_logout_login" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </ScrollView>
