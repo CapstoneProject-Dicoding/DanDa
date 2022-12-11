@@ -48,6 +48,7 @@ class EditProfileActivity : AppCompatActivity() {
         updateProfile()
         resultUpdateProfile()
         takeAPicture()
+        back()
 
         binding.btnBack.setOnClickListener { onBackPressed() }
     }
@@ -228,6 +229,12 @@ class EditProfileActivity : AppCompatActivity() {
 
                 binding.profileIv.setImageURI(selectedImg)
             }
+        }
+    }
+
+    private fun back() {
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 

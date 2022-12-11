@@ -4,7 +4,6 @@ import com.danda.danda.model.dataclass.User
 import com.danda.danda.util.Constants
 import com.danda.danda.util.Result
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject

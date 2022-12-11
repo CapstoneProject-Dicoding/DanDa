@@ -1,7 +1,10 @@
 package com.danda.danda.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -95,11 +98,13 @@ class ProfileFragment : Fragment() {
                 is Result.Success -> {
                     if (it.data?.email == null) {
                         tvLogoutLogin.text = "Login"
-                        imageView7.setImageResource(R.drawable.ic_baseline_login_24)
+                        tvLogoutLogin.setTextColor(Color.parseColor("#05FF00"))
+                        imageView7.setImageResource(R.drawable.ic_login_profile)
                         login()
                     } else {
-                        binding.tvLogoutLogin.text = "Logout"
-                        imageView7.setImageResource(R.drawable.ic_baseline_logout_24)
+                        tvLogoutLogin.text = "Logout"
+                        tvLogoutLogin.setTextColor(Color.parseColor("#FF0000"))
+                        imageView7.setImageResource(R.drawable.ic_logout_profile)
                         logout()
                     }
                 }
