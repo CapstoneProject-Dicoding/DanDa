@@ -17,11 +17,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
-import com.bumptech.glide.Glide
 import com.danda.danda.MainActivity
 import com.danda.danda.databinding.ActivityEditProfileBinding
-import com.danda.danda.ui.addrecipe.AddRecipeFragment
-import com.danda.danda.ui.profile.ProfileFragment
 import com.danda.danda.util.*
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,37 +42,6 @@ class EditProfileActivity : AppCompatActivity() {
         takeAPicture()
 
 
-
-//        auth = FirebaseAuth.getInstance()
-
-//        binding.changeProfileBt.setOnClickListener {
-//            val user = auth.currentUser
-//            user?.let {
-//                val username = binding.usernameEt.text.toString()
-//                val name = binding.nameEt.text.toString()
-//                val photoURI = Uri.parse("android.resource://$packageName/${R.drawable.ic_food}")
-//                val profileUpdates = UserProfileChangeRequest.Builder()
-//                    .setDisplayName(username)
-//                    .setPhotoUri(photoURI)
-//                    .build()
-//
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    try {
-//                        user.updateProfile(profileUpdates).await()
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(this@EditProfileActivity, "Successfully updated profile",
-//                                Toast.LENGTH_LONG).show()
-//                        }
-//                    } catch(e: Exception) {
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(this@EditProfileActivity, e.message, Toast.LENGTH_LONG).show()
-//                        }
-//                    }
-//
-//                }
-//            }
-//        }
-
     }
 
 
@@ -83,23 +49,36 @@ class EditProfileActivity : AppCompatActivity() {
         binding.changeProfileBt.setOnClickListener {
             val username = binding.usernameEt.text.toString()
             val name = binding.nameEt.text.toString()
-            val email = emailData
-            if (getFile!=null){
-                if (username.isEmpty()){
-                    showToast("masukkan username")
-                }else if(name.isEmpty()){
-                    showToast("masukkan name dulu")
-                }else{
-                    viewModel.updateProfile(
-                        username,name,id,email,getFile!!.toUri()
-                    )
-                }
 
+            if (username.isEmpty()){
+                showToast("masukkan username")
+            }else if(name.isEmpty()){
+                showToast("masukkan name dulu")
             }else{
-                showToast("Masukkan foto dlu bang")
+                updateImage()
+                updateName()
+                updateUserFireStore()
             }
 
             Log.d("namenya ada ga", name)
+        }
+    }
+    private fun updateImage(){
+        if(getFile!=null){
+            viewModel.updateImage(emailData,getFile!!.toUri())
+        }
+    }
+    private fun updateName(){
+        if(binding.nameEt.text.toString().isNotEmpty()){
+            val name = binding.nameEt.text.toString()
+            viewModel.updateName(name)
+        }
+    }
+    private fun updateUserFireStore(){
+        if(binding.usernameEt.text.toString().isNotEmpty()){
+            val username = binding.usernameEt.text.toString()
+            val name = binding.nameEt.text.toString()
+            viewModel.updateUserFireStore(username,name, id)
         }
     }
 
@@ -110,6 +89,7 @@ class EditProfileActivity : AppCompatActivity() {
                     showToast("update success")
                     showLoading(false,binding.progressBarLogin)
                     startActivity(Intent(this,MainActivity::class.java))
+                    finish()
                 }
                 is Result.Failure ->{
                     showToast("update failed")
@@ -127,12 +107,12 @@ class EditProfileActivity : AppCompatActivity() {
                 is Result.Success ->{
                     binding.nameEt.setText(it.data?.displayName.toString())
                     getProfileFromUser(it.data?.email)
-
                 }
                 is Result.Failure ->{
                     binding.nameEt.setText(it.error.toString())
-                }else->{
-                binding.nameEt.setText("ggbang")
+                }
+                is Result.Loading ->{
+
                 }
             }
         }
@@ -148,9 +128,10 @@ class EditProfileActivity : AppCompatActivity() {
                 }
                 is Result.Failure ->{
                     showToast(it.error.toString())
-                }else->{
-                binding.usernameEt.setText("ggbang")
-            }
+                }
+                is Result.Loading ->{
+
+                }
             }
 
         }

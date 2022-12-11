@@ -11,6 +11,7 @@ import com.danda.danda.model.repository.user.UserRepository
 import com.danda.danda.util.Result
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,21 +29,34 @@ class EditProfileViewModel @Inject constructor(
     private val _getUser = MutableLiveData<Result<FirebaseUser?>>()
     val getUser: LiveData<Result<FirebaseUser?>> = _getUser
 
-    fun updateProfile(username:String,name : String,id:String,email:String,file : Uri){
+
+    fun updateImage(email: String, file: Uri){
         _updateResponse.value = Result.Loading
         viewModelScope.launch {
+            profileRepository.updatePhoto(email,file){
+                _updateResponse.value = it
+            }
 
-            profileRepository.editProfile(username,name,id,email,file){
+        }
+    }
+    fun updateName(name: String){
+        _updateResponse.value = Result.Loading
+        viewModelScope.launch {
+            profileRepository.updateName(name){
                 _updateResponse.value = it
             }
         }
     }
-    fun updateFireStore(username: String, name: String, id: String, imgUrl: String){
+    fun updateUserFireStore(username: String, name: String, id: String,){
+        _updateResponse.value = Result.Loading
         viewModelScope.launch {
-            profileRepository.updateProfileUser(username,name,id,imgUrl){
-
+            delay(5000)
+            profileRepository.updateProfileUser(username,name,id){
+                _updateResponse.value = it
             }
         }
+
+
     }
 
     init {

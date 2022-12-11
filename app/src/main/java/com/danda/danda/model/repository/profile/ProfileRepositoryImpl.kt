@@ -32,56 +32,6 @@ class ProfileRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun editProfile(
-        username: String,
-        name: String,
-        id: String,
-        email: String,
-        file: Uri,
-        result: (Result<String?>) -> Unit
-    ) {
-        databaseStorage.getReference("user_profile/${email}")
-            .putFile(file)
-            .addOnSuccessListener {
-                databaseStorage.reference.child("user_profile/${email}")
-                    .downloadUrl
-                    .addOnSuccessListener { url->
-                        if (url!=null){
-                            CoroutineScope(Dispatchers.IO).launch {
-                                delay(3000)
-
-                                fireStoreUser.collection(Constants.USER)
-                                    .document(id)
-                                    .update(mapOf(
-                                        "username" to username,
-                                        "name" to name,
-                                        "imgProfile" to url.toString()
-                                    ))
-
-                                auth = FirebaseAuth.getInstance()
-                                val user = auth.currentUser
-                                val profileUpdate = userProfileChangeRequest {
-                                    displayName = name
-                                    photoUri = Uri.parse(url.toString())
-                                }
-                                user!!.updateProfile(profileUpdate)
-                                    .addOnCompleteListener{task->
-                                        try {
-                                            if(task.isSuccessful){
-                                                result.invoke(Result.Success("update success"))
-                                            }
-
-                                        }catch (e:Exception){
-                                            result.invoke(Result.Failure("update failed"))
-                                        }
-                                    }
-                            }
-                        }
-                    }
-            }
-
-
-    }
 
     override suspend fun getProfileUser(email: String?, result: (Result<User?>) -> Unit) {
         fireStoreUser.collection(Constants.USER)
@@ -104,7 +54,6 @@ class ProfileRepositoryImpl @Inject constructor(
         username: String,
         name: String,
         id: String,
-        imgUrl: String,
         result: (Result<String>) -> Unit
     ) {
         fireStoreUser.collection(Constants.USER)
@@ -112,7 +61,6 @@ class ProfileRepositoryImpl @Inject constructor(
             .update(mapOf(
                 "username" to username,
                 "name" to name,
-                "imgProfile" to imgUrl
             ))
             .addOnSuccessListener {
                 result.invoke(Result.Success("success"))
@@ -120,6 +68,38 @@ class ProfileRepositoryImpl @Inject constructor(
             .addOnFailureListener {
                 result.invoke(Result.Failure("failed"))
             }
+    }
+
+    override suspend fun updatePhoto(email: String, file: Uri, result: (Result<String?>) -> Unit) {
+        databaseStorage.getReference("user_profile/${email}")
+            .putFile(file)
+            .addOnSuccessListener {
+                databaseStorage.reference.child("user_profile/${email}")
+                    .downloadUrl
+                    .addOnSuccessListener { url ->
+                        if (url != null) {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                delay(3000)
+
+                                auth = FirebaseAuth.getInstance()
+                                val user = auth.currentUser
+                                val profileUpdate = userProfileChangeRequest {
+                                    photoUri = Uri.parse(url.toString())
+                                }
+                                user!!.updateProfile(profileUpdate)
+                            }
+                        }
+                    }
+            }
+    }
+
+    override suspend fun updateName(name: String, result: (Result<String?>) -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        val profileUpdate = userProfileChangeRequest {
+            displayName = name
+        }
+        user!!.updateProfile(profileUpdate)
     }
 
 }
